@@ -1,0 +1,37 @@
+<Page loaded="onPageLoaded">
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="CPA Calculator"></Label>
+</ActionBar>
+
+<ScrollView>
+	<StackLayout >
+
+    	<GridLayout class="page page-content">
+    		<StackLayout>
+    			<StackLayout id="modules" #stack>
+    			
+    			</StackLayout>
+    			<Button id="addmodule" text="Add Module" class="btn btn-primary btn-active" (tap)="addmodule()"></Button>
+    		</StackLayout>
+    	</GridLayout>	
+    	<Button text="Calculate CPA" class="btn btn-primary btn-active" (tap)="calculatecpa()"></Button>
+    	<StackLayout>
+    	<Label class="h3 p-15" text="CPA" textWrap="true"  ></Label>
+    	<Label  class="h3 p-15" textWrap="true" #label></Label>
+    	</StackLayout>
+    </StackLayout>
+</ScrollView>
+</Page>
