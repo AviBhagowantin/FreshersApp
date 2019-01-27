@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "45073105961",
+    "firebase_url": "https://freshersapp-7d28e.firebaseio.com",
+    "project_id": "freshersapp-7d28e",
+    "storage_bucket": "freshersapp-7d28e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45073105961:android:ce4135ec70d31254",
+        "android_client_info": {
+          "package_name": "org.nativescript.FreshersApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45073105961-4nba1vl0ctu3v455pvmdsejn9eor5ft0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqnX_FEuOzf71AHLsoBcLdoKcINlNjAyE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
