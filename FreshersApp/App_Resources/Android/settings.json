@@ -1,1 +1,1 @@
-{"appId":"org.nativescript.FreshersApp","minSdkVersion":null,"targetSdkVersion":null}
+{"appId":"org.nativescript.FreshersApp","minSdkVersion":null,"targetSdkVersion":null,"multiDexEnabled": true}
