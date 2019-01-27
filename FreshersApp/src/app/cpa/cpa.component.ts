@@ -1,15 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
-import {Page} from "ui/page";
 import { EventData } from 'tns-core-modules/data/observable';
 import { Label } from 'ui/label';
 import { StackLayout } from 'ui/layouts/stack-layout';
-import {Button} from "ui/button";
-import { getViewById } from "tns-core-modules/ui/core/view";
 import {ElementRef, ViewChild} from "@angular/core";
 import { TextField } from "tns-core-modules/ui/text-field";
-import { fromObject } from "tns-core-modules/data/observable";
 import { BindingOptions } from "tns-core-modules/ui/core/bindable";
 import { Model } from './model';
 
@@ -92,21 +88,7 @@ export class CpaComponent implements OnInit {
 
 }
 
-
-
-
-function onLoaded(args) {
-    alert("TEST");
-    var page = args.object;
-    
-}
-exports.onLoaded = onLoaded
-
-
-
-
 var model:Model[]=[];
-var page;
 var counter=0;
 
  const textFieldBindingOptions: BindingOptions = {
@@ -126,5 +108,3 @@ var counter=0;
         targetProperty: "text",
         twoWay: true
     };
-
-
