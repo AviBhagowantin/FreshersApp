@@ -1,14 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { RouterExtensions } from "nativescript-angular/router";
+import { Component, OnInit, NgZone } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
+import firebase = require('nativescript-plugin-firebase');
 
-class Bus {
+firebase
+    .init()
+    .then(() => console.log("Firebase Initialized!"))
+    .catch(error => console.error("Error: ${error}"));
+    
 
-    constructor(public id: number, public route: string, public destination: string, public frequency: string, public lastBus: string){}
+// class Bus {
 
-}
+//     constructor(public route: string, public destination: string, public frequency: string, public lastBus: string){}
+
+// }
 
 @Component({
     selector: "Bus",
@@ -17,49 +22,47 @@ class Bus {
 })
 export class BusComponent implements OnInit {
 
-    buses: Bus[];
+    public buses : any;
+    public keys : any;
 
-    constructor(private routerExtensions: RouterExtensions) {
+    constructor() {
         // Use the component constructor to inject providers.
-        this.buses = [
-            {
-                id: 0,
-                route: '141',
-                destination: 'Port Louis',
-                frequency: '20 mins',
-                lastBus: '18:35'
-            },
-            {
-                id: 1,
-                route: '15',
-                destination: 'Flacq',
-                frequency: '15 mins',
-                lastBus: '18:40'
-            },
-            {
-                id: 2,
-                route: '2',
-                destination: 'Curepipe',
-                frequency: '10 mins',
-                lastBus: '19:30'
-            }
-        ]
-    }
-
-    onItemTap(args: string): void {
-        this.routerExtensions.navigate(["/businfo"], {
-            transition: {
-                name: "fade"
-            }
-        });
     }
 
     ngOnInit(): void {
         // Init your component properties here.
+
+        firebase.getValue('/Buses')
+            .then(result=> (this.buses=this.getData(result)))
+            .catch(error => console.error("Error: " + error));
     }
 
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
+    }
+
+    getData(data : any): any{
+
+        this.keys=Object.keys(data.value); 
+
+        var counter : number;
+        var busArray = [];
+
+        for (counter = 0; counter < this.keys.length; counter++) {
+
+            var key = this.keys[counter];
+
+            var bus = {
+                route: data.value[key].route,
+                destination: data.value[key].destination,
+                frequency: data.value[key].frequency,
+                lastBus: data.value[key].lastBus
+            };
+
+            busArray.push(bus);
+        } 
+
+        return busArray;
     }
 }

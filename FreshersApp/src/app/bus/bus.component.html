@@ -15,10 +15,17 @@
     <Label class="action-bar-title" text="Bus"></Label>
 </ActionBar>
 
-<ListView [items]="buses" (itemTap)="onItemTap($event)">
+<ListView [items]="buses">
     <ng-template let-item="item">
-        <StackLayout>
-            <label [text]="item.destination"></label>
-        </StackLayout>
+        <GridLayout columns="auto,*,*,*,*" rows="*,*">
+            <Label col="1" row="0" text="Route No:  "></Label>
+            <Label col="2" row="0" [text]="item.route"></Label>
+            <Label col="3" row="0" text="Destination:  "></Label>
+            <Label col="4" row="0" [text]="item.destination"></Label>
+            <Label col="1" row="1" text="Frequency:  "></Label>
+            <Label col="2" row="1" [text]="item.frequency"></Label>
+            <Label col="3" row="1" text="Last Bus:  "></Label>
+            <Label col="4" row="1" [text]="item.lastBus"></Label>
+        </GridLayout>
     </ng-template>
 </ListView>
