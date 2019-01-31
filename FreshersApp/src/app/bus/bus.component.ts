@@ -2,18 +2,7 @@ import { Component, OnInit, NgZone } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import firebase = require('nativescript-plugin-firebase');
-
-firebase
-    .init()
-    .then(() => console.log("Firebase Initialized!"))
-    .catch(error => console.error("Error: ${error}"));
     
-
-// class Bus {
-
-//     constructor(public route: string, public destination: string, public frequency: string, public lastBus: string){}
-
-// }
 
 @Component({
     selector: "Bus",
