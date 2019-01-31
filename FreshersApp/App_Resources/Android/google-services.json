@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "45073105961-f9smdmnv9fcbutvvgr37gjh99jjqtb84.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.nativescript.FreshersApp",
+            "certificate_hash": "6049cbc9a2db81045ed9997cc70dda003c82e759"
+          }
+        },
+        {
           "client_id": "45073105961-4nba1vl0ctu3v455pvmdsejn9eor5ft0.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45073105961-4nba1vl0ctu3v455pvmdsejn9eor5ft0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "45073105961-tiaeiioe1naniopfe6m4hr5pladmmtns.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.nativescript.FreshersApp"
+              }
+            }
+          ]
         },
         "ads_service": {
           "status": 2
