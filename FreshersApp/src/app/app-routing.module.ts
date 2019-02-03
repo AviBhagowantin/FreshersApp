@@ -13,7 +13,8 @@ const routes: Routes = [
     { path: "cpa", loadChildren: "~/app/cpa/cpa.module#CpaModule" },
     { path: "login", loadChildren: "~/app/login/login.module#LoginModule" },
     { path: "register", loadChildren: "~/app/register/register.module#RegisterModule" },
-    { path: "passreset", loadChildren: "~/app/passreset/passreset.module#PassresetModule" }
+    { path: "passreset", loadChildren: "~/app/passreset/passreset.module#PassresetModule" },
+    { path: "feedback", loadChildren: "~/app/feedback/feedback.module#FeedbackModule"}
 ];
 
 @NgModule({
