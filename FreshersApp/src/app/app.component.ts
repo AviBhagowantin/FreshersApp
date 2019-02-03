@@ -2,8 +2,25 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
+var appSettings = require('application-settings');
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
+import firebase = require('nativescript-plugin-firebase');
+
+firebase.init({
+    onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when he re-visits your app
+      console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
+      if (data.loggedIn) {
+        console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
+        appSettings.setBoolean("authenticated", true);
+        console.log(appSettings.getBoolean("authenticated"));
+      }
+      if (!data.loggedIn) {
+        appSettings.setBoolean("authenticated", false);
+        console.log(appSettings.getBoolean("authenticated"));
+      }
+    }
+  });
 
 @Component({
     moduleId: module.id,
@@ -37,6 +54,33 @@ export class AppComponent implements OnInit {
 
     onNavItemTap(navItemRoute: string): void {
         this.routerExtensions.navigate([navItemRoute], {
+            transition: {
+                name: "fade"
+            }
+        });
+
+        const sideDrawer = <RadSideDrawer>app.getRootView();
+        sideDrawer.closeDrawer();
+    }
+
+    checkTest(): boolean {
+        return appSettings.getBoolean("authenticated");
+    }
+
+    checkLogin(): void {
+        var route : string;
+        if (appSettings.getBoolean("authenticated") == false) 
+        {
+            route="/login";
+        }
+        if (appSettings.getBoolean("authenticated") == true) 
+        {
+            firebase.logout();
+            appSettings.setBoolean("authenticated", false);
+            route="/home";
+        }
+
+        this.routerExtensions.navigate([route], {
             transition: {
                 name: "fade"
             }
