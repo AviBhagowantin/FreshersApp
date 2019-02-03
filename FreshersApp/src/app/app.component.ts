@@ -5,7 +5,7 @@ import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nat
 var appSettings = require('application-settings');
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
-import firebase = require('nativescript-plugin-firebase');
+var firebase = require('nativescript-plugin-firebase');
 
 firebase.init({
     onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when he re-visits your app

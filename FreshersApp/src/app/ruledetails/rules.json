@@ -1,0 +1,30 @@
+{
+    "rules":[
+    	{"title":"1.SELECTION AND ADMISSION TO TAUGHT PROGRAMMES",
+    	 "chapter":"1",
+    	 "section":[
+    	 	{"section_number":"1.1","section_title":"APPLICATION PROCEDURES FOR ADMISSION TO THE UNIVERSITY","section_text":"All applicants should apply on the official online application form of the University and should ascertain that all information and documents, as requested, are submitted by the deadline set. Online  application  forms  for  undergraduate  Programmes  of  Study are  normally available   on   the   University   website   at   the   following   address: http://www.uom.ac.mu/prospective/students, as soon as the Higher School Certificate results become official. \n Before filling the application form, applicants are strongly advised to read the Notes of Guidance and Information to Students accompanying the online application form. The Notes of Guidance and Information to Students give information on: \nDocuments required for submission of application forms \n Fees payable \n Maximum number of Programmes that may be applied \n Entry requirements for Programmes \n \nStructure and duration of the Programmes. Mauritian applicants are required to use the online undergraduate Application Toolkit available when they apply. Applicants should fill in the online application form via the internet at the following address: http://online.uom.ac.mu/application. For taught Postgraduate Programmes, the applicants need to fill in an online application form  for  all  Programmes  applied via the  internet  at  the  following  address: http://online.uom.ac.mu/application. Thesystem automatically generates application forms based on number of Programmesapplied. An online application fee is payable by candidates who wish to alter their choices of Programmes by the deadline (Refer to section 13.16). "},
+            {"section_number":"1.2","section_title":"SELECTION OF STUDENTS ","section_text":"Applicants must satisfy the relevant and specific Programme Requirements in addition to the University General Entry Requirements.\n \n All applications will be assessed fairly and against specific academic selection criteria as outlined  in  the University’s Policy on Recruitment, Selection  and  Admissions, available on: http://www.uom.ac.mu/index.php/centres-offices/quality-assurance. The latter describes fully the criteria and process for selecting applicants for admission to Programmes of Study at the University of Mauritius (UoM). "},
+            {"section_number":"1.3","section_title":"Meaning of Matrix","section_text":"Hello2"}
+    	 ]
+
+
+    	},
+    	{"title":"2.GENERAL REGULATIONS FOR STUDENTS",
+            "chapter":"1",
+         "section":[
+             {"section_number":"2.0","section_title":"Testing","section_text":"Hello2"}
+         ]
+        },
+    	{"title":"3.GENERAL INFORMATION","text":"section"},
+    	{"title":"4.CODE OF DISCIPLINE","text":"section"},
+    	{"title":"5.REGULATIONS FOR THE CONDUCT OF UNIVERSITY EXAMINATIONS","text":"section"},
+    	{"title":"6.THE CREDIT SYSTEM","text":"section"},
+    	{"title":"7.REGULATIONS FOR FINAL YEAR PROJECTS/DISSERTATIONS","text":"section"},
+    	{"title":"8.PLAGIARISM AND FABRICATION OR FALSIFICATION OF RESULT(S)/DOCUMENT(S)","text":"section"},
+    	{"title":"9.REGULATIONS GOVERNING MPhil AND PhD RESEARCH","text":"section"},
+    	{"title":"10.REGULATIONS FOR TAUGHT POSTGRADUATE DEGREES","text":"section"},
+    	{"title":"11.REGULATIONS FOR MATRICULATION","text":"section"}
+    	
+    ]
+}
