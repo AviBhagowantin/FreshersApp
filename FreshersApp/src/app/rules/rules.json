@@ -1,0 +1,16 @@
+{
+    "rules":[
+    	{"title":"1.SELECTION AND ADMISSION TO TAUGHT PROGRAMMES",},
+    	{"title":"2.PROGRAMME STRUCTURE AND CREDIT SYSTEM","text":"section"},
+    	{"title":"3.REGISTRATION AND CONDUCT OF STUDENTS","text":"section"},
+    	{"title":"4.ASSESSMENT, PROGRESSION AND AWARD","text":"section"},
+    	{"title":"5.CODE OF DISCIPLINE","text":"section"},
+    	{"title":"6.CONDUCT OF UNIVERSITY EXAMINATIONS AND EXAMINATION IRREGULARITIES","text":"section"},
+    	{"title":"7.PLAGIARISM AND FABRICATION OR FALSIFICATION OF RESULT(S)/ DOCUMENT(S)","text":"section"},
+    	{"title":"8.REGULATIONS FOR FINAL YEAR PROJECTS/ DISSERTATION","text":"section"},
+    	{"title":"9.STUDENT FACILITIES AND WELFARE","text":"section"},
+    	{"title":"10.Library","text":"section"},
+    	{"title":"11.REGULATIONS FOR MATRICULATION","text":"section"}
+    	
+    ]
+}

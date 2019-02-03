@@ -3,7 +3,7 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { RouterExtensions } from "nativescript-angular/router";
 import * as ApplicationSettings from "application-settings";
-import firebase = require("nativescript-plugin-firebase");
+var firebase = require("nativescript-plugin-firebase");
 import {User} from '../models/user.model';
 import * as dialogs from "tns-core-modules/ui/dialogs";
 /* ***********************************************************
