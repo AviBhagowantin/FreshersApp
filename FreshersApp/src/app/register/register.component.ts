@@ -17,7 +17,12 @@ export class RegisterComponent implements OnInit {
     constructor(private router: RouterExtensions) {
         this.user = {
             "email":"",
-            "password":""
+            "password":"",
+            "sid":"",
+            "sname":"",
+            "fname":"",
+            "course":"",
+            "phone":""
         }
     }
 
@@ -35,11 +40,26 @@ export class RegisterComponent implements OnInit {
             password: this.user.password
           }).then(
               function (user) {
-                // dialogs.alert({
-                //   title: "User created",
-                //   message: "email: " + user.email,
-                //   okButtonText: "Nice!"
-                // });
+                firebase.push(
+                    '/User',
+                    {
+                      'ID': this.user.sid,
+                      'First Name': this.user.fname,
+                      'Surname': this.user.sname,
+                      'Course': this.user.course,
+                      'Email': this.user.email,
+                      'Phone': this.user.phone
+                    }
+                ).then(
+                    function (result) {
+                        console.log("created key: " + result.key);
+                        dialogs.alert({
+                            title: "User created",
+                            message: "email: " + user.email,
+                            okButtonText: "Nice!"
+                        });
+                    }
+                );
                 this.router.navigate(['/home'], { clearHistory: true });
               }.bind(this),
               function (errorMessage) {

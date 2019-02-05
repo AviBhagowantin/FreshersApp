@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
-var appSettings = require('application-settings');
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 import firebase = require('nativescript-plugin-firebase');
 import * as dialogs from "tns-core-modules/ui/dialogs";
+
+var appSettings = require('application-settings');
 
 firebase.init({
     onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when he re-visits your app
@@ -86,7 +87,7 @@ export class AppComponent implements OnInit {
         }
     }
 
-    checkTest(): boolean {
+    checkAuth(): boolean {
         return appSettings.getBoolean("authenticated");
     }
 
