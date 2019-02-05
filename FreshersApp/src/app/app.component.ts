@@ -4,7 +4,9 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
+var appSettings = require('application-settings');
 var firebase = require('nativescript-plugin-firebase');
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     moduleId: module.id,
