@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
-import { newsInfo } from './news';
+var firebase = require('nativescript-plugin-firebase');
 
 @Component({
     selector: "Home",
@@ -10,19 +10,21 @@ import { newsInfo } from './news';
 })
 export class HomeComponent implements OnInit {
 
-    public news: Array<News>;
+    public news: any;
+    public keys : any;
 
     constructor() {
-        this.news = [];
 
-        for (let i = 0; i < news_details.length; i++) {
-
-            this.news.push(new News(news_details[i].title,news_details[i].description));
-        }
     }
 
     ngOnInit(): void {
         // Init your component properties here.
+
+        firebase.getValue('/News')
+        .then(result=> (this.news=this.getData(result)))
+        .catch(error => console.error("Error: " + error));
+
+        //console.log(this.news);
     }
 
     onDrawerButtonTap(): void {
@@ -30,26 +32,48 @@ export class HomeComponent implements OnInit {
         sideDrawer.showDrawer();
     }
 
-    toggle(event) {
-    if (event.object.textWrap) {
-      event.object.textWrap = false;
-    } else {
-      event.object.textWrap = true;
+    // toggle(event) {
+    //     if (event.object.textWrap) {
+    //     event.object.textWrap = false;
+    //     } else {
+    //     event.object.textWrap = true;
+    //     }
+    // }
+
+    getData(data : any): any{
+        //console.log(data.value);
+
+        this.keys=Object.keys(data.value); 
+
+        var counter : number;
+        var newsArray = [];
+
+        //console.log(data.value[this.keys[0]]);
+        //console.log(data.value[this.keys[0]].title);
+
+        for (counter = 0; counter < this.keys.length; counter++) {
+
+            var key = this.keys[counter];
+
+            var news_details = {
+                title: data.value[key].Title,
+                description: data.value[key].Description,
+                date: data.value[key].Date,
+                author: data.value[key].Author
+            };
+
+            news_details.date="Date: "+news_details.date;
+            news_details.author="Author: "+news_details.author;
+
+            newsArray.push(news_details);
+        } 
+
+        //console.log(newsArray);
+        return newsArray;
     }
-}
 
     
 }
-var news_details:newsInfo[]=[];
-news_details[0]=new newsInfo();
-news_details[0].title="Student Union";
-news_details[0].description="There was a time a boy named Sharfaaq who was named tsu after the election. Yuzo PResiden. Among the facultyies we have new face like moorateeah tashil rye, adarsh ,adarsh , adarsh";
-
-news_details[1]=new newsInfo();
-news_details[1].title="Vice Chancellor should be fired ";
-news_details[1].description="Vice Chancellor should be down from the university for he has been playing a lot with the memeber of the union and uom staff";
-
-
 
 class News {
     constructor(public title: string,public description:string) { }
