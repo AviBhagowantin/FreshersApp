@@ -6,6 +6,7 @@ var appSettings = require('application-settings');
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 import firebase = require('nativescript-plugin-firebase');
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 firebase.init({
     onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when he re-visits your app
@@ -61,6 +62,28 @@ export class AppComponent implements OnInit {
 
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.closeDrawer();
+    }
+
+    checkAuthFeedback(): void {
+        if (appSettings.getBoolean("authenticated") == false) 
+        {
+            dialogs.alert({
+                title: "Login Needed",
+                message: "Please login to leave a feedback.",
+                okButtonText: "OK, got it"
+              })
+        }
+        if (appSettings.getBoolean("authenticated") == true) 
+        {
+            this.routerExtensions.navigate(["/feedback"], {
+                transition: {
+                    name: "fade"
+                }
+            });
+
+            const sideDrawer = <RadSideDrawer>app.getRootView();
+            sideDrawer.closeDrawer();
+        }
     }
 
     checkTest(): boolean {

@@ -43,9 +43,9 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
                     <Label col="1" text="Search" class="p-r-10"></Label>
                 </GridLayout>
 
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/featured')" (tap)="onNavItemTap('/featured')">
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/feedback')" (tap)="checkAuthFeedback()">
                     <Label col="0" text="&#xf005;" class="fa"></Label>
-                    <Label col="1" text="Featured" class="p-r-10"></Label>
+                    <Label col="1" text="Feedback" class="p-r-10"></Label>
                 </GridLayout>
     
                 <StackLayout class="hr-light"></StackLayout>

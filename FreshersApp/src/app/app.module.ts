@@ -4,6 +4,7 @@ import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angul
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import {DatePipe} from '@angular/common';
 
 @NgModule({
     bootstrap: [
@@ -19,6 +20,9 @@ import { AppComponent } from "./app.component";
     ],
     schemas: [
         NO_ERRORS_SCHEMA
-    ]
+    ],
+    providers: [
+        DatePipe
+    ],
 })
 export class AppModule { }
