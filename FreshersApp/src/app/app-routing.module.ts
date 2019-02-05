@@ -11,6 +11,7 @@ const routes: Routes = [
     { path: "settings", loadChildren: "~/app/settings/settings.module#SettingsModule" },
     { path: "bus", loadChildren: "~/app/bus/bus.module#BusModule"},
     { path: "cpa", loadChildren: "~/app/cpa/cpa.module#CpaModule" },
+    { path: "rules", loadChildren: "~/app/rules/rules.module#RulesModule" },
     { path: "login", loadChildren: "~/app/login/login.module#LoginModule" },
     { path: "register", loadChildren: "~/app/register/register.module#RegisterModule" },
     { path: "passreset", loadChildren: "~/app/passreset/passreset.module#PassresetModule" },
