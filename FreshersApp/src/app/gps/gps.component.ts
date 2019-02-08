@@ -5,6 +5,9 @@ import * as app from "tns-core-modules/application";
 import { Accuracy } from "ui/enums";
 import * as geolocation from "nativescript-geolocation";
 import { RouterExtensions } from "nativescript-angular/router";
+import { dateProperty } from "tns-core-modules/ui/date-picker/date-picker";
+var firebase = require('nativescript-plugin-firebase');
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: "Gps",
@@ -16,11 +19,18 @@ export class GpsComponent implements OnInit {
     currentLat: number;
     currentLng: number;
 
-    constructor(private router: RouterExtensions) {
+    public events: any;
+    public keys : any;
+
+    constructor(private router: RouterExtensions,private datePipe: DatePipe) {
 
     }
 
     ngOnInit(): void {
+
+        firebase.getValue('/Events')
+        .then(result=> (this.events=this.getData(result)))
+        .catch(error => console.error("Error: " + error));
 
 
         console.log('checking if geolocation is enabled');
@@ -69,7 +79,45 @@ export class GpsComponent implements OnInit {
                 animated: true, // default true
                 zoomLevel: 16
             }
-        )
+        );
+
+        args.map.addMarkers(this.events);
+    }
+
+    getData(data : any): any{
+        //console.log(data.value);
+
+        this.keys=Object.keys(data.value); 
+
+        var counter : number;
+        var eventsArray = [];
+
+        //console.log(data.value[this.keys[0]]);
+        //console.log(data.value[this.keys[0]].title);
+
+        for (counter = 0; counter < this.keys.length; counter++) {
+
+            var key = this.keys[counter];
+
+            var events_details = {
+                id: key,
+                title: data.value[key].title,
+                subtitle: data.value[key].time,
+                date: data.value[key].date,
+                lat: data.value[key].lat,
+                lng: data.value[key].lng
+            };
+
+            var todayDate=this.datePipe.transform(Date.now(), 'dd-MM-yyyy');
+
+            if (todayDate==events_details.date)
+            {
+                eventsArray.push(events_details);
+            }
+        } 
+
+        //console.log(newsArray);
+        return eventsArray;
     }
 
     onBackTap(): void {

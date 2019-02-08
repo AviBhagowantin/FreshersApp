@@ -74,8 +74,3 @@ export class HomeComponent implements OnInit {
 
     
 }
-
-class News {
-    constructor(public title: string,public description:string) { }
-}
-
