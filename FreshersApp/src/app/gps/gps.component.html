@@ -1,0 +1,34 @@
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
+    <Label class="action-bar-title" text="GPS"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+        <ContentView height="100%" width="100%">
+            <Mapbox
+                accessToken="pk.eyJ1IjoiYXZpLWJoYWdvd2FudGluIiwiYSI6ImNqcmZhNTQ5eDBsd3A0NW1qNXk1cWs0eHEifQ.1vXbXMEFcX-5dQkbmsTQUA"
+                mapStyle="streets"
+                latitude="-20.233983"
+                longitude="57.4972365"
+                zoomLevel="16"
+                delay="500"
+                showUserLocation="true"
+                hideCompass="false"
+                disableZoom="false"
+                disableRotation="false"
+                disableScroll="false"
+                disableTilt="false"
+                (mapReady)="onMapReady($event)">
+            </Mapbox>
+        </ContentView>
+</GridLayout>
