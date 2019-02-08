@@ -14,7 +14,8 @@ const routes: Routes = [
     { path: "login", loadChildren: "~/app/login/login.module#LoginModule" },
     { path: "register", loadChildren: "~/app/register/register.module#RegisterModule" },
     { path: "passreset", loadChildren: "~/app/passreset/passreset.module#PassresetModule" },
-    { path: "feedback", loadChildren: "~/app/feedback/feedback.module#FeedbackModule"}
+    { path: "feedback", loadChildren: "~/app/feedback/feedback.module#FeedbackModule"},
+    { path: "gps", loadChildren: "~/app/gps/gps.module#GpsModule" }
 ];
 
 @NgModule({
