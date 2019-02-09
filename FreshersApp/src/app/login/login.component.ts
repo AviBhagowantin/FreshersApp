@@ -3,7 +3,7 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { RouterExtensions } from "nativescript-angular/router";
 import * as ApplicationSettings from "application-settings";
-import firebase = require("nativescript-plugin-firebase");
+var firebase = require("nativescript-plugin-firebase");
 import {User} from '../models/user.model';
 import * as dialogs from "tns-core-modules/ui/dialogs";
 /* ***********************************************************
@@ -25,18 +25,16 @@ export class LoginComponent implements OnInit {
     constructor(private router: RouterExtensions) {
         this.user = {
             "email":"",
-            "password":""
+            "password":"",
+            "sid":"",
+            "sname":"",
+            "fname":"",
+            "course":"",
+            "phone":""
         }
     }
 
     ngOnInit(): void {
-
-        // if(ApplicationSettings.getBoolean("authenticated") == true ) {
-        //     firebase.logout();
-        //     ApplicationSettings.setBoolean("authenticated", false);
-        //     this.router.navigate(['/home'], { clearHistory: true });
-        // }
-
 
     }
 
@@ -60,7 +58,7 @@ export class LoginComponent implements OnInit {
                     title: "Login Unsuccessful",
                     message: errorMessage,
                     okButtonText: "OK, got it"
-                  })
+                  });
                 }
             );
             //.then(result => console.log(JSON.stringify(result)))

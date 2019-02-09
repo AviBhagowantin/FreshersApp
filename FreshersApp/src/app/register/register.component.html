@@ -14,13 +14,22 @@
     </ActionItem>
     <Label class="action-bar-title" text="Register"></Label>
 </ActionBar>
-<ScrollView>
+<ScrollView orientation="vertical">
     <StackLayout class="page p-t-15">
-
         <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Email Address" keyboardType="email" autocorrect="false" autocapitalization="none" type="email"
             class="input" [(ngModel)]="user.email"></TextField>
         <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Password" secure="true" autocorrect="false" autocapitalization="none"
             class="input" [(ngModel)]="user.password"></TextField>
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Student ID" autocorrect="false" autocapitalization="none"
+            class="input" [(ngModel)]="user.sid"></TextField>
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Surname" autocorrect="false" autocapitalization="none"
+            class="input" [(ngModel)]="user.sname"></TextField>
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="First Name" autocorrect="false" autocapitalization="none"
+            class="input" [(ngModel)]="user.fname"></TextField>
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Course" autocorrect="false" autocapitalization="none"
+            class="input" [(ngModel)]="user.course"></TextField>
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Phone Number" autocorrect="false" autocapitalization="none"
+            class="input" [(ngModel)]="user.phone"></TextField>
 
         <Button class="btn btn-primary" text="Register" (tap)="onRegisterButtonTap()"></Button>
     </StackLayout>

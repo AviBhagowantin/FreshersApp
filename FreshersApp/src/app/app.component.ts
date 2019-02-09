@@ -1,26 +1,12 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
-var appSettings = require('application-settings');
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
-import firebase = require('nativescript-plugin-firebase');
-
-firebase.init({
-    onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when he re-visits your app
-      console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
-      if (data.loggedIn) {
-        console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
-        appSettings.setBoolean("authenticated", true);
-        console.log(appSettings.getBoolean("authenticated"));
-      }
-      if (!data.loggedIn) {
-        appSettings.setBoolean("authenticated", false);
-        console.log(appSettings.getBoolean("authenticated"));
-      }
-    }
-  });
+var appSettings = require('application-settings');
+var firebase = require('nativescript-plugin-firebase');
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     moduleId: module.id,
@@ -36,6 +22,21 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        firebase.init({
+            onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when he re-visits your app
+              console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
+              if (data.loggedIn) {
+                console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
+                appSettings.setBoolean("authenticated", true);
+                console.log(appSettings.getBoolean("authenticated"));
+              }
+              if (!data.loggedIn) {
+                appSettings.setBoolean("authenticated", false);
+                console.log(appSettings.getBoolean("authenticated"));
+              }
+            }
+        });
+
         this._activatedUrl = "/home";
         this._sideDrawerTransition = new SlideInOnTopTransition();
 
@@ -63,7 +64,29 @@ export class AppComponent implements OnInit {
         sideDrawer.closeDrawer();
     }
 
-    checkTest(): boolean {
+    checkAuthFeedback(): void {
+        if (appSettings.getBoolean("authenticated") == false) 
+        {
+            dialogs.alert({
+                title: "Login Needed",
+                message: "Please login to leave a feedback.",
+                okButtonText: "OK, got it"
+              })
+        }
+        if (appSettings.getBoolean("authenticated") == true) 
+        {
+            this.routerExtensions.navigate(["/feedback"], {
+                transition: {
+                    name: "fade"
+                }
+            });
+
+            const sideDrawer = <RadSideDrawer>app.getRootView();
+            sideDrawer.closeDrawer();
+        }
+    }
+
+    checkAuth(): boolean {
         return appSettings.getBoolean("authenticated");
     }
 

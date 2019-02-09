@@ -25,7 +25,7 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/login')" (tap)="checkLogin()">
                     <Label col="0" text="&#xf015;" class="fa"></Label>
-                    <Label col="1" [text]="checkTest() ? 'Log Out' : 'Log In'" class="p-r-10"></Label>
+                    <Label col="1" [text]="checkAuth() ? 'Log Out' : 'Log In'" class="p-r-10"></Label>
                 </GridLayout>
 
                  <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/cpa')" (tap)="onNavItemTap('/cpa')">
@@ -38,14 +38,14 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
                     <Label col="1" text="Browse" class="p-r-10"></Label>
                 </GridLayout>
 
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/search')" (tap)="onNavItemTap('/search')">
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/gps')" (tap)="onNavItemTap('/gps')">
                     <Label col="0" text="&#xf002;" class="fa"></Label>
-                    <Label col="1" text="Search" class="p-r-10"></Label>
+                    <Label col="1" text="Map" class="p-r-10"></Label>
                 </GridLayout>
 
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/featured')" (tap)="onNavItemTap('/featured')">
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/feedback')" (tap)="checkAuthFeedback()">
                     <Label col="0" text="&#xf005;" class="fa"></Label>
-                    <Label col="1" text="Featured" class="p-r-10"></Label>
+                    <Label col="1" text="Feedback" class="p-r-10"></Label>
                 </GridLayout>
     
                 <StackLayout class="hr-light"></StackLayout>
