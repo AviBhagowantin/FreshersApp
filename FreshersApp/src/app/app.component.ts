@@ -23,6 +23,24 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         firebase.init({
+            showNotifications: true,
+            showNotificationsWhenInForeground: true,
+            onMessageReceivedCallback: (message) => {
+                console.log(`Title: ${message.title}`);
+                console.log(`Body: ${message.body}`);
+                if (message.foreground==true)
+                {
+                    dialogs.alert({
+                        title: message.title,
+                        message: message.body,
+                        okButtonText: "Okay"
+                    }).then(() => {
+                        console.log("Dialog closed!");
+                    });
+                }
+                // if your server passed a custom property called 'foo', then do this:
+                //console.log(`Value of 'foo': ${message.data.foo}`);
+              },
             onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when he re-visits your app
               console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
               if (data.loggedIn) {
@@ -36,6 +54,8 @@ export class AppComponent implements OnInit {
               }
             }
         });
+
+        firebase.subscribeToTopic("news").then(() => console.log("Subscribed to topic"));
 
         this._activatedUrl = "/home";
         this._sideDrawerTransition = new SlideInOnTopTransition();
