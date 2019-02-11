@@ -44,10 +44,10 @@ export class RegisterComponent implements OnInit {
                     '/User',
                     {
                       'ID': this.user.sid,
-                      'First Name': this.user.fname,
-                      'Surname': this.user.sname,
+                      'FirstName': this.user.fname,
+                      'LastName': this.user.sname,
                       'Course': this.user.course,
-                      'Email': this.user.email,
+                      'Email': this.user.email.toLowerCase( ),
                       'Phone': this.user.phone
                     }
                 ).then(

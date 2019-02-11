@@ -106,6 +106,28 @@ export class AppComponent implements OnInit {
         }
     }
 
+    checkAuthSettings(): void {
+        if (appSettings.getBoolean("authenticated") == false) 
+        {
+            dialogs.alert({
+                title: "Login Needed",
+                message: "Please login to edit settings.",
+                okButtonText: "OK, got it"
+              })
+        }
+        if (appSettings.getBoolean("authenticated") == true) 
+        {
+            this.routerExtensions.navigate(["/settings"], {
+                transition: {
+                    name: "fade"
+                }
+            });
+
+            const sideDrawer = <RadSideDrawer>app.getRootView();
+            sideDrawer.closeDrawer();
+        }
+    }
+
     checkAuth(): boolean {
         return appSettings.getBoolean("authenticated");
     }

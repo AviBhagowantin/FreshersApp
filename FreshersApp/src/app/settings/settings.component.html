@@ -16,6 +16,32 @@
 </ActionBar>
 
 <GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf013;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
+    <ScrollView>
+        <StackLayout margin="10" verticalAlignment="center">
+            <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
+                <StackLayout class="input-field">
+                    <Label text="First Name" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="this.curUser.fname"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Last Name" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="this.curUser.sname"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Course" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="this.curUser.course"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Phone Number" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="this.curUser.phone"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <Button class="btn btn-primary w-full" text="Save" (tap)="save()"></Button>
+                <Label (tap)="goBack()" text="cancel" class="text-center footnote"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </GridLayout>
