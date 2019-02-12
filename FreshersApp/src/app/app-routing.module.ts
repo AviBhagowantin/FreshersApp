@@ -7,7 +7,7 @@ const routes: Routes = [
     { path: "home", loadChildren: "~/app/home/home.module#HomeModule" },
     { path: "rule", loadChildren: "~/app/rule/rule.module#RuleModule" },
     { path: "search", loadChildren: "~/app/search/search.module#SearchModule" },
-    { path: "featured", loadChildren: "~/app/featured/featured.module#FeaturedModule" },
+    { path: "admin", loadChildren: "~/app/admin/admin.module#AdminModule" },
     { path: "settings", loadChildren: "~/app/settings/settings.module#SettingsModule" },
     { path: "bus", loadChildren: "~/app/bus/bus.module#BusModule"},
     { path: "cpa", loadChildren: "~/app/cpa/cpa.module#CpaModule" },
