@@ -33,6 +33,11 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
                     <Label col="1" text="Browse" class="p-r-10"></Label>
                 </GridLayout>
 
+                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/search')" (tap)="onNavItemTap('/search')">
+                    <Label col="0" text="&#xf1ea;" class="fa"></Label>
+                    <Label col="1" text="Beacon Map" class="p-r-10"></Label>
+                </GridLayout>
+
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/gps')" (tap)="onNavItemTap('/gps')">
                     <Label col="0" text="&#xf002;" class="fa"></Label>
                     <Label col="1" text="Map" class="p-r-10"></Label>

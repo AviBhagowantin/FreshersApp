@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Mapwize.js demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+          position: absolute; top:0; bottom:0; left: 0; right: 0;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var mapwizeMap
+
+      window.onload = function () {
+        Mapwize.apiKey('1f04d780dc30b774c0c10f53e3c7d4ea'); // This is a demo key, giving you access to the demo building. It is not allowed to use it for production. The key might change at any time without notice. Get your key by signin up at mapwize.io
+        mapwizeMap = new Mapwize.Map({
+          container: 'map'
+        }, {});
+
+        mapwizeMap.on('mapwize:ready', e => {
+          console.log('Maps is now ready to be used')
+
+          mapwizeMap.on('mapwize:click', e => {
+            console.log('mapwize:click', e);
+          })
+        });
+      }
+
+    </script>
+  <script type="text/javascript" src="mapwize.js"></script></body>
+</html>

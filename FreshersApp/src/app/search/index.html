@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <script type="text/javascript" src="mapwize.js"></script>
+        <style>
+            #mapwize {
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="mapwize"></div>
+        <script>
+            var euratechVenueid = '5c62f696ec9b9200168def61';
+
+            Mapwize.apiKey('c8f09425f978bf33f60fd900bc0370e3'); // This is a demo key. It is not allowed to use it for production. The key might change at any time without notice. Get your key by signin up at mapwize.io
+            Mapwize.map({
+              container: 'map'
+            }, {
+              venueId: euratechVenueid // For demo performance, we only load euratechnologies venue
+            }).then(mapInstance => {
+                mapInstance.centerOnVenue(euratechVenueid);
+            });
+
+        </script>
+    </body>
+</html>
