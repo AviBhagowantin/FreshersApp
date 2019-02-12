@@ -5,7 +5,6 @@ import * as app from "tns-core-modules/application";
 import { Accuracy } from "ui/enums";
 import * as geolocation from "nativescript-geolocation";
 import { RouterExtensions } from "nativescript-angular/router";
-import { dateProperty } from "tns-core-modules/ui/date-picker/date-picker";
 var firebase = require('nativescript-plugin-firebase');
 import { DatePipe } from '@angular/common';
 
