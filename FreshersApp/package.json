@@ -25,6 +25,7 @@
         "@angular/platform-browser-dynamic": "~7.1.0",
         "@angular/router": "~7.1.0",
         "nativescript-angular": "~7.1.0",
+        "nativescript-enumerable": "^3.5.2",
         "nativescript-geolocation": "^4.4.2",
         "nativescript-mapbox": "^4.4.1",
         "nativescript-plugin-firebase": "^7.7.0",
