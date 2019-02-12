@@ -16,6 +16,8 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 export class AppComponent implements OnInit {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
+    public email;
+    public username;
 
     constructor(private router: Router, private routerExtensions: RouterExtensions) {
         // Use the component constructor to inject services.
@@ -44,15 +46,39 @@ export class AppComponent implements OnInit {
             onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when he re-visits your app
               console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
               if (data.loggedIn) {
+                this.email=data.user.email;
+                firebase.query(result => {
+                    console.log("query result:", JSON.stringify(result));
+                    this.username="Hello "+result.value.FirstName+" "+result.value.LastName;
+                    }, "/User", {
+                    orderBy: {
+                        type: firebase.QueryOrderByType.CHILD,
+                        value: 'Email'
+                    },
+                    ranges: [
+                        {
+                        type: firebase.QueryRangeType.START_AT,
+                        value: data.user.email
+                        },
+                        {
+                        type: firebase.QueryRangeType.END_AT,
+                        value: data.user.email
+                        }
+                    ]
+                })
                 console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
                 appSettings.setBoolean("authenticated", true);
                 console.log(appSettings.getBoolean("authenticated"));
               }
               if (!data.loggedIn) {
+                this.username="Hello";
+                this.email="Not logged in.";
                 appSettings.setBoolean("authenticated", false);
                 console.log(appSettings.getBoolean("authenticated"));
               }
-            }
+              console.log(this.username);
+              console.log(this.email);
+            }.bind(this)
         });
 
         firebase.subscribeToTopic("news").then(() => console.log("Subscribed to topic"));
