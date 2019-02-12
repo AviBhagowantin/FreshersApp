@@ -9,8 +9,10 @@ import * as app from "tns-core-modules/application";
 })
 export class SearchComponent implements OnInit {
 
+    public webSrc ="~/index.html";
+
     constructor() {
-        // Use the component constructor to inject providers.
+        console.log("tester");
     }
 
     ngOnInit(): void {
