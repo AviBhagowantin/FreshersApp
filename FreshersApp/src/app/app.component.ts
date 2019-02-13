@@ -8,6 +8,7 @@ var appSettings = require('application-settings');
 var firebase = require('nativescript-plugin-firebase');
 import * as dialogs from "tns-core-modules/ui/dialogs";
 
+
 @Component({
     moduleId: module.id,
     selector: "ns-app",
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit {
               if (data.loggedIn) {
                 this.email=data.user.email;
                 firebase.query(result => {
-                    console.log("query result:", JSON.stringify(result));
+                    //console.log("query result:", JSON.stringify(result));
                     this.username="Hello "+result.value.FirstName+" "+result.value.LastName;
                     }, "/User", {
                     orderBy: {
