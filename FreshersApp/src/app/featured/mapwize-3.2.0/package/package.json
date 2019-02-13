@@ -1,0 +1,10 @@
+{
+   "name": "mapwize",
+   "version": "3.2.0",
+   "description": "Mapwize Javascript SDK",
+   "main": "mapwize.js",
+   "author": "Mapwize",
+   "dependencies": {},
+   "homepage": "https://www.mapwize.io/",
+   "license": "©2018 - Mapwize is a registered trademark of Contexeo SAS - All rights reserved"
+}

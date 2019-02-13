@@ -9,6 +9,7 @@ import * as app from "tns-core-modules/application";
 })
 export class FeaturedComponent implements OnInit {
 
+     public webSrc ="~/app/featured/index.html";
     constructor() {
         // Use the component constructor to inject providers.
     }
