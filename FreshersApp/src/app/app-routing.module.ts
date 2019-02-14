@@ -18,6 +18,7 @@ const routes: Routes = [
     { path: "gps", loadChildren: "~/app/gps/gps.module#GpsModule" },
     { path: "ruletitle", loadChildren: "~/app/ruletitle/ruletitle.module#RuletitleModule" },
     { path: "addnews", loadChildren: "~/app/addnews/addnews.module#AddnewsModule" },
+    { path: "viewfeedback", loadChildren: "~/app/viewfeedback/viewfeedback.module#ViewfeedbackModule" },
 ];
 
 @NgModule({

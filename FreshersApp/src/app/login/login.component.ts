@@ -101,11 +101,7 @@ export class LoginComponent implements OnInit {
                                 else
                                 {
                                     console.log("Go Admin");
-                                    this.router.navigate(["/admin"], {
-                                        transition: {
-                                            name: "fade"
-                                        }
-                                    });
+                                    this.router.navigate(["/admin"], { clearHistory: true });
                                 }
                                 },"/admin",
                                 {

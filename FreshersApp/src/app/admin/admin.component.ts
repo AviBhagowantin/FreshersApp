@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
+var appSettings = require('application-settings');
+var firebase = require('nativescript-plugin-firebase');
 
 @Component({
     selector: "Admin",
@@ -25,10 +27,12 @@ export class AdminComponent implements OnInit {
     }
 
     onFeedbackButtonTap(): void {
-
+        this.router.navigate(['/viewfeedback'], { clearHistory: true });
     }
 
     onLogoutButtonTap(): void {
-
+        firebase.logout();
+        appSettings.setBoolean("authenticated", false);
+        this.router.navigate(['/home'], { clearHistory: true });
     }
 }

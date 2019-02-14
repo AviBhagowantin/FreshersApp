@@ -1,12 +1,18 @@
 <ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
     <Label class="action-bar-title" text="Add News"></Label>
 </ActionBar>
 
 <GridLayout class="page page-content">
     <StackLayout orientation="vertical">
-        <Button text="Add News" backgroundColor="#00FFFF" width="250" height="50" margin="20"></Button>
-        <Button text="Add Event" backgroundColor="#00FFFF" width="250" height="50" margin="20"></Button>
-        <Button text="View Feedback" backgroundColor="#00FFFF" width="250" height="50" margin="20"></Button>
-        <Button text="Log Out" backgroundColor="#00FF4D" width="250" height="50" margin="20"></Button>
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Title" autocorrect="false" autocapitalization="none"
+            [(ngModel)]="title"></TextField>
+        <TextView class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Description" editable="true" class="input input-border" autocorrect="false"
+            [(ngModel)]="description"></TextView>
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Author" autocorrect="false" autocapitalization="none"
+            [(ngModel)]="author"></TextField>
+
+        <Button class="btn btn-primary" text="Add" (tap)="onAddButtonTap()"></Button>
     </StackLayout>    
 </GridLayout>
