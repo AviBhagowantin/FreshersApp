@@ -2,14 +2,14 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
-import { RuleComponent } from "./rule.component";
+import { AddeventsComponent } from "./addevents.component";
 
 const routes: Routes = [
-    { path: "", component: RuleComponent }
+    { path: "", component: AddeventsComponent }
 ];
 
 @NgModule({
     imports: [NativeScriptRouterModule.forChild(routes)],
     exports: [NativeScriptRouterModule]
 })
-export class RuleRoutingModule { }
+export class AddeventsRoutingModule { }

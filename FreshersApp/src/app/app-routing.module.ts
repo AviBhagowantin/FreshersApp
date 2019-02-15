@@ -19,6 +19,11 @@ const routes: Routes = [
     { path: "ruletitle", loadChildren: "~/app/ruletitle/ruletitle.module#RuletitleModule" },
     { path: "addnews", loadChildren: "~/app/addnews/addnews.module#AddnewsModule" },
     { path: "viewfeedback", loadChildren: "~/app/viewfeedback/viewfeedback.module#ViewfeedbackModule" },
+    { path: "addevents", loadChildren: "~/app/addevents/addevents.module#AddeventsModule" },
+    { path: "eventdate", loadChildren: "~/app/eventdate/eventdate.module#EventdateModule" },
+    { path: "eventstart", loadChildren: "~/app/eventstart/eventstart.module#EventstartModule" },
+    { path: "eventend", loadChildren: "~/app/eventend/eventend.module#EventendModule" },
+    { path: "eventmap", loadChildren: "~/app/eventmap/eventmap.module#EventmapModule" },
 ];
 
 @NgModule({

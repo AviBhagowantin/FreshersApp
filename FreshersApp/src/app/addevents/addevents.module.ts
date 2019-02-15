@@ -1,20 +1,20 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
-import { RuleRoutingModule } from "./rule-routing.module";
-import { RuleComponent } from "./rule.component";
+import { AddeventsRoutingModule } from "./addevents-routing.module";
+import { AddeventsComponent } from "./addevents.component";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
-        RuleRoutingModule,
+        AddeventsRoutingModule,
         NativeScriptFormsModule
     ],
     declarations: [
-        RuleComponent
+        AddeventsComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class RuleModule { }
+export class AddeventsModule { }

@@ -5,7 +5,6 @@ var firebase = require('nativescript-plugin-firebase');
 import { PDFView } from 'nativescript-pdf-view';
 import { registerElement } from 'nativescript-angular';
 registerElement('PDFView', () => PDFView);
-
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

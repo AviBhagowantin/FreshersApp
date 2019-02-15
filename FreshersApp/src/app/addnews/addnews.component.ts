@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
     templateUrl: "./addnews.component.html"
 })
 export class AddnewsComponent implements OnInit {
+    
     public title;
     public description;
     public author;

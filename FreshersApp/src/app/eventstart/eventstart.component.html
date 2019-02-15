@@ -1,0 +1,14 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
+    <Label class="action-bar-title" text="Event Start Time"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+    <StackLayout orientation="vertical">
+        <label textWrap="true" text="Please select the starting time of the event:"></label>
+        <TimePicker (loaded)="onPickerLoaded($event)" (timeChange)="onTimeChanged($event)" verticalAlignment="center" class="m-15"></TimePicker>
+        <Button class="btn btn-primary" text="Next" (tap)="onNextTap()"></Button>
+        <Label class="m-t-10 m-b-10 m-l-15 m-r-15" text="Cancel" (tap)="onBackTap()"></Label>
+    </StackLayout>   
+</GridLayout>

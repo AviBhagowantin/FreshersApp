@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
     }
 
     onEventButtonTap(): void {
-
+        this.router.navigate(['/addevents'], { clearHistory: true });
     }
 
     onFeedbackButtonTap(): void {

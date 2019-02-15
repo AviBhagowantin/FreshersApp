@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
-var appSettings = require('application-settings');
 var firebase = require('nativescript-plugin-firebase');
 
 @Component({
