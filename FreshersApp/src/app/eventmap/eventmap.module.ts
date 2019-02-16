@@ -4,9 +4,6 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { EventmapRoutingModule } from "./eventmap-routing.module";
 import { EventmapComponent } from "./eventmap.component";
 
-import { registerElement } from "nativescript-angular/element-registry";
-registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView);
-
 @NgModule({
     imports: [
         NativeScriptCommonModule,

@@ -5,22 +5,25 @@
 </ActionBar>
 
 <GridLayout class="page page-content">
-        <ContentView height="100%" width="100%">
-            <Mapbox
-                accessToken="pk.eyJ1IjoiYXZpLWJoYWdvd2FudGluIiwiYSI6ImNqcmZhNTQ5eDBsd3A0NW1qNXk1cWs0eHEifQ.1vXbXMEFcX-5dQkbmsTQUA"
-                mapStyle="streets"
-                latitude="-20.233983"
-                longitude="57.4972365"
-                zoomLevel="16"
-                delay="500"
-                showUserLocation="true"
-                hideCompass="false"
-                disableZoom="false"
-                disableRotation="false"
-                disableScroll="false"
-                disableTilt="false"
-                (mapReady)="onMapReady($event)">
-            </Mapbox>
+    <StackLayout>
+        <ContentView height="75%" width="100%">
+                <Mapbox1
+                    accessToken="pk.eyJ1IjoiYXZpLWJoYWdvd2FudGluIiwiYSI6ImNqcmZhNTQ5eDBsd3A0NW1qNXk1cWs0eHEifQ.1vXbXMEFcX-5dQkbmsTQUA"
+                    mapStyle="streets"
+                    latitude="-20.233983"
+                    longitude="57.4972365"
+                    zoomLevel="16"
+                    delay="500"
+                    showUserLocation="true"
+                    hideCompass="false"
+                    disableZoom="false"
+                    disableRotation="false"
+                    disableScroll="false"
+                    disableTilt="false"
+                    (mapReady)="onMapReady($event)">
+                </Mapbox1>
         </ContentView>
-        <Label class="m-t-10 m-b-10 m-l-15 m-r-15" text="Cancel" (tap)="onBackTap()"></Label>
+        <Button class="btn btn-primary" text="Add" (tap)="onAddTap()"></Button>
+        <Button class="btn" text="Cancel" (tap)="onBackTap()"></Button>
+    </StackLayout>
 </GridLayout>

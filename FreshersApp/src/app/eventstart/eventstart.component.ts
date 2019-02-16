@@ -16,12 +16,16 @@ export class EventstartComponent implements OnInit {
     public timeSelected;
     public pathEvent;
     public pathNews;
+    public eventKey;
+    public dateSelected;
 
     constructor(private router: RouterExtensions,private datePipe: DatePipe,private route: ActivatedRoute) {
         // Use the component constructor to inject providers.
         this.route.queryParams.subscribe(params => {
             this.pathEvent = params["pathEvent"];
             this.pathNews = params["pathNews"];
+            this.eventKey = params["eventKey"];
+            this.dateSelected = params["date"];
         });
     }
 
@@ -49,7 +53,9 @@ export class EventstartComponent implements OnInit {
             queryParams: {
                 "pathEvent": this.pathEvent,
                 "pathNews": this.pathNews,
-                "startTime":this.timeSelected
+                "startTime":this.timeSelected,
+                "eventKey": this.eventKey,
+                "date": this.dateSelected
             }
           };
         this.router.navigate(["/eventend"], navigationExtras);

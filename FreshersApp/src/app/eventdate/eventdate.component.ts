@@ -40,12 +40,15 @@ export class EventdateComponent implements OnInit {
         var nowDay = +(date[0]+date[1]);
         let datePicker = <DatePicker>args.object;
 
+        nowMonth=nowMonth-1;
+
         datePicker.year = nowYear;
         datePicker.month = nowMonth;
         datePicker.day = nowDay;
         datePicker.minDate = new Date(nowYear, nowMonth, nowDay);
         datePicker.maxDate = new Date(2045, 4, 12);
         this.dateSelected = this.datePipe.transform(datePicker.minDate, 'dd-MM-yyyy');
+        console.log(this.dateSelected);
     }
 
     onDateChanged(args) {
@@ -64,7 +67,9 @@ export class EventdateComponent implements OnInit {
         let navigationExtras: NavigationExtras = {
             queryParams: {
                 "pathEvent": this.pathEvent,
-                "pathNews": this.pathNews
+                "pathNews": this.pathNews,
+                "eventKey": this.eventKey,
+                "date": this.dateSelected
             }
           };
           this.router.navigate(["/eventstart"], navigationExtras);
