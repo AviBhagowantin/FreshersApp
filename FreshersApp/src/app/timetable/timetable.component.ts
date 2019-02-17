@@ -34,18 +34,16 @@ export class TimetableComponent implements OnInit {
     public onItemTap(args) {
         let navigationExtras: NavigationExtras = {
             queryParams: {
-                "Room": args.index+1,
-                "Day" : "Monday",
-                "Slot": "8.30-10.30",
-                "Class" : "Free"
+                "Day": args.index+1,
+                
             }
         };
-        this.router.navigate(['/ruledetails'], navigationExtras);
+        this.router.navigate(['/timetabletime'], navigationExtras);
         
       }
 }
 
-let classes=["Room 2.1", "Room 2.2" , "Room 2.3"];
+let classes=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 class Class {
     constructor(public name: string) { }

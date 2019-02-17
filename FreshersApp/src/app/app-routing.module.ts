@@ -14,6 +14,8 @@ const routes: Routes = [
     { path: "login", loadChildren: "~/app/login/login.module#LoginModule" },
     { path: "register", loadChildren: "~/app/register/register.module#RegisterModule" },
     { path: "passreset", loadChildren: "~/app/passreset/passreset.module#PassresetModule" },
+    { path: "timetable", loadChildren: "~/app/timetable/timetable.module#TimetableModule" },
+    { path: "timetabletime", loadChildren: "~/app/timetabletime/timetabletime.module#TimetabletimeModule" },
     { path: "feedback", loadChildren: "~/app/feedback/feedback.module#FeedbackModule"},
     { path: "gps", loadChildren: "~/app/gps/gps.module#GpsModule" },
     { path: "ruletitle", loadChildren: "~/app/ruletitle/ruletitle.module#RuletitleModule" },
