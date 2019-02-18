@@ -1,0 +1,47 @@
+<ActionBar class="action-bar">
+	<StackLayout orientation="horizontal">
+    <Label #actionbartitle class="action-bar-title" textwrap="true"></Label>
+    </StackLayout>
+</ActionBar>
+
+
+<GridLayout class="page page-content">
+	<StackLayout>
+	<TabView>
+	    <StackLayout *tabItem="{title: 'Courses'}" >
+	    	<ListView [items]="cafes" class="list-group">
+   		 		<ng-template let-cafe="item" let-i="index" let-odd="odd" let-even="even" let-myIndex1="index">
+       				<StackLayout orientation="vertical" class="list-group-item">
+           				 <Label [text]="cafe.name"></Label>
+           				 <Label [text]="cafe.description"></Label>
+           				 <Label [text]="cafe.price"></Label>
+           				 <Button text="Add to cart" (tap)="addmenutocart($event, myIndex1)"></Button>
+        			</StackLayout>
+   				 </ng-template>
+           
+			</ListView>
+	 	</StackLayout>
+
+	    <StackLayout *tabItem="{title: 'Drinks'}">
+	    	<ListView [items]="cafes2" class="list-group">
+   		 		<ng-template let-cafe2="item" let-i="index" let-odd="odd" let-even="even" let-myIndex="index">
+       				<StackLayout orientation="vertical" class="list-group-item">
+           				 <Label [text]="cafe2.name"></Label>
+           				 <Label [text]="cafe2.description"></Label>
+           				 <Label [text]="cafe2.price"></Label>
+           				 <Button id="{{ 'btn_' + $index }}" text="Add to cart" (tap)="adddrinktocart($event,myIndex)"></Button>
+        			</StackLayout>
+   				 </ng-template>
+			</ListView>
+	    </StackLayout>
+
+	     <StackLayout *tabItem="{title: 'Cart'}">
+	    	
+           		<Button text="Calculate" (tap)="calculateprice()"></Button>
+        			
+	    </StackLayout>
+    </TabView>
+
+    
+	</StackLayout>
+</GridLayout>
