@@ -15,8 +15,8 @@ import { DatePipe } from '@angular/common';
 })
 export class GpsComponent implements OnInit {
 
-    currentLat: number;
-    currentLng: number;
+    public currentLat = -20.233983;
+    public currentLng = 57.4972365;
 
     public events: any;
     public keys : any;
@@ -62,6 +62,8 @@ export class GpsComponent implements OnInit {
         geolocation.watchLocation(position => {
             this.currentLat = position.latitude;
             this.currentLng = position.longitude;
+            console.log(this.currentLat);
+            console.log(this.currentLng);
         }, e => {
             console.log('failed to get location');
         }, {

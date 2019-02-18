@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSigninButtonTap(): void {
+        var admin;
 
         firebase.login(
             {
@@ -51,7 +52,83 @@ export class LoginComponent implements OnInit {
             .then(
                 function () {
                     ApplicationSettings.setBoolean("authenticated", true);
-                    this.router.navigate(['/home'], { clearHistory: true });
+
+                    firebase.getCurrentUser()
+                    .then(
+                        function(user) {
+                            //console.log(user);
+                            admin=user.email;
+                            //console.log(admin);
+                            firebase.query(result => {
+                                //console.log("query result:", JSON.stringify(result));
+                                if (result.value==null)
+                                {
+                                    firebase.query(result => {
+                                        //console.log("query result:", JSON.stringify(result));
+                                        if (result.value==null)
+                                        {
+                                            console.log("Go home");
+                                            this.router.navigate(['/home'], { clearHistory: true });
+                                        }
+                                        else
+                                        {
+                                            console.log("Go CafeAdmin");
+                                        }
+                                        },"/cafeadmin",
+                                        {
+                                            singleEvent: true,
+                                            orderBy: {
+                                                type: firebase.QueryOrderByType.CHILD,
+                                                value: 'Email' 
+                                            },
+                                            ranges: [
+                                            {
+                                                type: firebase.QueryRangeType.START_AT,
+                                                value: admin
+                                            },
+                                            {
+                                                type: firebase.QueryRangeType.END_AT,
+                                                value: admin
+                                            }
+                                            ],
+                                            limit: {
+                                                type: firebase.QueryLimitType.LAST,
+                                                value: 1
+                                            }
+                                        }
+                                    );
+                                }
+                                else
+                                {
+                                    console.log("Go Admin");
+                                    this.router.navigate(["/admin"], { clearHistory: true });
+                                }
+                                },"/admin",
+                                {
+                                    singleEvent: true,
+                                    orderBy: {
+                                        type: firebase.QueryOrderByType.CHILD,
+                                        value: 'Email' 
+                                    },
+                                    ranges: [
+                                    {
+                                        type: firebase.QueryRangeType.START_AT,
+                                        value: admin
+                                    },
+                                    {
+                                        type: firebase.QueryRangeType.END_AT,
+                                        value: admin
+                                    }
+                                    ],
+                                    limit: {
+                                        type: firebase.QueryLimitType.LAST,
+                                        value: 1
+                                    }
+                                }
+                            );
+                        }.bind(this)
+                    )
+                    .catch(error => console.log("Trouble in paradise: " + error));
                 }.bind(this),
                 function (errorMessage) {
                   dialogs.alert({
@@ -63,8 +140,6 @@ export class LoginComponent implements OnInit {
             );
             //.then(result => console.log(JSON.stringify(result)))
             //.catch(error => console.log(error));
-
-
         
     }
 

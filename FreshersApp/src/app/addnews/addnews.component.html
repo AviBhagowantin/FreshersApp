@@ -1,0 +1,19 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
+    <Label class="action-bar-title" text="Add News"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+    <StackLayout orientation="vertical">
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Title" autocorrect="false" autocapitalization="none"
+            [(ngModel)]="title"></TextField>
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Author" autocorrect="false" autocapitalization="none"
+            [(ngModel)]="author"></TextField>
+        <TextView class="m-t-10 m-b-10 m-l-15 m-r-15" hint="Description" editable="true" class="input input-border" autocorrect="false"
+            [(ngModel)]="description"></TextView>
+
+        <Button class="btn btn-primary" text="Add" (tap)="onAddButtonTap()"></Button>
+        <Button class="btn" text="Cancel" (tap)="onBackTap()"></Button>
+    </StackLayout>    
+</GridLayout>
