@@ -157,7 +157,7 @@ export class EventmapComponent implements OnInit {
               console.log("Error occurred " + JSON.stringify(e));
         }).then(
             function (result) {
-                console.log("created key: " + result.key);
+                //console.log("created key: " + result.key);
             }
         );
 
