@@ -12,10 +12,18 @@
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label class="action-bar-title" text="Search"></Label>
+    <Label class="action-bar-title" text="Rules and Regulations"></Label>
 </ActionBar>
 
 <GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf002;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
+    <ScrollView> 
+        <ListView [items]="rules" (itemTap)="onItemTap($event)" class="list-group">
+            <ng-template let-rule="item" let-i="index" let-odd="odd" let-even="even">
+                <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+                <StackLayout orientation="horizontal" class="list-group-item">
+                    <Label textWrap="true" [text]="rule.title"></Label>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+    </ScrollView>
 </GridLayout>

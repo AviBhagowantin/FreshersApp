@@ -1,0 +1,29 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
+    <Label class="action-bar-title" text="Event Location"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+    <StackLayout>
+        <ContentView height="75%" width="100%">
+                <Mapbox1
+                    accessToken="pk.eyJ1IjoiYXZpLWJoYWdvd2FudGluIiwiYSI6ImNqcmZhNTQ5eDBsd3A0NW1qNXk1cWs0eHEifQ.1vXbXMEFcX-5dQkbmsTQUA"
+                    mapStyle="streets"
+                    latitude="-20.233983"
+                    longitude="57.4972365"
+                    zoomLevel="16"
+                    delay="500"
+                    showUserLocation="true"
+                    hideCompass="false"
+                    disableZoom="false"
+                    disableRotation="false"
+                    disableScroll="false"
+                    disableTilt="false"
+                    (mapReady)="onMapReady($event)">
+                </Mapbox1>
+        </ContentView>
+        <Button class="btn btn-primary" text="Add" (tap)="onAddTap()"></Button>
+        <Button class="btn" text="Cancel" (tap)="onBackTap()"></Button>
+    </StackLayout>
+</GridLayout>

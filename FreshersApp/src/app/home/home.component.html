@@ -18,16 +18,16 @@
 <GridLayout class="page page-content">
 
     <ListView [items]="news" class="list-group">
-    <ng-template let-rule="item" let-i="index" let-odd="odd" let-even="even">
-        <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
-        <StackLayout orientation="vertical" class="list-group-item">
-            <Label [text]="rule.title"></Label>
-            <Label [textWrap]="true" [text]="rule.description"></Label>
-            <!-- (tap)="toggle($event)" -->
-            <label [text]="rule.author"></label>
-            <label [text]="rule.date"></label>
-        </StackLayout>
-    </ng-template>
-</ListView>
+        <ng-template let-rule="item" let-i="index" let-odd="odd" let-even="even">
+            <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+            <StackLayout orientation="vertical" class="list-group-item">
+                <Label [text]="rule.title"></Label>
+                <Label [textWrap]="true" [text]="rule.description"></Label>
+                <!-- (tap)="toggle($event)" -->
+                <label [text]="rule.author"></label>
+                <label [text]="rule.date"></label>
+            </StackLayout>
+        </ng-template>
+    </ListView>
 
 </GridLayout>

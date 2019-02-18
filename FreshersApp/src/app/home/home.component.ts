@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
+import { DatePipe } from '@angular/common';
 var firebase = require('nativescript-plugin-firebase');
 
 @Component({
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
     public news: any;
     public keys : any;
 
-    constructor() {
+    constructor(private datePipe: DatePipe) {
 
     }
 
@@ -43,6 +44,10 @@ export class HomeComponent implements OnInit {
     getData(data : any): any{
         //console.log(data.value);
 
+        var nowDate = this.datePipe.transform(Date.now(), 'dd/MM/yyyy');
+        var nowYear = +(nowDate[6]+nowDate[7]+nowDate[8]+nowDate[9]);
+        var nowMonth = +(nowDate[3]+nowDate[4]);
+
         this.keys=Object.keys(data.value); 
 
         var counter : number;
@@ -62,10 +67,24 @@ export class HomeComponent implements OnInit {
                 author: data.value[key].Author
             };
 
+            var year = +(news_details.date[6]+news_details.date[7]+news_details.date[8]+news_details.date[9]);
+            var month = +(news_details.date[3]+news_details.date[4]);
+
             news_details.date="Date: "+news_details.date;
             news_details.author="Author: "+news_details.author;
+            
 
-            newsArray.push(news_details);
+            if ((year<nowYear) && (nowMonth==1) && (month==12))
+            {
+                newsArray.push(news_details);
+            }
+            else if ((year==nowYear) && ((nowMonth-month==1) || (nowMonth==month)))
+            {
+                newsArray.push(news_details);
+            }
+
+            //newsArray.push(news_details);
+
         } 
 
         //console.log(newsArray);
@@ -74,8 +93,3 @@ export class HomeComponent implements OnInit {
 
     
 }
-
-class News {
-    constructor(public title: string,public description:string) { }
-}
-
