@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
         var newsArray = [];
 
         firebase.query(result => {
-            console.log("query result:", JSON.stringify(result));
+            //console.log("query result:", JSON.stringify(result));
 
             var news_details = {
                 title: result.value.Title,
