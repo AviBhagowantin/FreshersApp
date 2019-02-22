@@ -133,6 +133,28 @@ export class AppComponent implements OnInit {
         }
     }
 
+    checkAuthCafetaria(): void {
+        if (appSettings.getBoolean("authenticated") == false) 
+        {
+            dialogs.alert({
+                title: "Login Needed",
+                message: "Please login to access the cafetaria.",
+                okButtonText: "OK, got it"
+              })
+        }
+        if (appSettings.getBoolean("authenticated") == true) 
+        {
+            this.routerExtensions.navigate(["/cafeteria"], {
+                transition: {
+                    name: "fade"
+                }
+            });
+
+            const sideDrawer = <RadSideDrawer>app.getRootView();
+            sideDrawer.closeDrawer();
+        }
+    }
+
     checkAuthSettings(): void {
         var admin;
         if (appSettings.getBoolean("authenticated") == false) 

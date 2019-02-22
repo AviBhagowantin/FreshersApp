@@ -1,7 +1,16 @@
 <ActionBar class="action-bar">
-	<StackLayout orientation="horizontal">
+      <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
     <Label #actionbartitle class="action-bar-title" textwrap="true"></Label>
-    </StackLayout>
 </ActionBar>
 
 
@@ -16,8 +25,10 @@
     <ng-template let-i="index" let-item="item" acTemplateKey="title">
       <StackLayout>
         <Label [text]="item.title"></Label>
-        <Label  [text]="item.headerText"></Label>
-         <Label  [text]="item.price"></Label>
+        <StackLayout orientation="horizontal">
+            <label text="Price: Rs "></label>
+            <Label  [text]="item.price"></Label>
+        </StackLayout>
       </StackLayout>
     </ng-template>
 
@@ -55,7 +66,7 @@
               <StackLayout>
                 <Label [text]="Current" ></Label>
                 <Label [text]="Cost"></Label>
-                 <Button text="Confirm order" (tap)="calculateprice()"></Button>
+                 <Button text="Confirm order" (tap)="checkout()"></Button>
               </StackLayout>
                
                   <ListView [items]="order" class="list-group" (loadMoreItems)="loadMore()">
@@ -72,11 +83,7 @@
                               
                           </StackLayout>
                       </ng-template>
-                  </ListView>
-           
-	    	
-     
-        			
+                  </ListView>		
 	    </StackLayout>
     </TabView>
 

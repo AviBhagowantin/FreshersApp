@@ -1,16 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
 import {ActivatedRoute} from "@angular/router";
-import { ObservableArray, ChangedData } from "tns-core-modules/data/observable-array"
 import {ElementRef, ViewChild} from "@angular/core";
-import { StackLayout } from 'ui/layouts/stack-layout';
 import { Label } from 'ui/label';
-import { menuItem } from './menuItem';
-import {EventData} from "data/observable"
-
+var firebase = require('nativescript-plugin-firebase');
 import { CheckBox } from 'nativescript-checkbox';
 import { Page } from 'tns-core-modules/ui/page';
+import { RouterExtensions } from "nativescript-angular/router";
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: "Menu",
@@ -29,58 +25,123 @@ export class MenuComponent implements OnInit {
     public order:any;
     public Current:string;
     public Cost:string;
-    public credits:string;
+    public credits:number;
     public sum:number;
+    public keys : any;
 
 	 @ViewChild('actionbartitle') actionbartitle : ElementRef;
      
 
-    public constructor(private route: ActivatedRoute, private page: Page) {
+    public constructor(private route: ActivatedRoute, private page: Page,private router: RouterExtensions) {
         this.sum=0;
         this.tabSelectedIndex = 0;
         this.cart =[];
         this.count=0;
-        this.credits="100";
         this.order=this.cart;
     }
 
     ngOnInit(): any {
 
+        firebase.getCurrentUser()
+            .then(
+                function(user) {
+                    console.log(user);
+                    var userEmail=user.email;
+                    firebase.query(result => {
+                        console.log("query result:", JSON.stringify(result));
+                        this.credits=result.value.CafeCredits;
+                        this.Current="Current Credits : "+ this.credits;
+                        }, "/User", {
+                        orderBy: {
+                            type: firebase.QueryOrderByType.CHILD,
+                            value: 'Email'
+                        },
+                        ranges: [
+                            {
+                            type: firebase.QueryRangeType.START_AT,
+                            value: userEmail
+                            },
+                            {
+                            type: firebase.QueryRangeType.END_AT,
+                            value: userEmail
+                            }
+                        ]
+                    })
+                }.bind(this)
+            )
+            .catch(error => console.log("Trouble in paradise: " + error));
+
     	const myTitle: Label = <Label>this.actionbartitle.nativeElement;
-        this.Current="Current Credits : "+ this.credits;
-
-
-
         this.route.queryParams.subscribe(params => {
             this.cafe = params["Cafe_Name"];
   			
         });
 
-    	myTitle.text=this.cafe;
-        
+        myTitle.text=this.cafe;
+    
+        var path='/Cafetaria/'+this.cafe;
 
-        this.items = [
-            {
-                title: 'Mine Frite',
-                headerText: 'Poulet',
-                price: '50',
-                items: [{ id:"Soy",text: 'Soy Sauce'}, {id:"Margoz",
-                    text: 'Margoz'}]
-            },
-            {
-                title: 'Roti Faratha',
-                headerText: 'Poulet',
-                price: '50',
-                items: [{ id:"Rougaille" ,text: 'Rougaille'},{ id:"Gros Pois" ,text: 'Gros Pois'},{ id:"Sardine" ,text: 'Sardine'}, {
-                    id:"Poule",text: 'Poule'}]
-            }];
-
+        firebase.getValue(path)
+        .then(result => (this.items=this.getData(result)))
+        .catch(error => console.log("Error: " + error));
   
     }
 
-    calculateprice()
-    {
+    getData(data:any):any {
+        console.log(data);
+
+        var allItems=[];
+
+        this.keys=Object.keys(data.value); 
+        var counter : number;
+
+        for (counter = 0; counter < this.keys.length; counter++) {
+
+            var key = this.keys[counter];
+
+            var itemsArray=[];
+
+            var items=data.value[key].items;
+
+            for (var z=1;z<items.length;z++) {
+                var x={
+                    id:z,
+                    text:items[z]
+                }
+
+                itemsArray.push(x);
+            }
+
+            console.log("Items:"+items);
+
+            var item_details = {
+                title: key,
+                price: data.value[key].Price,
+                items: itemsArray
+            };
+
+            console.log(item_details);
+
+            allItems.push(item_details);
+        }
         
+        return allItems;
+    }
+
+    onBackTap(): void {
+        this.router.navigate(['/cafeteria'], { clearHistory: true });
+    }
+
+    checkout()
+    {
+        if (this.credits<this.sum)
+        {
+            dialogs.alert({
+                title: "Not enough credits",
+                message: "Please go to the cafetaria to put more credits.",
+                okButtonText: "OK, got it"
+              })
+        }
     }
 
     loadMore()
@@ -134,9 +195,6 @@ export class MenuComponent implements OnInit {
    
 
 }
-
-
-
 
 class Course{
     constructor(public id:number,public name:string,public description:string,public price:string) { }
