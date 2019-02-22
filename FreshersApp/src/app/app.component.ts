@@ -31,16 +31,16 @@ export class AppComponent implements OnInit {
             onMessageReceivedCallback: (message) => {
                 console.log(`Title: ${message.title}`);
                 console.log(`Body: ${message.body}`);
-                if (message.foreground==true)
-                {
-                    dialogs.alert({
-                        title: message.title,
-                        message: message.body,
-                        okButtonText: "Okay"
-                    }).then(() => {
-                        console.log("Dialog closed!");
-                    });
-                }
+                // if (message.foreground==true)
+                // {
+                //     dialogs.alert({
+                //         title: message.title,
+                //         message: message.body,
+                //         okButtonText: "Okay"
+                //     }).then(() => {
+                //         console.log("Dialog closed!");
+                //     });
+                // }
                 // if your server passed a custom property called 'foo', then do this:
                 //console.log(`Value of 'foo': ${message.data.foo}`);
               },
