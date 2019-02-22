@@ -6,42 +6,80 @@
 
 
 <GridLayout class="page page-content">
-	<StackLayout>
 	<TabView>
-	    <StackLayout *tabItem="{title: 'Courses'}" >
-	    	<ListView [items]="cafes" class="list-group">
-   		 		<ng-template let-cafe="item" let-i="index" let-odd="odd" let-even="even" let-myIndex1="index">
-       				<StackLayout orientation="vertical" class="list-group-item">
-           				 <Label [text]="cafe.name"></Label>
-           				 <Label [text]="cafe.description"></Label>
-           				 <Label [text]="cafe.price"></Label>
-           				 <Button text="Add to cart" (tap)="addmenutocart($event, myIndex1)"></Button>
-        			</StackLayout>
-   				 </ng-template>
-           
-			</ListView>
-	 	</StackLayout>
+	 <StackLayout *tabItem="{title: 'Courses'}" >
+
+ 
+  <Accordion [items]="items" allowMultiple="false" >
+
+
+    <ng-template let-i="index" let-item="item" acTemplateKey="title">
+      <StackLayout>
+        <Label [text]="item.title"></Label>
+        <Label  [text]="item.headerText"></Label>
+         <Label  [text]="item.price"></Label>
+      </StackLayout>
+    </ng-template>
+
+    <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="content">
+      <StackLayout>
+        <Checkbox [id]="item.id" [text]="item.text" ></Checkbox>
+      </StackLayout>
+    </ng-template>
+
+
+    <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="footer">
+      <StackLayout>
+        <Button  text="Add to cart" (tap)="addmenutocart($event,myIndex)"></Button>
+
+      </StackLayout>
+    </ng-template>
+
+  </Accordion>
+</StackLayout>
+
+
 
 	    <StackLayout *tabItem="{title: 'Drinks'}">
-	    	<ListView [items]="cafes2" class="list-group">
-   		 		<ng-template let-cafe2="item" let-i="index" let-odd="odd" let-even="even" let-myIndex="index">
-       				<StackLayout orientation="vertical" class="list-group-item">
-           				 <Label [text]="cafe2.name"></Label>
-           				 <Label [text]="cafe2.description"></Label>
-           				 <Label [text]="cafe2.price"></Label>
-           				 <Button id="{{ 'btn_' + $index }}" text="Add to cart" (tap)="adddrinktocart($event,myIndex)"></Button>
-        			</StackLayout>
-   				 </ng-template>
-			</ListView>
+	    	
+
+        <Accordion [items]="drinks" allowMultiple="false" >
+
+        
+        </Accordion>
+
+
 	    </StackLayout>
 
 	     <StackLayout *tabItem="{title: 'Cart'}">
+              <StackLayout>
+                <Label [text]="Current" ></Label>
+                <Label [text]="Cost"></Label>
+                 <Button text="Confirm order" (tap)="calculateprice()"></Button>
+              </StackLayout>
+               
+                  <ListView [items]="order" class="list-group" (loadMoreItems)="loadMore()">
+                      <ng-template let-order="item" let-i="index"  let-odd="odd" let-even="even" let-indexing="index">
+                          
+                          <StackLayout  class="list-group-item">
+                             <StackLayout  orientation="horizontal">
+                              <Label textWrap="true" horizontalAlignment="left" [text]="order.name"></Label>
+                               <Button horizontalAlignment="right" text="Remove" (tap)="remove(indexing)"></Button>
+                            </StackLayout>
+                              <Label textWrap="true" [text]="order.description"></Label>
+                            
+                              <Label textWrap="true" [text]="order.price"></Label>
+                              
+                          </StackLayout>
+                      </ng-template>
+                  </ListView>
+           
 	    	
-           		<Button text="Calculate" (tap)="calculateprice()"></Button>
+     
         			
 	    </StackLayout>
     </TabView>
 
     
-	</StackLayout>
+
 </GridLayout>

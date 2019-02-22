@@ -5,7 +5,8 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import {DatePipe} from '@angular/common';
-import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
+
+
 @NgModule({
     bootstrap: [
         AppComponent
@@ -14,8 +15,7 @@ import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
         AppRoutingModule,
         NativeScriptModule,
         NativeScriptUISideDrawerModule,
-        NativeScriptFormsModule,
-        TNSCheckBoxModule
+        NativeScriptFormsModule
     ],
     declarations: [
         AppComponent

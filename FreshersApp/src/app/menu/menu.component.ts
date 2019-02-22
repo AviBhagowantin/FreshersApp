@@ -9,7 +9,8 @@ import { Label } from 'ui/label';
 import { menuItem } from './menuItem';
 import {EventData} from "data/observable"
 
-
+import { CheckBox } from 'nativescript-checkbox';
+import { Page } from 'tns-core-modules/ui/page';
 
 @Component({
     selector: "Menu",
@@ -22,33 +23,32 @@ export class MenuComponent implements OnInit {
 
 	public cafe:string;
     public tabSelectedIndex: number;
-    public cafes: Array<Course>;
-    public cafes2: Array<Course>;
-
-    
+    public count:number;
+    public cart:any;
+    public items: any[];
+    public order:any;
+    public Current:string;
+    public Cost:string;
+    public credits:string;
     public sum:number;
 
 	 @ViewChild('actionbartitle') actionbartitle : ElementRef;
+     
 
-
-    public constructor(private route: ActivatedRoute) {
+    public constructor(private route: ActivatedRoute, private page: Page) {
         this.sum=0;
         this.tabSelectedIndex = 0;
-        this.cafes = [];
-        this.cafes2 = [];
-
-        for (let i = 0; i < menu_Item.length; i++) {
-            this.cafes.push(new Course(menu_Item[i].name,menu_Item[i].description,menu_Item[i].price));
-        }
-
-        for (let i = 0; i < drink_Item.length; i++) {
-            this.cafes2.push(new Course(drink_Item[i].name,drink_Item[i].description,drink_Item[i].price));
-        }
+        this.cart =[];
+        this.count=0;
+        this.credits="100";
+        this.order=this.cart;
     }
 
     ngOnInit(): any {
 
     	const myTitle: Label = <Label>this.actionbartitle.nativeElement;
+        this.Current="Current Credits : "+ this.credits;
+
 
 
         this.route.queryParams.subscribe(params => {
@@ -57,62 +57,87 @@ export class MenuComponent implements OnInit {
         });
 
     	myTitle.text=this.cafe;
+        
 
+        this.items = [
+            {
+                title: 'Mine Frite',
+                headerText: 'Poulet',
+                price: '50',
+                items: [{ id:"Soy",text: 'Soy Sauce'}, {id:"Margoz",
+                    text: 'Margoz'}]
+            },
+            {
+                title: 'Roti Faratha',
+                headerText: 'Poulet',
+                price: '50',
+                items: [{ id:"Rougaille" ,text: 'Rougaille'},{ id:"Gros Pois" ,text: 'Gros Pois'},{ id:"Sardine" ,text: 'Sardine'}, {
+                    id:"Poule",text: 'Poule'}]
+            }];
 
-    }
-
-    adddrinktocart(args: EventData, index: number)
-    {
-        alert("Add to cart");
-        drink_cart.push(index);
-    }
-    
-    addmenutocart(args: EventData, index: number)
-    {
-        alert("Added to cart");
-        menu_cart.push(index);
+  
     }
 
     calculateprice()
     {
-        this.sum=0;
-        for (let i = 0; i < drink_cart.length; i++) {
-            this.sum=this.sum+drink_Item[drink_cart[i]].price;
-        }
-
-        for (let i = 0; i < menu_cart.length; i++) {
-            this.sum=this.sum+menu_Item[menu_cart[i]].price;
-        }
-
-        alert(this.sum);
+        
     }
+
+    loadMore()
+    {
+        this.order=this.cart;
+    }
+
+    remove(indexes)
+    {
+            this.cart = this.cart.filter(item => item.id !== this.cart[indexes].id);
+            this.order=this.cart;
+            this.count=this.count-1;
+           if(this.cart.length==0)
+           {
+                this.cart=[];
+                this.count=0;
+           }
+           
+           this.sum=0;
+        for(let i=0;i<this.cart.length;i++)
+        {
+            this.sum=this.sum+parseFloat(this.cart[i].price);
+        }
+        this.Cost="Order Cost : "+this.sum.toString();
+    }
+
+    addmenutocart(args,myIndex)
+    {
+        var string="";
+        for(let i=0;i<this.items[myIndex].items.length;i++)
+        {
+           let checkbox: CheckBox = <CheckBox >this.page.getViewById<CheckBox>(this.items[myIndex].items[i].id);
+           if(checkbox.checked)
+           {
+            string=string.concat(this.items[myIndex].items[i].text+",")
+           }
+        }
+        this.cart[this.count]=new Course(this.count,this.items[myIndex].title,string,this.items[myIndex].price);
+        this.count=this.count+1;
+        this.order=this.cart;
+        
+        this.sum=0;
+        for(let i=0;i<this.cart.length;i++)
+        {
+            this.sum=this.sum+parseFloat(this.cart[i].price);
+        }
+        this.Cost="Order Cost : "+this.sum.toString();
+        
+    }
+
+   
 
 }
 
-let drink_cart:number[]=[];
-let menu_cart:number[]=[];
-var menu_Item:menuItem[]=[];
-menu_Item[0]=new menuItem();
-menu_Item[0].name="Pomme de terre Crazer";
-menu_Item[0].description="Bien saller avec un pince du sel";
-menu_Item[0].price=20.50;
 
-menu_Item[1]=new menuItem();
-menu_Item[1].name="Pomme dammour Crazer";
-menu_Item[1].description="Bien doux avec un pince du sel";
-menu_Item[1].price=250.50;
 
-var drink_Item:menuItem[]=[];
-drink_Item[0]=new menuItem();
-drink_Item[0].name="Water 1L";
-drink_Item[0].description="";
-drink_Item[0].price=200;
-
-drink_Item[1]=new menuItem();
-drink_Item[1].name="Coca";
-drink_Item[1].description="";
-drink_Item[1].price=2;
 
 class Course{
-    constructor(public name: string,public description:string,public price:number) { }
+    constructor(public id:number,public name:string,public description:string,public price:string) { }
 }
