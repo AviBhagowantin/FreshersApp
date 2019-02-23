@@ -7,6 +7,9 @@ import { CheckBox } from 'nativescript-checkbox';
 import { Page } from 'tns-core-modules/ui/page';
 import { RouterExtensions } from "nativescript-angular/router";
 import * as dialogs from "tns-core-modules/ui/dialogs";
+// import * as imgSource from "tns-core-modules/image-source";
+
+// const ZXing = require('nativescript-zxing');
 
 @Component({
     selector: "Menu",
@@ -28,6 +31,9 @@ export class MenuComponent implements OnInit {
     public credits:number;
     public sum:number;
     public keys : any;
+    public userEmail;
+    public userKey;
+    public img;
 
 	 @ViewChild('actionbartitle') actionbartitle : ElementRef;
      
@@ -46,8 +52,9 @@ export class MenuComponent implements OnInit {
             .then(
                 function(user) {
                     console.log(user);
-                    var userEmail=user.email;
+                    this.userEmail=user.email;
                     firebase.query(result => {
+                        this.userKey=result.key;
                         console.log("query result:", JSON.stringify(result));
                         this.credits=result.value.CafeCredits;
                         this.Current="Current Credits : "+ this.credits;
@@ -59,11 +66,11 @@ export class MenuComponent implements OnInit {
                         ranges: [
                             {
                             type: firebase.QueryRangeType.START_AT,
-                            value: userEmail
+                            value: this.userEmail
                             },
                             {
                             type: firebase.QueryRangeType.END_AT,
-                            value: userEmail
+                            value: this.userEmail
                             }
                         ]
                     })
@@ -140,7 +147,37 @@ export class MenuComponent implements OnInit {
                 title: "Not enough credits",
                 message: "Please go to the cafetaria to put more credits.",
                 okButtonText: "OK, got it"
-              })
+            })
+        }
+        else 
+        {
+            var description="";
+            var path='/User/'+this.userKey;
+            var orderPath='/Orders/'+this.cafe;
+            this.credits=this.credits-this.sum;
+            firebase.update(
+                path,
+                {'CafeCredits':this.credits}
+            );
+
+            for (var i=0;i<this.cart.length;i++)
+            {
+                description=description+this.cart[i].name+"("+this.cart[i].description+"),";
+            }
+            
+            firebase.push(
+                orderPath,
+                {
+                  'Description': description
+                }
+            ).then(
+                function (result) {
+                    console.log("created key: " + result.key);
+                    // const zx = new ZXing();
+                    // const barcode = zx.createBarcode({encode: result.key, height: 100, width: 100, format: ZXing.QR_CODE});
+                    // this.img.imageSource = imgSource.fromNativeSource(barcode);
+                }
+            );
         }
     }
 
@@ -170,6 +207,7 @@ export class MenuComponent implements OnInit {
 
     addmenutocart(args,myIndex)
     {
+        console.log("myIndex:" +myIndex);
         var string="";
         for(let i=0;i<this.items[myIndex].items.length;i++)
         {
@@ -178,10 +216,14 @@ export class MenuComponent implements OnInit {
            {
             string=string.concat(this.items[myIndex].items[i].text+",")
            }
+           console.log("string"+string);
         }
         this.cart[this.count]=new Course(this.count,this.items[myIndex].title,string,this.items[myIndex].price);
+        console.log("cart"+this.cart);
         this.count=this.count+1;
+        console.log("count"+this.count);
         this.order=this.cart;
+        console.log("order"+this.order);
         
         this.sum=0;
         for(let i=0;i<this.cart.length;i++)
