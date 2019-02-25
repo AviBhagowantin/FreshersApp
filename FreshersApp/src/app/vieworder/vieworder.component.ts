@@ -66,4 +66,13 @@ export class VieworderComponent implements OnInit {
 
         return orderArray;
     }
+
+
+    removeOrder(index)
+    {
+
+    		console.log(this.orders[index]);
+    	 	this.orders = this.orders.filter(item => item.description !== this.orders[index].description);
+           
+    }
 }
