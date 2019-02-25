@@ -7,9 +7,6 @@ import { CheckBox } from 'nativescript-checkbox';
 import { Page } from 'tns-core-modules/ui/page';
 import { RouterExtensions } from "nativescript-angular/router";
 import * as dialogs from "tns-core-modules/ui/dialogs";
-// import * as imgSource from "tns-core-modules/image-source";
-
-// const ZXing = require('nativescript-zxing');
 
 @Component({
     selector: "Menu",
@@ -33,7 +30,8 @@ export class MenuComponent implements OnInit {
     public keys : any;
     public userEmail;
     public userKey;
-    public img;
+    public code;
+    public codes: any[];
 
 	 @ViewChild('actionbartitle') actionbartitle : ElementRef;
      
@@ -45,6 +43,8 @@ export class MenuComponent implements OnInit {
         this.count=0;
         this.order=this.cart;
     }
+
+    
 
     ngOnInit(): any {
 
@@ -58,11 +58,70 @@ export class MenuComponent implements OnInit {
                         console.log("query result:", JSON.stringify(result));
                         if (this.cafe=="Main Cafetaria")
                         {
+                            this.codes=[];
                             this.credits=result.value.CafeMainCredits;
+                            firebase.query(result => {
+                                console.log("code result:", JSON.stringify(result));
+
+                                var cd = {
+                                    code:result.value.Code
+                                 };
+                        
+                                 console.log(cd.code);
+
+                                 console.log(cd);
+                        
+                                 this.codes.push(cd.code);
+                        
+                                 console.log("codes:"+this.codes);
+                                }, "/Orders/Main Cafetaria", {
+                                orderBy: {
+                                    type: firebase.QueryOrderByType.CHILD,
+                                    value: 'userEmail'
+                                },
+                                ranges: [
+                                    {
+                                    type: firebase.QueryRangeType.START_AT,
+                                    value: this.userEmail
+                                    },
+                                    {
+                                    type: firebase.QueryRangeType.END_AT,
+                                    value: this.userEmail
+                                    }
+                                ]
+                            })
                         }
                         else if (this.cafe=="Secret Cafetaria")
                         {
                             this.credits=result.value.CafeSecretCredits;
+                            firebase.query(result => {
+                                console.log("code result:", JSON.stringify(result));
+                        
+                                var cd = {
+                                    code:result.value.Code
+                                 };
+                        
+                                 console.log(cd.code);
+                        
+                                 this.codes.push(cd);
+                        
+                                 console.log(this.codes);
+                                }, "/Orders/Secret Cafetaria", {
+                                orderBy: {
+                                    type: firebase.QueryOrderByType.CHILD,
+                                    value: 'userEmail'
+                                },
+                                ranges: [
+                                    {
+                                    type: firebase.QueryRangeType.START_AT,
+                                    value: this.userEmail
+                                    },
+                                    {
+                                    type: firebase.QueryRangeType.END_AT,
+                                    value: this.userEmail
+                                    }
+                                ]
+                            })
                         }
                         this.Current="Current Credits : "+ this.credits;
                         }, "/User", {
@@ -171,18 +230,19 @@ export class MenuComponent implements OnInit {
             {
                 description=description+this.cart[i].name+"("+this.cart[i].description+"),";
             }
+
+            this.code=Math.floor(Math.random() * 10000) + 1; 
             
             firebase.push(
                 orderPath,
                 {
-                  'Description': description
+                  'Description': description,
+                  'Code':this.code,
+                  'userEmail':this.userEmail
                 }
             ).then(
                 function (result) {
                     console.log("created key: " + result.key);
-                    // const zx = new ZXing();
-                    // const barcode = zx.createBarcode({encode: result.key, height: 100, width: 100, format: ZXing.QR_CODE});
-                    // this.img.imageSource = imgSource.fromNativeSource(barcode);
                 }
             );
         }
@@ -212,7 +272,7 @@ export class MenuComponent implements OnInit {
         this.Cost="Order Cost : "+this.sum.toString();
     }
 
-    addmenutocart(args,myIndex)
+    addmenutocart(myIndex)
     {
         console.log("myIndex:" +myIndex);
         var string="";
