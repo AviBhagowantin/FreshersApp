@@ -4,13 +4,15 @@ import { MenuRoutingModule } from "./menu-routing.module";
 import { MenuComponent } from "./menu.component";
 import { AccordionModule } from "nativescript-accordion/angular";
 import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         MenuRoutingModule,
         AccordionModule,
-        TNSCheckBoxModule
+        TNSCheckBoxModule,
+        NativeScriptFormsModule
 
     ],
     declarations: [
