@@ -29,6 +29,8 @@ const routes: Routes = [
     { path: "vieworder", loadChildren: "~/app/vieworder/vieworder.module#VieworderModule" },
     { path: "cafeadmin", loadChildren: "~/app/cafeadmin/cafeadmin.module#CafeadminModule" },
     { path: "updatecredits", loadChildren: "~/app/updatecredits/updatecredits.module#UpdatecreditsModule" },
+    { path: "addnewscafe", loadChildren: "~/app/addnewscafe/addnewscafe.module#AddnewscafeModule" },
+    { path: "addcredits", loadChildren: "~/app/addcredits/addcredits.module#AddcreditsModule" },
 ];
 
 @NgModule({

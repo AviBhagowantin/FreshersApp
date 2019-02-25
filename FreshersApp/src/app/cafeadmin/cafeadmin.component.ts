@@ -23,12 +23,10 @@ export class CafeadminComponent implements OnInit {
 
     ngOnInit(): void {
         // Init your component properties here.
-
-     
     }
 
     addcredits(): void {
-        this.router.navigate(['/updatecredits'], { clearHistory: true });
+        this.router.navigate(['/addcredits'], { clearHistory: true });
     }
 
     addnews(): void {

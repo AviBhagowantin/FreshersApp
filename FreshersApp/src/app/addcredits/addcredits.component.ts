@@ -1,64 +1,56 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 var firebase = require("nativescript-plugin-firebase");
-import {ActivatedRoute} from "@angular/router";
+import { DatePipe } from '@angular/common';
+const httpModule = require("http");
+import { NavigationExtras} from "@angular/router";
+
 
 @Component({
-    selector: "Updatecredits",
+    selector: "Addcredits",
     moduleId: module.id,
-    templateUrl: "./updatecredits.component.html"
+    templateUrl: "./addcredits.component.html"
 })
-export class UpdatecreditsComponent implements OnInit {
+export class AddcreditsComponent implements OnInit {
     
     public email;
-    public amount:number;
-    public path;
     public credits;
-    public current;
 
-    constructor(private router: RouterExtensions,private route: ActivatedRoute) {
+    constructor(private router: RouterExtensions,private datePipe: DatePipe) {
         // Use the component constructor to inject providers.
-
-        this.route.queryParams.subscribe(params => {
-            this.email = params["email"];
-            this.credits = params["credits"];
-        });
     }
 
     ngOnInit(): void {
         // Init your component properties here.
     }
 
-    onAddTap(): void {
-
-        this.amount=(+this.credits)+(+this.amount);
+    onNextTap(): void {
 
         firebase.query(result => {
             console.log("query result:", JSON.stringify(result));
-            this.path='/User/'+result.key;
             firebase.getCurrentUser()
             .then(
                 function(user) {
                     console.log(user);
                     if (user.email=="cafesecret@uom.com")
                     {
-                        firebase.update(
-                            this.path,
-                            {
-                                'CafeSecretCredits':this.amount
-                            }
-                        );
+                        this.credits=result.value.CafeSecretCredits;
+                        console.log(result.value.CafeSecretCredits);
                     }
                     else if (user.email=="cafemain@uom.com")
                     {
-                        firebase.update(
-                            this.path,
-                            {
-                                'CafeMainCredits':this.amount
-                            }
-                        );
+                        this.credits=result.value.CafeMainCredits;
                     }
-                    this.router.navigate(['/cafeadmin'], { clearHistory: true });
+                    console.log(this.credits);
+
+                    let navigationExtras: NavigationExtras = {
+                        queryParams: {
+                            "email": this.email.toLowerCase(),
+                            "credits":this.credits
+                        }
+                      };
+            
+                    this.router.navigate(["/updatecredits"],navigationExtras);
                 }.bind(this)
             )
             .catch(error => console.log("Trouble in paradise: " + error));
