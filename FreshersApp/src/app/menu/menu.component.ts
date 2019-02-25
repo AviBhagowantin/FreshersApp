@@ -56,7 +56,14 @@ export class MenuComponent implements OnInit {
                     firebase.query(result => {
                         this.userKey=result.key;
                         console.log("query result:", JSON.stringify(result));
-                        this.credits=result.value.CafeCredits;
+                        if (this.cafe=="Main Cafetaria")
+                        {
+                            this.credits=result.value.CafeMainCredits;
+                        }
+                        else if (this.cafe=="Secret Cafetaria")
+                        {
+                            this.credits=result.value.CafeSecretCredits;
+                        }
                         this.Current="Current Credits : "+ this.credits;
                         }, "/User", {
                         orderBy: {
