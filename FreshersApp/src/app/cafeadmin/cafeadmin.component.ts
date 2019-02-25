@@ -3,7 +3,7 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 var firebase = require('nativescript-plugin-firebase');
 import { RouterExtensions} from "nativescript-angular/router";
-import { NavigationExtras} from "@angular/router";
+var appSettings = require('application-settings');
 
 @Component({
     selector: "Cafeadmin",
@@ -27,15 +27,22 @@ export class CafeadminComponent implements OnInit {
      
     }
 
-    vieworder(){
-        this.router.navigate(['/vieworder']);
-        
-      }
-
-    onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
-        sideDrawer.showDrawer();
+    addcredits(): void {
+        this.router.navigate(['/updatecredits'], { clearHistory: true });
     }
 
+    addnews(): void {
+        this.router.navigate(['/addnewscafe'], { clearHistory: true });
+    }
+
+    vieworder(){
+        this.router.navigate(['/vieworder'], { clearHistory: true });
+    }
+
+    logout(): void {
+        firebase.logout();
+        appSettings.setBoolean("authenticated", false);
+        this.router.navigate(['/home'], { clearHistory: true });
+    }
     
 }

@@ -27,7 +27,8 @@ const routes: Routes = [
     { path: "eventend", loadChildren: "~/app/eventend/eventend.module#EventendModule" },
     { path: "eventmap", loadChildren: "~/app/eventmap/eventmap.module#EventmapModule" },
     { path: "vieworder", loadChildren: "~/app/vieworder/vieworder.module#VieworderModule" },
-    { path: "cafeadmin", loadChildren: "~/app/cafeadmin/cafeadmin.module#CafeadminModule" }
+    { path: "cafeadmin", loadChildren: "~/app/cafeadmin/cafeadmin.module#CafeadminModule" },
+    { path: "updatecredits", loadChildren: "~/app/updatecredits/updatecredits.module#UpdatecreditsModule" },
 ];
 
 @NgModule({

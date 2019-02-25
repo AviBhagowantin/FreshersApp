@@ -1,9 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
 var firebase = require('nativescript-plugin-firebase');
 import { RouterExtensions} from "nativescript-angular/router";
-import { NavigationExtras} from "@angular/router";
 
 @Component({
     selector: "Vieworder",
@@ -14,8 +11,6 @@ export class VieworderComponent implements OnInit {
 
     public orders:any;
     public keys : any;
-    
-
 
     constructor(private router: RouterExtensions) {
      
@@ -23,17 +18,30 @@ export class VieworderComponent implements OnInit {
 
     ngOnInit(): void {
         // Init your component properties here.
+        var path;
 
-        firebase.getValue('/Orders/Secret Cafetaria')
-        .then(result=> (this.orders=this.getData(result)))
-        .catch(error => console.error("Error: " + error));
+        firebase.getCurrentUser()
+            .then(
+                function(user) {
+                    console.log(user);
+                    if (user.email=="cafesecret@uom.com")
+                    {
+                        path='/Orders/Secret Cafetaria';
+                    }
+                    else if (user.email=="cafemain@uom.com")
+                    {
+                        path='/Orders/Main Cafetaria';
+                    }
+                    firebase.getValue(path)
+                    .then(result=> (this.orders=this.getData(result)))
+                    .catch(error => console.error("Error: " + error));
+                }.bind(this)
+            )
+            .catch(error => console.log("Trouble in paradise: " + error));
     }
 
-    
-
-    onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
-        sideDrawer.showDrawer();
+    onBackTap(): void {
+        this.router.navigate(["/cafeadmin"], { clearHistory: true });
     }
 
     getData(data : any): any{

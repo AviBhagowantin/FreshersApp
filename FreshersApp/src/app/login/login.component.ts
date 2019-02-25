@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit {
                                         else
                                         {
                                             console.log("Go CafeAdmin");
+                                            this.router.navigate(["/cafeadmin"], { clearHistory: true });
                                         }
                                         },"/cafeadmin",
                                         {
