@@ -52,15 +52,7 @@
 
 
 	    <StackLayout *tabItem="{title: 'QR Code'}">	
-        <label [text]="codes"></label>    	
-          <!-- <ListView [items]="codes" class="list-group">
-              <ng-template let-rule="item" let-i="index" let-odd="odd" let-even="even">
-                  <StackLayout orientation="vertical" class="list-group-item">
-                      <Label [text]="rule[index]"></Label>
-                  </StackLayout>
-              </ng-template>
-          </ListView> -->
-              <!-- <label [text]="code"></label> -->
+        <Image id="barcode" width="500" height="500" stretch="fill"></Image>
 	    </StackLayout>
 
 	     <StackLayout *tabItem="{title: 'Cart'}">
