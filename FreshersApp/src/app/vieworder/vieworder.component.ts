@@ -57,6 +57,7 @@ export class VieworderComponent implements OnInit {
             var description=data.value[key].Description;
 
             var order = {
+                key:key,
                description:description
                 
             };
@@ -70,9 +71,31 @@ export class VieworderComponent implements OnInit {
 
     removeOrder(index)
     {
-
-    		console.log(this.orders[index]);
-    	 	this.orders = this.orders.filter(item => item.description !== this.orders[index].description);
+        var path;
+        firebase.getCurrentUser()
+        .then(
+            function(user) {
+                console.log(user);
+                if (user.email=="cafesecret@uom.com")
+                {
+                    path='/Orders/Secret Cafetaria/'+this.orders[index].key;
+                    console.log(this.orders[index]);
+                    this.orders = this.orders.filter(item => item.description !== this.orders[index].description);
+                    firebase.remove(path);
+                }
+                else if (user.email=="cafemain@uom.com")
+                {
+                    path='/Orders/Main Cafetaria/'+this.orders[index].key;
+                    console.log(this.orders[index]);
+                    this.orders = this.orders.filter(item => item.description !== this.orders[index].description);
+                    firebase.remove(path);
+                }
+                firebase.getValue(path)
+                .then(result=> (this.orders=this.getData(result)))
+                .catch(error => console.error("Error: " + error));
+            }.bind(this)
+        )
+        .catch(error => console.log("Trouble in paradise: " + error));
            
     }
 }
