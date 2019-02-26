@@ -7,7 +7,9 @@ import { CheckBox } from 'nativescript-checkbox';
 import { Page } from 'tns-core-modules/ui/page';
 import { RouterExtensions } from "nativescript-angular/router";
 import * as dialogs from "tns-core-modules/ui/dialogs";
-
+var ZXing = require('nativescript-zxing');
+import { Image } from "tns-core-modules/ui/image"; 
+import {ImageSource, fromNativeSource} from "tns-core-modules/image-source";
 @Component({
     selector: "Menu",
     moduleId: module.id,
@@ -30,7 +32,7 @@ export class MenuComponent implements OnInit {
     public keys : any;
     public userEmail;
     public userKey;
-    public code;
+    public code : number;
     public codes: any[];
 
 	 @ViewChild('actionbartitle') actionbartitle : ElementRef;
@@ -58,70 +60,70 @@ export class MenuComponent implements OnInit {
                         console.log("query result:", JSON.stringify(result));
                         if (this.cafe=="Main Cafetaria")
                         {
-                            this.codes=[];
+                            //this.codes=[];
                             this.credits=result.value.CafeMainCredits;
-                            firebase.query(result => {
-                                console.log("code result:", JSON.stringify(result));
+                            // firebase.query(result => {
+                            //     console.log("code result:", JSON.stringify(result));
 
-                                var cd = {
-                                    code:result.value.Code
-                                 };
+                            //     var cd = {
+                            //         code:result.value.Code
+                            //      };
                         
-                                 console.log(cd.code);
+                            //      console.log(cd.code);
 
-                                 console.log(cd);
+                            //      console.log(cd);
                         
-                                 this.codes.push(cd.code);
+                            //      this.codes.push(cd.code);
                         
-                                 console.log("codes:"+this.codes);
-                                }, "/Orders/Main Cafetaria", {
-                                orderBy: {
-                                    type: firebase.QueryOrderByType.CHILD,
-                                    value: 'userEmail'
-                                },
-                                ranges: [
-                                    {
-                                    type: firebase.QueryRangeType.START_AT,
-                                    value: this.userEmail
-                                    },
-                                    {
-                                    type: firebase.QueryRangeType.END_AT,
-                                    value: this.userEmail
-                                    }
-                                ]
-                            })
+                            //      console.log("codes:"+this.codes);
+                            //     }, "/Orders/Main Cafetaria", {
+                            //     orderBy: {
+                            //         type: firebase.QueryOrderByType.CHILD,
+                            //         value: 'userEmail'
+                            //     },
+                            //     ranges: [
+                            //         {
+                            //         type: firebase.QueryRangeType.START_AT,
+                            //         value: this.userEmail
+                            //         },
+                            //         {
+                            //         type: firebase.QueryRangeType.END_AT,
+                            //         value: this.userEmail
+                            //         }
+                            //     ]
+                            // })
                         }
                         else if (this.cafe=="Secret Cafetaria")
                         {
                             this.credits=result.value.CafeSecretCredits;
-                            firebase.query(result => {
-                                console.log("code result:", JSON.stringify(result));
+                            // firebase.query(result => {
+                            //     console.log("code result:", JSON.stringify(result));
                         
-                                var cd = {
-                                    code:result.value.Code
-                                 };
+                            //     var cd = {
+                            //         code:result.value.Code
+                            //      };
                         
-                                 console.log(cd.code);
+                            //      console.log(cd.code);
                         
-                                 this.codes.push(cd);
+                            //      this.codes.push(cd);
                         
-                                 console.log(this.codes);
-                                }, "/Orders/Secret Cafetaria", {
-                                orderBy: {
-                                    type: firebase.QueryOrderByType.CHILD,
-                                    value: 'userEmail'
-                                },
-                                ranges: [
-                                    {
-                                    type: firebase.QueryRangeType.START_AT,
-                                    value: this.userEmail
-                                    },
-                                    {
-                                    type: firebase.QueryRangeType.END_AT,
-                                    value: this.userEmail
-                                    }
-                                ]
-                            })
+                            //      console.log(this.codes);
+                            //     }, "/Orders/Secret Cafetaria", {
+                            //     orderBy: {
+                            //         type: firebase.QueryOrderByType.CHILD,
+                            //         value: 'userEmail'
+                            //     },
+                            //     ranges: [
+                            //         {
+                            //         type: firebase.QueryRangeType.START_AT,
+                            //         value: this.userEmail
+                            //         },
+                            //         {
+                            //         type: firebase.QueryRangeType.END_AT,
+                            //         value: this.userEmail
+                            //         }
+                            //     ]
+                            // })
                         }
                         this.Current="Current Credits : "+ this.credits;
                         }, "/User", {
@@ -207,6 +209,7 @@ export class MenuComponent implements OnInit {
 
     checkout()
     {
+        let imgbar: Image = <Image>this.page.getViewById<Image>('barcode');
         if (this.credits<this.sum)
         {
             dialogs.alert({
@@ -221,11 +224,20 @@ export class MenuComponent implements OnInit {
             var path='/User/'+this.userKey;
             var orderPath='/Orders/'+this.cafe;
             this.credits=this.credits-this.sum;
-            firebase.update(
-                path,
-                {'CafeCredits':this.credits}
-            );
-
+            if (this.cafe=="Main Cafetaria")
+            {
+                firebase.update(
+                    path,
+                    {'CafeMainCredits':this.credits}
+                );
+            }
+            else if (this.cafe=="Secret Cafetaria")
+            {
+                firebase.update(
+                    path,
+                    {'CafeSecretCredits':this.credits}
+                );
+            }
             for (var i=0;i<this.cart.length;i++)
             {
                 description=description+this.cart[i].name+"("+this.cart[i].description+"),";
@@ -243,7 +255,11 @@ export class MenuComponent implements OnInit {
             ).then(
                 function (result) {
                     console.log("created key: " + result.key);
-                }
+                    var zx = new ZXing();
+                    var img = zx.createBarcode({encode: this.code.toString(), height: 500, width: 500, format: ZXing.QR_CODE});
+                    imgbar.imageSource = <ImageSource> fromNativeSource(img);
+                    console.log(img);
+                }.bind(this)
             );
         }
     }
@@ -272,7 +288,7 @@ export class MenuComponent implements OnInit {
         this.Cost="Order Cost : "+this.sum.toString();
     }
 
-    addmenutocart(myIndex)
+    addmenutocart(args,myIndex)
     {
         console.log("myIndex:" +myIndex);
         var string="";
