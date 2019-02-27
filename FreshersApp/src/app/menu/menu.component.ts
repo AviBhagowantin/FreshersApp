@@ -32,8 +32,7 @@ export class MenuComponent implements OnInit {
     public keys : any;
     public userEmail;
     public userKey;
-    public code : number;
-    public codes: any[];
+    public code;
 
 	 @ViewChild('actionbartitle') actionbartitle : ElementRef;
      
@@ -60,70 +59,64 @@ export class MenuComponent implements OnInit {
                         console.log("query result:", JSON.stringify(result));
                         if (this.cafe=="Main Cafetaria")
                         {
-                            //this.codes=[];
                             this.credits=result.value.CafeMainCredits;
-                            // firebase.query(result => {
-                            //     console.log("code result:", JSON.stringify(result));
+                            firebase.query(result => {
+                                console.log("code result:", JSON.stringify(result));
 
-                            //     var cd = {
-                            //         code:result.value.Code
-                            //      };
+                                this.code=result.value.Code;
                         
-                            //      console.log(cd.code);
+                                console.log(this.code);
 
-                            //      console.log(cd);
-                        
-                            //      this.codes.push(cd.code);
-                        
-                            //      console.log("codes:"+this.codes);
-                            //     }, "/Orders/Main Cafetaria", {
-                            //     orderBy: {
-                            //         type: firebase.QueryOrderByType.CHILD,
-                            //         value: 'userEmail'
-                            //     },
-                            //     ranges: [
-                            //         {
-                            //         type: firebase.QueryRangeType.START_AT,
-                            //         value: this.userEmail
-                            //         },
-                            //         {
-                            //         type: firebase.QueryRangeType.END_AT,
-                            //         value: this.userEmail
-                            //         }
-                            //     ]
-                            // })
+                                }, "/Orders/Main Cafetaria", {
+                                orderBy: {
+                                    type: firebase.QueryOrderByType.CHILD,
+                                    value: 'userEmail'
+                                },
+                                ranges: [
+                                    {
+                                    type: firebase.QueryRangeType.START_AT,
+                                    value: this.userEmail
+                                    },
+                                    {
+                                    type: firebase.QueryRangeType.END_AT,
+                                    value: this.userEmail
+                                    }
+                                ],
+                                limit: {
+                                    type: firebase.QueryLimitType.LAST,
+                                    value: 1
+                                }
+                            })
                         }
                         else if (this.cafe=="Secret Cafetaria")
                         {
                             this.credits=result.value.CafeSecretCredits;
-                            // firebase.query(result => {
-                            //     console.log("code result:", JSON.stringify(result));
+                            firebase.query(result => {
+                                console.log("code result:", JSON.stringify(result));
                         
-                            //     var cd = {
-                            //         code:result.value.Code
-                            //      };
+                                this.code=result.value.Code;
                         
-                            //      console.log(cd.code);
-                        
-                            //      this.codes.push(cd);
-                        
-                            //      console.log(this.codes);
-                            //     }, "/Orders/Secret Cafetaria", {
-                            //     orderBy: {
-                            //         type: firebase.QueryOrderByType.CHILD,
-                            //         value: 'userEmail'
-                            //     },
-                            //     ranges: [
-                            //         {
-                            //         type: firebase.QueryRangeType.START_AT,
-                            //         value: this.userEmail
-                            //         },
-                            //         {
-                            //         type: firebase.QueryRangeType.END_AT,
-                            //         value: this.userEmail
-                            //         }
-                            //     ]
-                            // })
+                                console.log(this.code);
+                                }, "/Orders/Secret Cafetaria", {
+                                orderBy: {
+                                    type: firebase.QueryOrderByType.CHILD,
+                                    value: 'userEmail'
+                                },
+                                ranges: [
+                                    {
+                                    type: firebase.QueryRangeType.START_AT,
+                                    value: this.userEmail
+                                    },
+                                    {
+                                    type: firebase.QueryRangeType.END_AT,
+                                    value: this.userEmail
+                                    }
+                                ],
+                                limit: {
+                                    type: firebase.QueryLimitType.LAST,
+                                    value: 1
+                                }
+                            })
                         }
                         this.Current="Current Credits : "+ this.credits;
                         }, "/User", {
