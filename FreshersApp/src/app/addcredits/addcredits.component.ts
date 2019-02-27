@@ -62,11 +62,11 @@ export class AddcreditsComponent implements OnInit {
             ranges: [
                 {
                 type: firebase.QueryRangeType.START_AT,
-                value: this.email
+                value: this.email.toLowerCase()
                 },
                 {
                 type: firebase.QueryRangeType.END_AT,
-                value: this.email
+                value: this.email.toLowerCase()
                 }
             ],
             limit: {
