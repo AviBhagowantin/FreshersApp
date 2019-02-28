@@ -48,7 +48,8 @@ export class MenuComponent implements OnInit {
     
 
     ngOnInit(): any {
-
+        
+        let imgbar: Image = <Image>this.page.getViewById<Image>('barcode');
         firebase.getCurrentUser()
             .then(
                 function(user) {
@@ -64,8 +65,14 @@ export class MenuComponent implements OnInit {
                                 console.log("code result:", JSON.stringify(result));
 
                                 this.code=result.value.Code;
+
+                                var zx = new ZXing();
+                                var img = zx.createBarcode({encode: this.code.toString(), height: 500, width: 500, format: ZXing.QR_CODE});
+                                console.log(img);
                         
                                 console.log(this.code);
+
+                                imgbar.imageSource = <ImageSource> fromNativeSource(img);
 
                                 }, "/Orders/Main Cafetaria", {
                                 orderBy: {
@@ -95,6 +102,11 @@ export class MenuComponent implements OnInit {
                                 console.log("code result:", JSON.stringify(result));
                         
                                 this.code=result.value.Code;
+
+                                var zx = new ZXing();
+                                var img = zx.createBarcode({encode: this.code.toString(), height: 500, width: 500, format: ZXing.QR_CODE});
+                                imgbar.imageSource = <ImageSource> fromNativeSource(img);
+                                console.log(img);
                         
                                 console.log(this.code);
                                 }, "/Orders/Secret Cafetaria", {
@@ -236,7 +248,7 @@ export class MenuComponent implements OnInit {
                 description=description+this.cart[i].name+"("+this.cart[i].description+"),";
             }
 
-            this.code=Math.floor(Math.random() * 10000) + 1; 
+            this.code=Math.floor(Math.random() * 100000) + 1; 
             
             firebase.push(
                 orderPath,
