@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit ,AfterViewInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {ElementRef, ViewChild} from "@angular/core";
 import { Label } from 'ui/label';
@@ -17,7 +17,7 @@ import {ImageSource, fromNativeSource} from "tns-core-modules/image-source";
 })
 
 
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit,AfterViewInit{
 
 	public cafe:string;
     public tabSelectedIndex: number;
@@ -45,32 +45,30 @@ export class MenuComponent implements OnInit {
         this.order=this.cart;
     }
 
-    
-
-    ngOnInit(): any {
-        
+    ngAfterViewInit() {
         let imgbar: Image = <Image>this.page.getViewById<Image>('barcode');
+
         firebase.getCurrentUser()
             .then(
                 function(user) {
-                    console.log(user);
+                    //console.log(user);
                     this.userEmail=user.email;
                     firebase.query(result => {
                         this.userKey=result.key;
-                        console.log("query result:", JSON.stringify(result));
+                        //console.log("query result:", JSON.stringify(result));
                         if (this.cafe=="Main Cafetaria")
                         {
                             this.credits=result.value.CafeMainCredits;
                             firebase.query(result => {
-                                console.log("code result:", JSON.stringify(result));
+                                //console.log("code result:", JSON.stringify(result));
 
                                 this.code=result.value.Code;
 
                                 var zx = new ZXing();
                                 var img = zx.createBarcode({encode: this.code.toString(), height: 500, width: 500, format: ZXing.QR_CODE});
-                                console.log(img);
+                                console.log(imgbar);
                         
-                                console.log(this.code);
+                                //console.log(this.code);
 
                                 imgbar.imageSource = <ImageSource> fromNativeSource(img);
 
@@ -130,6 +128,9 @@ export class MenuComponent implements OnInit {
                                 }
                             })
                         }
+
+
+                       
                         this.Current="Current Credits : "+ this.credits;
                         }, "/User", {
                         orderBy: {
@@ -151,6 +152,11 @@ export class MenuComponent implements OnInit {
             )
             .catch(error => console.log("Trouble in paradise: " + error));
 
+     }
+
+    ngOnInit(): any {
+        
+        
     	const myTitle: Label = <Label>this.actionbartitle.nativeElement;
         this.route.queryParams.subscribe(params => {
             this.cafe = params["Cafe_Name"];
@@ -168,7 +174,7 @@ export class MenuComponent implements OnInit {
     }
 
     getData(data:any):any {
-        console.log(data);
+        //console.log(data);
 
         var allItems=[];
 
@@ -192,7 +198,7 @@ export class MenuComponent implements OnInit {
                 itemsArray.push(x);
             }
 
-            console.log("Items:"+items);
+            //console.log("Items:"+items);
 
             var item_details = {
                 title: key,
@@ -200,7 +206,7 @@ export class MenuComponent implements OnInit {
                 items: itemsArray
             };
 
-            console.log(item_details);
+            //console.log(item_details);
 
             allItems.push(item_details);
         }
@@ -263,7 +269,6 @@ export class MenuComponent implements OnInit {
                     var zx = new ZXing();
                     var img = zx.createBarcode({encode: this.code.toString(), height: 500, width: 500, format: ZXing.QR_CODE});
                     imgbar.imageSource = <ImageSource> fromNativeSource(img);
-                    console.log(img);
                 }.bind(this)
             );
         }
