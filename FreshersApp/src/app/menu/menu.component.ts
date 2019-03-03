@@ -269,6 +269,11 @@ export class MenuComponent implements OnInit,AfterViewInit{
                     var zx = new ZXing();
                     var img = zx.createBarcode({encode: this.code.toString(), height: 500, width: 500, format: ZXing.QR_CODE});
                     imgbar.imageSource = <ImageSource> fromNativeSource(img);
+                    dialogs.alert({
+                        title: "Order Successful!",
+                        message: "Please go to the QR code tab and show the code at the cafetaria.",
+                        okButtonText: "OK, got it"
+                    })
                 }.bind(this)
             );
         }
