@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 var firebase = require('nativescript-plugin-firebase');
+import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { DatePipe } from '@angular/common';
     
 
@@ -14,6 +15,7 @@ export class BusComponent implements OnInit {
 
     public buses : any;
     public keys : any;
+    public busesfilter:any;
 
     constructor(private datePipe: DatePipe) {
         // Use the component constructor to inject providers.
@@ -25,6 +27,7 @@ export class BusComponent implements OnInit {
         firebase.getValue('/Buses')
             .then(result=> (this.buses=this.getData(result)))
             .catch(error => console.error("Error: " + error));
+         
     }
 
     onDrawerButtonTap(): void {
@@ -137,7 +140,22 @@ export class BusComponent implements OnInit {
 
             busArray.push(bus);
         } 
-
+        this.busesfilter=busArray;
         return busArray;
+
     }
+
+
+    onSubmit(args) {
+        let searchBar = <SearchBar>args.object;
+       
+        this.buses = this.buses.filter(item => item.destination.toLowerCase() == searchBar.text.toLowerCase());      
+    }
+
+    onClear(args)
+    {
+        this.buses=this.busesfilter;
+    }
+
+   
 }

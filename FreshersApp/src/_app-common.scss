@@ -5,6 +5,78 @@
     font-family: "FontAwesome";
 }
 // Common page class
+.butn 	{
+	font-family: "Montserrat-Medium";
+}
+.butn_login 	{
+	font-family: "Montserrat-Medium";
+	text-decoration: underline; 
+	text-color:#ADD8E6;
+	text-align:center;
+}
+.butn_forget 	{
+	font-family: "Montserrat-Medium";
+	text-color:#ADD8E6;
+	text-align:center;
+}
+
+.butn_bus 	{
+	font-family: "Montserrat-Medium";
+	font-size:12px;
+}
+
+.title	{
+	font-family: "Montserrat-Medium";
+	font-weight: bold;
+	font-size:17px;
+	padding-left: 15px;
+	    
+}
+.title_rules	{
+	font-family: "Montserrat-Medium";
+	font-weight: bold;
+	font-size:15px;
+
+	    
+}
+
+
+
+.sidedrawer_item {
+	font-family: "Montserrat-Medium";
+	font-size:13px;
+}
+.bus_title {
+
+	font-family: "Montserrat-Medium";
+	font-weight: bold;
+	font-size:13px;
+
+}
+
+.bus_description  {
+	
+	font-family: "OpenSans-Light";
+	font-size:13px;
+}
+.news_description  {
+	text-align:left;
+	font-family: "OpenSans-Light";
+	font-size:14px;
+	padding-left:10px;
+}
+
+.news_descriptions  {
+	text-align:left;
+	font-family: "OpenSans-LightItalic";
+	font-size:11px;
+	
+}
+
+
+
+
+
 .page-content {
     .page-placeholder {
         color: $page-icon-color;

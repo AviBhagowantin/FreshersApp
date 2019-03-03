@@ -61,7 +61,8 @@ export class RuletitleComponent implements OnInit {
 
             var rule = {
                 title: title,
-                path: path
+                path: path,
+                chapnum: counter+1 +"."
             };
 
             ruleArray.push(rule);

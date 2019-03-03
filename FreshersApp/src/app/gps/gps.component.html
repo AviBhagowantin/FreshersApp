@@ -10,7 +10,7 @@
     because its function is to always navigate back in the application.
     -->
     <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
-    <Label class="action-bar-title" text="GPS"></Label>
+    <Label class="title" text="GPS"></Label>
 </ActionBar>
 
 <GridLayout class="page page-content">
@@ -32,6 +32,6 @@
                     (mapReady)="onMapReady($event)">
                 </Mapbox>
             </ContentView>
-            <Button class="btn btn-primary" text="Navigate" (tap)="onNavigateTap()"></Button>
+            <Button class="btn btn-primary butn" text="Navigate" (tap)="onNavigateTap()"></Button>
     </StackLayout>
 </GridLayout>
