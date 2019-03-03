@@ -1,0 +1,19 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
+    <Label class="action-bar-title" text="Orders"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+    <ScrollView> 
+        <ListView [items]="orders" (itemTap)="onItemTap($event)" class="list-group">
+            <ng-template let-order="item" let-i="index" let-odd="odd" let-even="even" >
+                <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+                <StackLayout orientation="horizontal" class="list-group-item">
+                    <Label textWrap="true" [text]="order.description" ></Label>
+                    <Button text="Remove" (tap)="removeOrder(i)"></Button>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+    </ScrollView>
+</GridLayout>

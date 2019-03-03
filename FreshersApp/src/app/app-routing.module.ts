@@ -26,6 +26,11 @@ const routes: Routes = [
     { path: "eventstart", loadChildren: "~/app/eventstart/eventstart.module#EventstartModule" },
     { path: "eventend", loadChildren: "~/app/eventend/eventend.module#EventendModule" },
     { path: "eventmap", loadChildren: "~/app/eventmap/eventmap.module#EventmapModule" },
+    { path: "vieworder", loadChildren: "~/app/vieworder/vieworder.module#VieworderModule" },
+    { path: "cafeadmin", loadChildren: "~/app/cafeadmin/cafeadmin.module#CafeadminModule" },
+    { path: "updatecredits", loadChildren: "~/app/updatecredits/updatecredits.module#UpdatecreditsModule" },
+    { path: "addnewscafe", loadChildren: "~/app/addnewscafe/addnewscafe.module#AddnewscafeModule" },
+    { path: "addcredits", loadChildren: "~/app/addcredits/addcredits.module#AddcreditsModule" },
 ];
 
 @NgModule({

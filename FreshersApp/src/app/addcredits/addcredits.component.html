@@ -1,0 +1,15 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
+    <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
+    <Label class="action-bar-title" text="User's email"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+    <StackLayout orientation="vertical">
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15" hint="User's email" autocorrect="false" autocapitalization="none"
+            [(ngModel)]="email"></TextField>
+
+        <Button class="btn btn-primary" text="Next" (tap)="onNextTap()"></Button>
+        <Button class="btn" text="Cancel" (tap)="onBackTap()"></Button>
+    </StackLayout>    
+</GridLayout>
