@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { DatePipe } from '@angular/common';
+var dialogs = require("tns-core-modules/ui/dialogs");
 var firebase = require('nativescript-plugin-firebase');
 
 @Component({
@@ -36,6 +37,18 @@ export class HomeComponent implements OnInit {
         sideDrawer.showDrawer();
     }
 
+    onItemTap(i)
+    {
+        
+        dialogs.alert({
+            title: this.news[i].title,
+            message: this.news[i].description,
+            okButtonText: "ok"
+        }).then(function () {
+            console.log("Dialog closed!");
+        });
+
+    }
     // toggle(event) {
     //     if (event.object.textWrap) {
     //     event.object.textWrap = false;

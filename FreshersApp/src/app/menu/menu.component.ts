@@ -206,7 +206,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
                 items: itemsArray
             };
 
-            //console.log(item_details);
+            console.log(item_details);
 
             allItems.push(item_details);
         }

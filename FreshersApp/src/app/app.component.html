@@ -7,69 +7,69 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
     <GridLayout tkDrawerContent rows="auto, *" class="sidedrawer sidedrawer-left">
         <StackLayout row="0" class="sidedrawer-header">
             <Label class="sidedrawer-header-image fa" text="&#xf2bd;"></Label>
-            <Label class="sidedrawer-header-brand" [text]="this.username"></Label>
-            <Label class="footnote" [text]="this.email"></Label>
+            <Label class="sidedrawer-header-brand sidedrawer_item" [text]="this.username" ></Label>
+            <Label  [text]="this.email" class="sidedrawer_item"></Label>
         </StackLayout>
     
         <ScrollView row="1">
             <StackLayout class="sidedrawer-content">
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/home')" (tap)="onNavItemTap('/home')">
                     <Label col="0" text="&#xf015;" class="fa"></Label>
-                    <Label col="1" text="Home" class="p-r-10"></Label>
+                    <Label col="1" text="Home" class="sidedrawer_item"></Label>
                 </GridLayout>
                 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/bus')" (tap)="onNavItemTap('/bus')">
-                    <Label col="0" text="&#xf015;" class="fa"></Label>
-                    <Label col="1" text="Bus" class="p-r-10"></Label>
+                    <Label col="0" text="&#xf207;" class="fa"></Label>
+                    <Label col="1" text="Bus Schedule" class="sidedrawer_item"></Label>
                 </GridLayout>
 
                  <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/cafeteria')" (tap)="checkAuthCafetaria()">
-                    <Label col="0" text="&#xf015;" class="fa"></Label>
-                    <Label col="1" text="Cafeteria" class="p-r-10"></Label>
+                    <Label col="0" text="&#xf0f5;" class="fa"></Label>
+                    <Label col="1" text="Cafeteria" class="sidedrawer_item"></Label>
                 </GridLayout>
 
 
                  <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/cpa')" (tap)="onNavItemTap('/cpa')">
-                    <Label col="0" text="&#xf015;" class="fa"></Label>
-                    <Label col="1" text="CPA calculator" class="p-r-10"></Label>
+                    <Label col="0" text="&#xf1ec;" class="fa"></Label>
+                    <Label col="1" text="CPA calculator" class="sidedrawer_item"></Label>
                 </GridLayout>
 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/timetable')" (tap)="onNavItemTap('/timetable')">
-                    <Label col="0" text="&#xf015;" class="fa"></Label>
-                    <Label col="1" text="Timetable" class="p-r-10"></Label>
+                    <Label col="0" text="&#xff0ce;" class="fa"></Label>
+                    <Label col="1" text="Timetable" class="sidedrawer_item"></Label>
                 </GridLayout>
 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/ruletitle')" (tap)="onNavItemTap('/ruletitle')">
-                    <Label col="0" text="&#xf1ea;" class="fa"></Label>
-                    <Label col="1" text="Rule" class="p-r-10"></Label>
+                    <Label col="0" text="&#xf0e3;" class="fa"></Label>
+                    <Label col="1" text="Rules & Regulation" class="sidedrawer_item"></Label>
                 </GridLayout>
 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/gps')" (tap)="onNavItemTap('/gps')">
-                    <Label col="0" text="&#xf002;" class="fa"></Label>
-                    <Label col="1" text="Map" class="p-r-10"></Label>
+                    <Label col="0" text="&#xf278;" class="fa"></Label>
+                    <Label col="1" text="Map" class="sidedrawer_item"></Label>
                 </GridLayout>
 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/feedback')" (tap)="checkAuthFeedback()">
-                    <Label col="0" text="&#xf005;" class="fa"></Label>
-                    <Label col="1" text="Feedback" class="p-r-10"></Label>
+                    <Label col="0" text="&#xf003;" class="fa"></Label>
+                    <Label col="1" text="Feedback" class="sidedrawer_item"></Label>
                 </GridLayout>
     
                 <StackLayout class="hr-light"></StackLayout>
 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/settings')" (tap)="checkAuthSettings()">
-                    <Label col="0" text="&#xf013;" class="fa"></Label>
-                    <Label col="1" text="Settings" class="p-r-10"></Label>
+                    <Label col="0" text="&#xf085;" class="fa"></Label>
+                    <Label col="1" text="Settings" class="sidedrawer_item"></Label>
                 </GridLayout>
 
 
 
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/login')" (tap)="checkLogin()">
-                    <Label col="0" text="&#xf015;" class="fa"></Label>
-                    <Label col="1" [text]="checkAuth() ? 'Log Out' : 'Log In'" class="p-r-10"></Label>
+                    <Label col="0" text="&#xf007;" class="fa"></Label>
+                    <Label col="1" [text]="checkAuth() ? 'Log Out' : 'Log In'" class="sidedrawer_item"></Label>
                 </GridLayout>
             </StackLayout>
         </ScrollView>
     </GridLayout>
 
-    <page-router-outlet tkMainContent class="page page-content"></page-router-outlet>
+    <page-router-outlet tkMainContent class="page page-content "></page-router-outlet>
 </RadSideDrawer>
