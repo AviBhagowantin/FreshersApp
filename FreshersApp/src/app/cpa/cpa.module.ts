@@ -1,6 +1,5 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
-
 import { CpaRoutingModule } from "./cpa-routing.module";
 import { CpaComponent } from "./cpa.component";
 
@@ -8,6 +7,7 @@ import { CpaComponent } from "./cpa.component";
     imports: [
         NativeScriptCommonModule,
         CpaRoutingModule
+        
     ],
     declarations: [
         CpaComponent
