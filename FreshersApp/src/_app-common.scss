@@ -20,6 +20,12 @@
 	text-align:center;
 }
 
+.butn_cpa 	{
+	font-family: "Montserrat-Medium";
+	
+	text-align:center;
+}
+
 .butn_bus 	{
 	font-family: "Montserrat-Medium";
 	font-size:12px;
@@ -59,6 +65,14 @@
 	font-family: "OpenSans-Light";
 	font-size:13px;
 }
+
+.cafe_description  {
+	
+	text-align:left;
+	font-family: "OpenSans-Light";
+	font-size:14px;
+	padding-left:10px;
+}
 .news_description  {
 	text-align:left;
 	font-family: "OpenSans-Light";
@@ -73,7 +87,20 @@
 	
 }
 
+.menu_descriptions  {
+	
+	font-family: "OpenSans-LightItalic";
+	font-size:13px;
+	
+}
 
+
+.coverImage {
+    background-image: 'http://tineye.com/images/widgets/mona.jpg';
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
 
 

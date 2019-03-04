@@ -1,7 +1,7 @@
 import { Component, OnInit ,AfterViewInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {ElementRef, ViewChild} from "@angular/core";
-import { Label } from 'ui/label';
+
 var firebase = require('nativescript-plugin-firebase');
 import { CheckBox } from 'nativescript-checkbox';
 import { Page } from 'tns-core-modules/ui/page';
@@ -9,6 +9,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 var ZXing = require('nativescript-zxing');
 import { Image } from "tns-core-modules/ui/image"; 
+import { Label } from "tns-core-modules/ui/label";
 import {ImageSource, fromNativeSource} from "tns-core-modules/image-source";
 @Component({
     selector: "Menu",
@@ -332,7 +333,25 @@ export class MenuComponent implements OnInit,AfterViewInit{
         
     }
 
-   
+
+   onChange(event)
+   {
+
+    var indexes = event.index;
+    let chevron: Label = <Label>this.page.getViewById<Label>("chrvon"+indexes.toString());
+    let charCode = 0xf077;
+    var text=String.fromCharCode(charCode);
+    if(chevron.text==text)
+    {
+        let charCode = 0xf078;
+        chevron.text=String.fromCharCode(charCode);
+    }
+    else{
+         let charCode = 0xf077;
+        chevron.text=String.fromCharCode(charCode);
+    }
+    
+   }
 
 }
 
