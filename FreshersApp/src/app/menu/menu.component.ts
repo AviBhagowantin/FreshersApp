@@ -51,27 +51,21 @@ export class MenuComponent implements OnInit,AfterViewInit{
         firebase.getCurrentUser()
             .then(
                 function(user) {
-                    //console.log(user);
                     this.userEmail=user.email;
                     firebase.query(result => {
                         this.userKey=result.key;
-                        //console.log("query result:", JSON.stringify(result));
                         if (this.cafe=="Main Cafetaria")
                         {
+                            // Retrive the credits of the user.
                             this.credits=result.value.CafeMainCredits;
                             firebase.query(result => {
-                                //console.log("code result:", JSON.stringify(result));
-
+                                // Fetch code of order from database.
                                 this.code=result.value.Code;
-
+                                // Create a barcode.
                                 var zx = new ZXing();
                                 var img = zx.createBarcode({encode: this.code.toString(), height: 500, width: 500, format: ZXing.QR_CODE});
                                 console.log(imgbar);
-                        
-                                //console.log(this.code);
-
                                 imgbar.imageSource = <ImageSource> fromNativeSource(img);
-
                                 }, "/Orders/Main Cafetaria", {
                                 orderBy: {
                                     type: firebase.QueryOrderByType.CHILD,
@@ -127,10 +121,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
                                     value: 1
                                 }
                             })
-                        }
-
-
-                       
+                        }     
                         this.Current="Current Credits : "+ this.credits;
                         }, "/User", {
                         orderBy: {
@@ -155,38 +146,31 @@ export class MenuComponent implements OnInit,AfterViewInit{
      }
 
     ngOnInit(): any {
-        
-        
-    	const myTitle: Label = <Label>this.actionbartitle.nativeElement;
+        const myTitle: Label = <Label>this.actionbartitle.nativeElement;
+    
+        // Retrieve name of the cafeteria selected by the user in the previous page.
         this.route.queryParams.subscribe(params => {
             this.cafe = params["Cafe_Name"];
-  			
         });
 
         myTitle.text=this.cafe;
-    
         var path='/Cafetaria/'+this.cafe;
 
+        // Retrieve data from firebase for specific cafeteria.
         firebase.getValue(path)
         .then(result => (this.items=this.getData(result)))
         .catch(error => console.log("Error: " + error));
-  
     }
 
+    // Get menu of the cafeteria and push it in an array.
     getData(data:any):any {
-        //console.log(data);
-
         var allItems=[];
-
         this.keys=Object.keys(data.value); 
         var counter : number;
 
         for (counter = 0; counter < this.keys.length; counter++) {
-
             var key = this.keys[counter];
-
             var itemsArray=[];
-
             var items=data.value[key].items;
 
             for (var z=1;z<items.length;z++) {
@@ -194,23 +178,17 @@ export class MenuComponent implements OnInit,AfterViewInit{
                     id:z,
                     text:items[z]
                 }
-
                 itemsArray.push(x);
             }
-
-            //console.log("Items:"+items);
 
             var item_details = {
                 title: key,
                 price: data.value[key].Price,
                 items: itemsArray
             };
-
-            //console.log(item_details);
-
             allItems.push(item_details);
-        }
-        
+        }    
+
         return allItems;
     }
 
@@ -253,9 +231,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
             {
                 description=description+this.cart[i].name+"("+this.cart[i].description+"),";
             }
-
             this.code=Math.floor(Math.random() * 100000) + 1; 
-            
             firebase.push(
                 orderPath,
                 {

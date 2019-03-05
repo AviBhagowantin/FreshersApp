@@ -16,70 +16,53 @@
 
 <GridLayout class="page page-content">
 	<TabView>
-	 <StackLayout *tabItem="{title: 'Courses'}" >
+	  <StackLayout *tabItem="{title: 'Courses'}" >
+      <Accordion [items]="items" allowMultiple="false" >
+        <ng-template let-i="index" let-item="item" acTemplateKey="title">
+          <StackLayout>
+            <Label [text]="item.title"></Label>
+            <StackLayout orientation="horizontal">
+                <label text="Price: Rs "></label>
+                <Label  [text]="item.price"></Label>
+            </StackLayout>
+          </StackLayout>
+        </ng-template>
+        <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="content">
+          <StackLayout>
+            <Checkbox [id]="item.id" [text]="item.text" ></Checkbox>
+          </StackLayout>
+        </ng-template>
+        <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="footer">
+          <StackLayout>
+            <Button  text="Add to cart" (tap)="addmenutocart($event,myIndex)"></Button>
+          </StackLayout>
+        </ng-template>
+      </Accordion>
+    </StackLayout>
 
- 
-  <Accordion [items]="items" allowMultiple="false" >
+    <StackLayout *tabItem="{title: 'QR Code'}">	
+      <Image id="barcode" width="500" height="500" stretch="fill"></Image>
+    </StackLayout>
 
-
-    <ng-template let-i="index" let-item="item" acTemplateKey="title">
+    <StackLayout *tabItem="{title: 'Cart'}">
       <StackLayout>
-        <Label [text]="item.title"></Label>
-        <StackLayout orientation="horizontal">
-            <label text="Price: Rs "></label>
-            <Label  [text]="item.price"></Label>
-        </StackLayout>
+        <Label [text]="Current" ></Label>
+        <Label [text]="Cost"></Label>
+          <Button text="Confirm order" (tap)="checkout()"></Button>
       </StackLayout>
-    </ng-template>
-
-    <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="content">
-      <StackLayout>
-        <Checkbox [id]="item.id" [text]="item.text" ></Checkbox>
-      </StackLayout>
-    </ng-template>
-
-
-    <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="footer">
-      <StackLayout>
-        <Button  text="Add to cart" (tap)="addmenutocart($event,myIndex)"></Button>
-
-      </StackLayout>
-    </ng-template>
-
-  </Accordion>
-</StackLayout>
-
-
-
-	    <StackLayout *tabItem="{title: 'QR Code'}">	
-        <Image id="barcode" width="500" height="500" stretch="fill"></Image>
-	    </StackLayout>
-
-	     <StackLayout *tabItem="{title: 'Cart'}">
-              <StackLayout>
-                <Label [text]="Current" ></Label>
-                <Label [text]="Cost"></Label>
-                 <Button text="Confirm order" (tap)="checkout()"></Button>
-              </StackLayout>
-               
-                  <ListView [items]="order" class="list-group" (loadMoreItems)="loadMore()">
-                      <ng-template let-order="item" let-i="index"  let-odd="odd" let-even="even" let-indexing="index">
-                          
-                          <StackLayout  class="list-group-item">
-                             <StackLayout  orientation="horizontal">
-                              <Label textWrap="true" horizontalAlignment="left" [text]="order.name"></Label>
-                               <Button horizontalAlignment="right" text="Remove" (tap)="remove(indexing)"></Button>
-                            </StackLayout>
-                              <Label textWrap="true" [text]="order.description"></Label>
-                            
-                              <Label textWrap="true" [text]="order.price"></Label>
-                              
-                          </StackLayout>
-                      </ng-template>
-                  </ListView>		
-	    </StackLayout>
-    </TabView>
-
-    
-
+            
+      <ListView [items]="order" class="list-group" (loadMoreItems)="loadMore()">
+        <ng-template let-order="item" let-i="index"  let-odd="odd" let-even="even" let-indexing="index">
+          <StackLayout  class="list-group-item">
+              <StackLayout  orientation="horizontal">
+              <Label textWrap="true" horizontalAlignment="left" [text]="order.name"></Label>
+                <Button horizontalAlignment="right" text="Remove" (tap)="remove(indexing)"></Button>
+            </StackLayout>
+              <Label textWrap="true" [text]="order.description"></Label>
+              <Label textWrap="true" [text]="order.price"></Label>
+          </StackLayout>
+        </ng-template>
+      </ListView>		
+    </StackLayout>
+  </TabView>
 </GridLayout>

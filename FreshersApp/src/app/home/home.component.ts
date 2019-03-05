@@ -19,16 +19,9 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // Init your component properties here.
 
         this.news=this.getData();
         console.log(this.news);
-
-        // firebase.getValue('/News')
-        // .then(result=> (this.news=this.getData(result)))
-        // .catch(error => console.error("Error: " + error));
-
-        //console.log(this.news);
     }
 
     onDrawerButtonTap(): void {
@@ -36,16 +29,7 @@ export class HomeComponent implements OnInit {
         sideDrawer.showDrawer();
     }
 
-    // toggle(event) {
-    //     if (event.object.textWrap) {
-    //     event.object.textWrap = false;
-    //     } else {
-    //     event.object.textWrap = true;
-    //     }
-    // }
-
     getData(): any{
-        //console.log(data.value);
         var nowDate = this.datePipe.transform(Date.now(), 'dd/MM/yyyy');
         var nowYear = +(nowDate[6]+nowDate[7]+nowDate[8]+nowDate[9]);
         var nowMonth = +(nowDate[3]+nowDate[4]);
@@ -53,7 +37,6 @@ export class HomeComponent implements OnInit {
         var newsArray = [];
 
         firebase.query(result => {
-            //console.log("query result:", JSON.stringify(result));
 
             var news_details = {
                 title: result.value.Title,
@@ -88,5 +71,11 @@ export class HomeComponent implements OnInit {
         return newsArray;
     }
 
-    
+        // toggle(event) {
+    //     if (event.object.textWrap) {
+    //     event.object.textWrap = false;
+    //     } else {
+    //     event.object.textWrap = true;
+    //     }
+    // }
 }

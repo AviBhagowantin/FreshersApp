@@ -68,7 +68,6 @@ export class VieworderComponent implements OnInit {
         return orderArray;
     }
 
-
     removeOrder(index)
     {
         var path;
@@ -95,7 +94,6 @@ export class VieworderComponent implements OnInit {
                 .catch(error => console.error("Error: " + error));
             }.bind(this)
         )
-        .catch(error => console.log("Trouble in paradise: " + error));
-           
+        .catch(error => console.log("Trouble in paradise: " + error));     
     }
 }

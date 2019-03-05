@@ -54,31 +54,6 @@ export class GpsComponent implements OnInit {
         
     }
 
-    request() {
-        console.log('enableLocationRequest()');
-        geolocation.enableLocationRequest().then(() => {
-            console.log('location enabled!');
-            this.watch();
-        }, e => {
-            console.log('Failed to enable', e);
-        });
-    }
-
-    watch() {
-        console.log('watchLocation()');
-        geolocation.watchLocation(position => {
-            this.currentLat = position.latitude;
-            this.currentLng = position.longitude;
-            console.log(this.currentLat);
-            console.log(this.currentLng);
-        }, e => {
-            console.log('failed to get location');
-        }, {
-            desiredAccuracy: Accuracy.high,
-            minimumUpdateTime: 500
-        });
-    }
-
     onMapReady(args: any) {
         args.map.setCenter(
             {
@@ -150,8 +125,29 @@ export class GpsComponent implements OnInit {
         return eventsArray;
     }
 
-    onBackTap(): void {
-        this.router.navigate(['/home'], { clearHistory: true });
+    request() {
+        console.log('enableLocationRequest()');
+        geolocation.enableLocationRequest().then(() => {
+            console.log('location enabled!');
+            this.watch();
+        }, e => {
+            console.log('Failed to enable', e);
+        });
+    }
+
+    watch() {
+        console.log('watchLocation()');
+        geolocation.watchLocation(position => {
+            this.currentLat = position.latitude;
+            this.currentLng = position.longitude;
+            console.log(this.currentLat);
+            console.log(this.currentLng);
+        }, e => {
+            console.log('failed to get location');
+        }, {
+            desiredAccuracy: Accuracy.high,
+            minimumUpdateTime: 500
+        });
     }
 
     onNavigateTap(): void {
@@ -183,6 +179,10 @@ export class GpsComponent implements OnInit {
                   console.log(error);
             });
         }
+    }
+
+    onBackTap(): void {
+        this.router.navigate(['/home'], { clearHistory: true });
     }
 
     onDrawerButtonTap(): void {

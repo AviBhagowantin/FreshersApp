@@ -20,7 +20,7 @@
 
     <ListView [items]="cafe" (itemTap)="onItemTap($event)" class="list-group">
     <ng-template let-cafe="item" let-i="index" let-odd="odd" let-even="even">
-        <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+        <!-- Display all the cafetarias in UoM-->
         <StackLayout orientation="horizontal" class="list-group-item">
             <Label [text]="cafe.name"></Label>
         </StackLayout>

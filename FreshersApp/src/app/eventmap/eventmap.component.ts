@@ -67,9 +67,7 @@ export class EventmapComponent implements OnInit {
                 zoomLevel: 16
             }
         );
-
         args.map.addMarkers(this.events);
-
         args.map.setOnMapClickListener((point: any) => {
             console.log("Map clicked at latitude: " + point.lat + ", longitude: " + point.lng);
             this.eventLat=point.lat;
@@ -89,20 +87,12 @@ export class EventmapComponent implements OnInit {
     }
 
     getData(data : any): any{
-        //console.log(data.value);
-
         this.keys=Object.keys(data.value); 
-
         var counter : number;
         var eventsArray = [];
 
-        //console.log(data.value[this.keys[0]]);
-        //console.log(data.value[this.keys[0]].title);
-
         for (counter = 0; counter < this.keys.length; counter++) {
-
             var key = this.keys[counter];
-
             var events_details = {
                 id: key,
                 title: data.value[key].title,
@@ -113,7 +103,6 @@ export class EventmapComponent implements OnInit {
             };
 
             var eventDate=this.dateSelected;
-
             console.log(eventDate);
 
             if ((eventDate==events_details.date) && (this.eventKey!=events_details.id))
