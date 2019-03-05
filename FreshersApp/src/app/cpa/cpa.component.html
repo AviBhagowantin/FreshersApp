@@ -12,24 +12,33 @@
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label class="action-bar-title" text="CPA Calculator"></Label>
+    <Label class="title" text="CPA Calculator"></Label>
 </ActionBar>
 
-<ScrollView>
+
+<GridLayout class="page page-content">
+ 
+
 	<StackLayout >
 
-    	<GridLayout class="page page-content">
+
+        <StackLayout orientation="horizontal">
+            <Label class="title" text="CPA :" textWrap="true"  ></Label>
+            <Label  class="title" textWrap="true" [text]="cpaScore"></Label>
+             <Label  class="title" textWrap="true" text="%"></Label>
+        </StackLayout>
+        <Button text="Calculate CPA" class="btn btn-primary btn-active butn" (tap)="calculatecpa()"></Button>
+    	<StackLayout class="hr-dark"></StackLayout>
+        <ScrollView>
     		<StackLayout>
-    			<StackLayout id="modules" #stack>
     			
-    			</StackLayout>
-    			<Button id="addmodule" text="Add Module" class="btn btn-primary btn-active" (tap)="addmodule()"></Button>
+    			<Button id="addmodule" text="Add Module" class="btn btn-primary btn-active butn" (tap)="addmodule()"></Button>
+                <StackLayout class="butn_cpa" id="modules" #stack>
+                    
+                </StackLayout>
     		</StackLayout>
-    	</GridLayout>	
-    	<Button text="Calculate CPA" class="btn btn-primary btn-active" (tap)="calculatecpa()"></Button>
-    	<StackLayout>
-    	<Label class="h3 p-15" text="CPA" textWrap="true"  ></Label>
-    	<Label  class="h3 p-15" textWrap="true" #label></Label>
-    	</StackLayout>
-    </StackLayout>
-</ScrollView>
+    
+    	   </ScrollView>
+            </StackLayout>
+     
+</GridLayout>

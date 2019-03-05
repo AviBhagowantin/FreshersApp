@@ -12,20 +12,23 @@
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label class="action-bar-title" text="Bus"></Label>
+    <Label class="title" text="Bus"></Label>
 </ActionBar>
+<StackLayout>
+<SearchBar hint="Search by destination name" class="butn_bus" (submit)="onSubmit($event)" (clear)="onClear($event)" ></SearchBar>
 
 <ListView [items]="buses">
     <ng-template let-item="item">
-        <GridLayout columns="auto,*,*,*,*" rows="*,*">
-            <Label col="1" row="0" text="Route No:  "></Label>
-            <Label col="2" row="0" [text]="item.route"></Label>
-            <Label col="3" row="0" text="Destination:  "></Label>
-            <Label col="4" row="0" [text]="item.destination"></Label>
-            <Label col="1" row="1" text="Next Bus:  "></Label>
-            <Label col="2" row="1" [text]="item.nextBus"></Label>
-            <Label col="3" row="1" text="Last Bus:  "></Label>
-            <Label col="4" row="1" [text]="item.lastBus"></Label>
+        <GridLayout columns="*,*" rows="*,*,*,*">
+            <Label class="bus_title" col="0" row="0" text="Route No:  "></Label>
+            <Label class="bus_description" col="1" row="0" [text]="item.route"></Label>
+            <Label class="bus_title" col="0" row="1" text="Destination:  "></Label>
+            <Label class="bus_description"  col="1" row="1" [text]="item.destination"></Label>
+            <Label class="bus_title" col="0" row="2" text="Next Bus:  "></Label>
+            <Label class="bus_description"  col="1" row="2" [text]="item.nextBus"></Label>
+            <Label class="bus_title" col="0" row="3" text="Last Bus:  "></Label>
+            <Label class="bus_description"  col="1" row="3" [text]="item.lastBus"></Label>
         </GridLayout>
     </ng-template>
 </ListView>
+</StackLayout>
