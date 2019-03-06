@@ -1,0 +1,224 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/freshersapp-7d28e.appspot.com/o/mapwize.js?alt=media&token=d91ba5d1-b444-4b24-b605-8228a29d6a8a"></script>
+        
+        <style>
+            #mapwize {
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="mapwize"></div>
+        <input type="text" value="1" id="test"/>
+        <input type="text" value="1" id="test1"/>
+        <div>
+                <select id="places">
+                  <option value="1">MCID</option>
+                  <option value="2">Rm 2.9</option>
+                  <option value="3">Rm 2.16</option>
+                  <option value="4">Toilet</option>
+                </select> 
+             <button type="button" onclick="navigate()">Navigate</button> 
+        </div>
+        <div>
+              <button type="button" onclick="removedirection()">Remove Direction</button> 
+        </div>
+        
+     
+        <script >
+
+            var theScript;
+
+                    var head = document.getElementsByTagName('head')[0];
+
+                    theScript= document.createElement('script');
+                    theScript.src = "./distance.js";
+                    theScript.type = "text/javascript";
+
+                    head.appendChild( theScript );
+              
+                function removedirection()
+                {
+                    mapglobal.removeDirection();
+                    donavigation=false;
+                }
+
+                var donavigation=false;
+                function navigate()
+                {
+                    donavigation=true;
+                    var e = document.getElementById("places");
+                    var destination = e.options[e.selectedIndex].text;
+                    
+                    if(destination=="MCID")
+                    {
+                        var destinationid="5c64500c564579002cb8d799";
+                    } 
+                    else if(destination=="Rm 2.16")
+                    {
+                        var destinationid="5c6538904a7b530050534cff";
+                    } 
+                    
+                    else if(destination=="Rm 2.9")
+                    {
+                        var destinationid="5c645066534301002d436b4c";
+                    } 
+
+                    else if(destination=="Rm 2.10")
+                    {
+                        var destinationid="5c6538e57b6e56002cff6938";
+                    } 
+
+                    else if(destination=="Rm 2.16")
+                    {
+                        var destinationid="5c6538904a7b530050534cff";
+                    } 
+
+                    else
+                    {
+                        return;
+                    }
+                    var userpos=mapglobal.getUserPosition();
+                    
+                                        Mapwize.Api.getDirection({
+                    from: {latitude: userpos.latitude,longitude: userpos.longitude,floor: 2},
+                    to: {placeId:destinationid}
+                    }).then(direction => mapglobal.setDirection(direction));
+                }
+            
+
+
+
+
+
+                var dn=0;
+                var de=0;
+              
+                
+                var e=document.getElementById("test");
+                var e1=document.getElementById("test1");
+                function readTextFile()
+                {
+                    theScript.parentNode.removeChild( theScript );
+
+                    head = document.getElementsByTagName('head')[0];
+
+                    theScript= document.createElement('script');
+                    theScript.src = "./distance.js";
+                    theScript.type = "text/javascript";
+
+                    head.appendChild( theScript );
+                    var splittedText=myData.split(",");
+                    e.value=splittedText[0];
+                    e1.value=splittedText[1];
+                    dn=splittedText[0];
+                    de=splittedText[1];
+                    
+
+                   
+                }
+                var dnAnc;
+                var deAnc;
+                var initialx;
+                var initialy;
+                function meterstolat(x,y)
+                {
+                    
+                    dnAnc=dn;
+                    deAnc=de;
+                    readTextFile();
+             
+                    
+                    
+                        var dLat = dn/(R*Math.cos((Math.PI*x/33)));
+                        var dLon = de/(R*Math.cos((Math.PI*x/140)));
+                        x =  initialx + dLat * 180/Math.PI;
+                        y =  initialy + dLon * 180/Math.PI;
+                        
+                    
+                    
+            
+                    return [x, y];
+
+                }
+
+                
+
+            var R=6378137;
+            var mapglobal;
+            
+            var euratechVenueid = '5c644c3c534301002d436aec';
+            Mapwize.apiKey('b36ed551be32c200bea8f52e08c4f4bb');
+            Mapwize.map({
+                container: 'mapwize',
+                 minZoom: 19,
+                 maxZoom: 20
+
+            },{
+
+                venueId: euratechVenueid
+            }).then(map => {
+               
+                mapglobal=map;
+                map.centerOnVenue(euratechVenueid);
+                
+                myFunc(map);
+                
+                
+                
+            }).catch(err => {
+                // Something bad happened during Mapwize loading
+                console.error(err);
+            });
+           
+
+            function myFunc(map) {
+                
+                map.setUserPosition({
+                latitude: -20.235510,
+                longitude: 57.496698
+                });
+                initialx=-20.235510
+                initialy=57.49685
+                setTimeout(function(){ myFunc2(map,initialx,initialy); }, 1000);
+            }
+           function myFunc2(map,x,y) {
+                
+
+                map.setUserPosition({
+                latitude: x,
+                longitude:y
+                });
+                setTimeout(function(){ [x,y]= meterstolat(x,y); }, 5000);
+
+                if(donavigation==true)
+                {
+                navigate();
+                }
+                setTimeout(function(){ myFunc3(map,x,y); }, 6000);
+            }
+
+            function myFunc3(map,x,y) {
+                            
+
+                map.setUserPosition({
+                latitude: x,
+                longitude:y
+                });
+                setTimeout(function(){ [x,y]= meterstolat(x,y); }, 5000);
+                
+                if(donavigation==true)
+                {
+                navigate();
+                }
+                setTimeout(function(){ myFunc2(map,x,y); }, 6000);
+            }
+
+           
+
+       
+                
+        </script>
+    </body>
+</html>
