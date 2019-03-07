@@ -22,7 +22,7 @@
             <StackLayout (tap)="onItemTap(i)">
             <GridLayout columns="120,200,auto" rows="80,auto,auto">
 
-                <Image src="~/app/images/logo.jpg" stretch="aspectFill"></Image>
+                <Image [src]="rule.image" stretch="aspectFill"></Image>
                 <StackLayout  col="1" row="0" orientaion="vertical">
                     <Label class="title" [text]="rule.title"></Label>
                     <Label class="news_description" [textWrap]="true" [text]="rule.description"></Label>

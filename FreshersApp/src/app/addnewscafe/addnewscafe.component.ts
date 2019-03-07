@@ -48,7 +48,8 @@ export class AddnewscafeComponent implements OnInit {
               'Description': this.description,
               'Author': this.author,
               'Date': this.date,
-              'Timestamp' : Date.now()
+              'Timestamp' : Date.now(),
+              'Image':"~/app/images/cafenews.jpg"
             }
         ).then(
             function (result) {

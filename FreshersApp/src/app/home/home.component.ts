@@ -63,7 +63,8 @@ export class HomeComponent implements OnInit {
                 title: result.value.Title,
                 description: result.value.Description,
                 date: result.value.Date,
-                author: result.value.Author
+                author: result.value.Author,
+                image:result.value.Image
             };
 
             var year = +(news_details.date[6]+news_details.date[7]+news_details.date[8]+news_details.date[9]);

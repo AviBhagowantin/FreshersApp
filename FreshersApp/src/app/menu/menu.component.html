@@ -25,7 +25,7 @@
 
     <ng-template let-i="index" let-item="item" acTemplateKey="title" >
       <GridLayout columns="80,*,20" rows="60,*">
-        <Image row="0" col="0" src="~/app/images/food.jpg" stretch="aspectFill"></Image>
+        <Image row="0" col="0" [src]=item.image stretch="aspectFill"></Image>
         <StackLayout col="1" row="0"> 
         <Label class="title" [text]="item.title"></Label>
        
@@ -105,7 +105,7 @@
       <StackLayout>
         <Label class="title" [text]="Current"></Label>
         <Label class="title" [text]="Cost"></Label>
-        <Button class="btn btn-primary butn" text="Confirm order" (tap)="checkout()"></Button>
+        <Button class="btn btn-primary butn" text="Confirm order" (tap)="checkCheckout()"></Button>
       </StackLayout>
       <StackLayout class="hr-dark"></StackLayout>
       <ListView [items]="order" class="list-group" (loadMoreItems)="loadMore()">

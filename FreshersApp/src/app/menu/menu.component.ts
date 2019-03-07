@@ -184,6 +184,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
 
             var item_details = {
                 title: key,
+                image:"~/app/images/"+key+".jpg",
                 price: data.value[key].Price,
                 items: itemsArray
             };
@@ -196,7 +197,20 @@ export class MenuComponent implements OnInit,AfterViewInit{
     onBackTap(): void {
         this.router.navigate(['/cafeteria'], { clearHistory: true });
     }
-
+    checkCheckout()
+    {
+        dialogs.confirm({
+            title: "Are you sure to checkout",
+            
+            okButtonText: "Yes",
+            cancelButtonText: "No",
+           
+        }).then(result => {
+            if(result==true){
+                this.checkout();
+            }
+        });
+    }
     checkout()
     {
         let imgbar: Image = <Image>this.page.getViewById<Image>('barcode');
@@ -242,7 +256,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
                 }
             ).then(
                 function (result) {
-                    console.log("created key: " + result.key);
+                    //console.log("created key: " + result.key);
                     var zx = new ZXing();
                     var img = zx.createBarcode({encode: this.code.toString(), height: 500, width: 500, format: ZXing.QR_CODE});
                     imgbar.imageSource = <ImageSource> fromNativeSource(img);
@@ -289,7 +303,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
            let checkbox: CheckBox = <CheckBox >this.page.getViewById<CheckBox>(this.items[myIndex].items[i].id);
            if(checkbox.checked)
            {
-            string=string.concat(this.items[myIndex].items[i].text+",")
+            string=string.concat(this.items[myIndex].items[i].text+" ")
            }
            console.log("string"+string);
         }

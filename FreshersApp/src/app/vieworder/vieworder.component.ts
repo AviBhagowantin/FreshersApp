@@ -55,10 +55,12 @@ export class VieworderComponent implements OnInit {
 
             var key = this.keys[counter];
             var description=data.value[key].Description;
-
+            var code=data.value[key].Code;
+            
             var order = {
-                key:key,
-               description:description
+               key:key,
+               description:description,
+               code:code
                 
             };
             console.log(order.description)
