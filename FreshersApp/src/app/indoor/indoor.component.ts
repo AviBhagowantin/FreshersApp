@@ -87,7 +87,7 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
             var d=Math.pow(10,((beacon.txPower_accuracy- beacon.rssi)/25));
             this.values.push(d);
             this.count++;
-            if (this.count==3)
+            if (this.count==8)
             {
                 var sum=0;
                 for(let i=0;i<this.values.length;i++)
@@ -97,8 +97,8 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
                 //alert(sum/this.values.length+"\n");
                     var fs = require('file-system');
 
-                   // fs.knownFolders.documents().getFile("app/app/indoor/distance.js").readText()
-                   // .then((res) => {alert(res)});
+                fs.knownFolders.documents().getFile("app/app/indoor/distance.js").readText()
+                .then((res) => {console.log("Result :" +res)});
 
                   fs.knownFolders.documents().getFile("app/app/indoor/distance.js").remove()
                  .then((res) => {

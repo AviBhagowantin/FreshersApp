@@ -10,7 +10,7 @@
     </head>
     <body>
         <div id="mapwize"></div>
-        <input type="text" value="1" id="test"/>
+      
         <input type="text" value="1" id="test1"/>
         <div>
                 <select id="places">
@@ -94,50 +94,39 @@
 
                 var dn=0;
                 var de=0;
-              
-                
-                var e=document.getElementById("test");
-                var e1=document.getElementById("test1");
-                function readTextFile()
-                {
-                    theScript.parentNode.removeChild( theScript );
-
-                    head = document.getElementsByTagName('head')[0];
-
-                    theScript= document.createElement('script');
-                    theScript.src = "./distance.js";
-                    theScript.type = "text/javascript";
-
-                    head.appendChild( theScript );
-                    var splittedText=myData.split(",");
-                    e.value=splittedText[0];
-                    e1.value=splittedText[1];
-                    dn=splittedText[0];
-                    de=splittedText[1];
-                    
-
-                   
-                }
                 var dnAnc;
                 var deAnc;
                 var initialx;
                 var initialy;
+                
+             
+                var e1=document.getElementById("test1");
+                function readTextFile()
+                {
+                    theScript.parentNode.removeChild( theScript );
+                    head = document.getElementsByTagName('head')[0];
+                    theScript= document.createElement('script');
+                    theScript.src = "./distance.js";
+                    head.appendChild( theScript );
+                    var splittedText=myData.split(",");
+                    
+                    dn=splittedText[0];
+                    de=splittedText[1];
+                    e1.value=dn;
+                    
+                   
+                }
+               
                 function meterstolat(x,y)
                 {
                     
                     dnAnc=dn;
                     deAnc=de;
                     readTextFile();
-             
-                    
-                    
-                        var dLat = dn/(R*Math.cos((Math.PI*x/33)));
-                        var dLon = de/(R*Math.cos((Math.PI*x/140)));
-                        x =  initialx + dLat * 180/Math.PI;
-                        y =  initialy + dLon * 180/Math.PI;
-                        
-                    
-                    
+                    var dLat = dn/(R*Math.cos((Math.PI*x/33)));
+                    var dLon = de/(R*Math.cos((Math.PI*x/140)));
+                    x =  initialx + dLat * 180/Math.PI;
+                    y =  initialy + dLon * 180/Math.PI;
             
                     return [x, y];
 
@@ -162,8 +151,9 @@
                
                 mapglobal=map;
                 map.centerOnVenue(euratechVenueid);
-                
-                myFunc(map);
+                initialx=-20.235510
+                initialy=57.49685
+                myFunc(map,initialx,initialy);
                 
                 
                 
@@ -173,47 +163,24 @@
             });
            
 
-            function myFunc(map) {
-                
-                map.setUserPosition({
-                latitude: -20.235510,
-                longitude: 57.496698
-                });
-                initialx=-20.235510
-                initialy=57.49685
-                setTimeout(function(){ myFunc2(map,initialx,initialy); }, 1000);
-            }
-           function myFunc2(map,x,y) {
+           function myFunc(map,x,y) {
                 
 
                 map.setUserPosition({
                 latitude: x,
                 longitude:y
                 });
-                setTimeout(function(){ [x,y]= meterstolat(x,y); }, 5000);
-
-                if(donavigation==true)
-                {
-                navigate();
-                }
-                setTimeout(function(){ myFunc3(map,x,y); }, 6000);
-            }
-
-            function myFunc3(map,x,y) {
-                            
-
-                map.setUserPosition({
-                latitude: x,
-                longitude:y
-                });
-                setTimeout(function(){ [x,y]= meterstolat(x,y); }, 5000);
+                setTimeout(function(){ [x,y]= meterstolat(x,y); ; }, 3000);
                 
+
                 if(donavigation==true)
                 {
                 navigate();
                 }
-                setTimeout(function(){ myFunc2(map,x,y); }, 6000);
+                setTimeout(function(){ myFunc(map,x,y); }, 3000);
             }
+
+           
 
            
 
