@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Page } from "tns-core-modules/ui/page";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import {Observable} from 'data/observable';
@@ -7,9 +8,9 @@ import {
     BeaconLocationOptions, BeaconLocationOptionsIOSAuthType, BeaconLocationOptionsAndroidAuthType
 } from "nativescript-ibeacon/nativescript-ibeacon.common";
 import {NativescriptIbeacon} from "nativescript-ibeacon";
-import { ComponentFactoryResolver } from "@angular/core/src/render3";
-import { FindValueSubscriber } from "rxjs/internal/operators/find";
-import { knownFolders, Folder, File } from "tns-core-modules/file-system";
+
+var bluetooth = require("nativescript-bluetooth");
+var dialogs = require("tns-core-modules/ui/dialogs");
 
 @Component({
     selector: "Indoor",
@@ -31,10 +32,25 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
 
     ngOnInit()
     {
-       
+        bluetooth.isBluetoothEnabled().then(function(enabled) {
+            if (!enabled)
+            {
+                dialogs.alert({
+                    title: "Bluetooth",
+                    message: "Please enable your bluetooth to get your indoor location",
+                    okButtonText: "Okay, thanks"
+                });
+            }
+      });
+
+      this.start();
+
+      this.page.on('navigatingFrom', (data) => {
+        this.stop();
+      });
     }
     
-    constructor() {
+    constructor(private page: Page) {
         super();
 
         console.log('Hello World Model constructed');
