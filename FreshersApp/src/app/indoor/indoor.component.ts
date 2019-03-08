@@ -22,7 +22,8 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
 
     public message: string = "Init";
 
-    private region: BeaconRegion = null;
+    private region1: BeaconRegion = null;
+    private region2: BeaconRegion = null;
 
     public values=[];
     public count=0;
@@ -43,7 +44,8 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
             androidAuthorisationDescription: "Location permission needed"
         };
         this.nativescriptIbeacon = new NativescriptIbeacon(this, options);
-        this.region = new BeaconRegion("Blanc", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+        this.region1 = new BeaconRegion("Blanc", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+        this.region2 = new BeaconRegion("Vert","63208BDB-82E2-46E4-A066-839A1E5DC12D");
     }
 
     start() {
@@ -67,15 +69,19 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
 
     stop() {
         this.message = "stop";
-        this.nativescriptIbeacon.stopRanging(this.region);
-        this.nativescriptIbeacon.stopMonitoring(this.region);
+        this.nativescriptIbeacon.stopRanging(this.region1);
+        this.nativescriptIbeacon.stopMonitoring(this.region1);
+        this.nativescriptIbeacon.stopRanging(this.region2);
+        this.nativescriptIbeacon.stopMonitoring(this.region2);
         this.nativescriptIbeacon.unbind();
     }
 
     onBeaconManagerReady(): void {
         console.log("onBeaconManagerReady");
-        this.nativescriptIbeacon.startRanging(this.region);
-        this.nativescriptIbeacon.startMonitoring(this.region);
+        this.nativescriptIbeacon.startRanging(this.region1);
+        this.nativescriptIbeacon.startMonitoring(this.region1);
+        this.nativescriptIbeacon.startRanging(this.region2);
+        this.nativescriptIbeacon.startMonitoring(this.region2);
     }
 
     didRangeBeaconsInRegion(region: BeaconRegion, beacons: Beacon[]): void {
