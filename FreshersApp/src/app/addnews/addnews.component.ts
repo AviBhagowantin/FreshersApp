@@ -33,7 +33,8 @@ export class AddnewsComponent implements OnInit {
               'Description': this.description,
               'Author': this.author,
               'Date': this.date,
-              'Timestamp' : Date.now()
+              'Timestamp' : Date.now(),
+              'Image':"~/app/images/logo.jpg"
             }
         ).then(
             function (result) {

@@ -36,7 +36,8 @@ export class AddeventsComponent implements OnInit {
               'Description': this.description,
               'Author': this.author,
               'Date': this.date,
-              'Timestamp' : Date.now()
+              'Timestamp' : Date.now(),
+              'Image':"~/app/images/event.png"
             }
         ).then(
             function (result) {

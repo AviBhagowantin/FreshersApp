@@ -183,6 +183,32 @@
     background-image: url("~/app/images/foodadmin2.jpg");
 }
 
+.adminpanel{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/adminpanel.jpg");
+}
+
+.adminevent{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/adminevent.jpg");
+}
+
+.adminnews{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/newsadmin.jpg");
+}
 
 .food-back3{
     padding-top:50px;

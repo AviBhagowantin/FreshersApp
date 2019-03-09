@@ -1,12 +1,12 @@
 <ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Admin"></Label>
+    <Label class="title" text="Admin"></Label>
 </ActionBar>
 
-<GridLayout class="page page-content">
-    <StackLayout orientation="vertical">
-        <Button text="Add News" backgroundColor="#00FFFF" width="250" height="50" margin="20" (tap)="onNewsButtonTap()"></Button>
-        <Button text="Add Event" backgroundColor="#00FFFF" width="250" height="50" margin="20" (tap)="onEventButtonTap()"></Button>
-        <Button text="View Feedback" backgroundColor="#00FFFF" width="250" height="50" margin="20" (tap)="onFeedbackButtonTap()"></Button>
-        <Button text="Log Out" backgroundColor="#00FF4D" width="250" height="50" margin="20" (tap)="onLogoutButtonTap()"></Button>
+<GridLayout class="page page-content adminpanel">
+    <StackLayout orientation="vertical" horizontalAlignment="center" verticalAlignment="center">
+        <Button text="Add News" class="btn btn-primary butn" width="250"  (tap)="onNewsButtonTap()"></Button>
+        <Button text="Add Event" class="btn btn-primary butn" width="250" (tap)="onEventButtonTap()"></Button>
+        <Button text="View Feedback"  class="btn btn-primary butn" width="250" (tap)="onFeedbackButtonTap()"></Button>
+        <Button text="Log Out" class="btn btn-primary butn" width="250" (tap)="onLogoutButtonTap()"></Button>
     </StackLayout>    
 </GridLayout>
