@@ -1,4 +1,4 @@
-<html>
++<html>
     <head>
         <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/freshersapp-7d28e.appspot.com/o/mapwize.js?alt=media&token=d91ba5d1-b444-4b24-b605-8228a29d6a8a"></script>
         
@@ -109,7 +109,7 @@
                     theScript.src = "./distance.js";
                     head.appendChild( theScript );
                     var splittedText=myData.split(",");
-                    
+                  
                     dn=splittedText[0];
                     de=splittedText[1];
                     e1.value=dn;
@@ -119,9 +119,6 @@
                
                 function meterstolat(x,y)
                 {
-                    
-                    dnAnc=dn;
-                    deAnc=de;
                     readTextFile();
                     var dLat = dn/(R*Math.cos((Math.PI*x/33)));
                     var dLon = de/(R*Math.cos((Math.PI*x/140)));
@@ -170,7 +167,7 @@
                 latitude: x,
                 longitude:y
                 });
-                setTimeout(function(){ [x,y]= meterstolat(x,y); ; }, 3000);
+                setTimeout(function(){ [x,y]= meterstolat(x,y);  }, 3000);
                 
 
                 if(donavigation==true)

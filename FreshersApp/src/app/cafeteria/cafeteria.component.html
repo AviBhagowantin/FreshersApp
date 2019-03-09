@@ -16,16 +16,19 @@
     <Label class="title" text="Cafeteria"></Label>
 </ActionBar>
 
-<GridLayout class="page page-content food-back2">
-    <StackLayout horizontalAlignment="center"  verticalAlignment="center">
-    <ListView [items]="cafe" (itemTap)="onItemTap($event)" class="list-group titlefood">
+<GridLayout class="page page-content">
+    
+    <ListView [items]="cafe" (itemTap)="onItemTap($event)" class="list-group">
     <ng-template let-cafe="item" let-i="index" let-odd="odd" let-even="even">
         <!-- Display all the cafetarias in UoM-->
-        <StackLayout class="coverImage" orientation="horizontal" class="list-group-item ">
-            <Label horizontalAlignment="center"  verticalAlignment="center" class="title" [text]="cafe.name"></Label>
-        </StackLayout>
+        <GridLayout rows="220, auto" columns="*, *, *" >
+            <Image src="~/app/images/foodmain.jpg" colSpan="3" stretch="aspectFill" row="0" ></Image>
+            <Label horizontalAlignment="center" row="0" colSpan="2" textWrap="true" verticalAlignment="center" class="titlecafe" [text]="cafe.name"></Label>
+
+   </GridLayout>
+        
     </ng-template>
 </ListView>
-</StackLayout>
+
 </GridLayout>
 

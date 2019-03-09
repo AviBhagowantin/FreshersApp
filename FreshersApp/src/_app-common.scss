@@ -36,6 +36,7 @@
 	font-size:12px;
 }
 
+
 .title	{
 	font-family: "Montserrat-Medium";
 	font-weight: bold;
@@ -44,6 +45,13 @@
 	    
 }
 
+.titlecafe	{
+	font-family: "Montserrat-Medium";
+	font-weight: bold;
+	font-size:25%;
+	color:white;
+	    
+}
 .titlefood	{
 	font-family: "Montserrat-Medium";
 	color:white;
@@ -155,6 +163,15 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url("~/app/images/foodadmin.jpg");
+}
+
+.cafemenu{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/cafemenu.jpg");
 }
 
 .food-back2{
