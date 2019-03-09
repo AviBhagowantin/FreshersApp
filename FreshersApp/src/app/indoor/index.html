@@ -1,4 +1,4 @@
-+<html>
+<html>
     <head>
         <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/freshersapp-7d28e.appspot.com/o/mapwize.js?alt=media&token=d91ba5d1-b444-4b24-b605-8228a29d6a8a"></script>
         
@@ -112,7 +112,10 @@
                   
                     dn=splittedText[0];
                     de=splittedText[1];
+                    initialx=parseFloat(splittedText[2]);
+                    initialy=parseFloat(splittedText[3]);
                     e1.value=dn;
+
                     
                    
                 }
@@ -124,7 +127,6 @@
                     var dLon = de/(R*Math.cos((Math.PI*x/140)));
                     x =  initialx + dLat * 180/Math.PI;
                     y =  initialy + dLon * 180/Math.PI;
-            
                     return [x, y];
 
                 }

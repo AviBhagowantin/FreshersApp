@@ -8,7 +8,7 @@ import {
     BeaconLocationOptions, BeaconLocationOptionsIOSAuthType, BeaconLocationOptionsAndroidAuthType
 } from "nativescript-ibeacon/nativescript-ibeacon.common";
 import {NativescriptIbeacon} from "nativescript-ibeacon";
-
+var fs = require('file-system');
 var bluetooth = require("nativescript-bluetooth");
 var dialogs = require("tns-core-modules/ui/dialogs");
 
@@ -103,21 +103,36 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
     didRangeBeaconsInRegion(region: BeaconRegion, beacons: Beacon[]): void {
         console.log("didRangeBeaconsInRegion: " + region.identifier + " - " + beacons.length);
         this.message = "didRangeBeaconsInRegion: " + (new Date().toDateString());
-
+        var lat;
+        var lon;
+        var distance=0;
         for (let beacon of beacons) {
             console.log("B: " + beacon.proximityUUID + " - " + beacon.major + " - " + beacon.minor + " - " + beacon.distance_proximity + " - " + beacon.rssi + " - " + beacon.txPower_accuracy );
             var d=Math.pow(10,((beacon.txPower_accuracy- beacon.rssi)/25));
             this.values.push(d);
             this.count++;
-            if (this.count==8)
+            if (this.count==5)
             {
                 var sum=0;
                 for(let i=0;i<this.values.length;i++)
                 {
                     sum=sum+this.values[i];
                 }
-                //alert(sum/this.values.length+"\n");
-                    var fs = require('file-system');
+
+                if(beacon.proximityUUID=="B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+                {
+                    distance=sum/this.values.length;
+                    lat=-20.235341621405528;
+                    lon=57.49679267406464;
+                }
+                else
+                {
+                    distance=(sum/this.values.length)*-1;
+                     lat=-20.23570653706646;
+                    lon=57.49691605567933;
+
+                }
+               
 
                 fs.knownFolders.documents().getFile("app/app/indoor/distance.js").readText()
                 .then((res) => {console.log("Result :" +res)});
@@ -129,7 +144,7 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
                    });
                
 
-                  fs.knownFolders.documents().getFile("app/app/indoor/distance.js").writeText(("var myData=\'"+sum/this.values.length+","+sum/this.values.length+"\';"));
+                  fs.knownFolders.documents().getFile("app/app/indoor/distance.js").writeText(("var myData=\'"+distance+","+distance+","+lat+","+lon+"\';"));
                  
 
 
