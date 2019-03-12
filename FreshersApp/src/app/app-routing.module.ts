@@ -6,7 +6,6 @@ const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "home", loadChildren: "~/app/home/home.module#HomeModule" },
     { path: "rule", loadChildren: "~/app/rule/rule.module#RuleModule" },
-    { path: "search", loadChildren: "~/app/search/search.module#SearchModule" },
     { path: "admin", loadChildren: "~/app/admin/admin.module#AdminModule" },
     { path: "settings", loadChildren: "~/app/settings/settings.module#SettingsModule" },
     { path: "bus", loadChildren: "~/app/bus/bus.module#BusModule"},
@@ -26,6 +25,13 @@ const routes: Routes = [
     { path: "eventstart", loadChildren: "~/app/eventstart/eventstart.module#EventstartModule" },
     { path: "eventend", loadChildren: "~/app/eventend/eventend.module#EventendModule" },
     { path: "eventmap", loadChildren: "~/app/eventmap/eventmap.module#EventmapModule" },
+    { path: "vieworder", loadChildren: "~/app/vieworder/vieworder.module#VieworderModule" },
+    { path: "cafeadmin", loadChildren: "~/app/cafeadmin/cafeadmin.module#CafeadminModule" },
+    { path: "updatecredits", loadChildren: "~/app/updatecredits/updatecredits.module#UpdatecreditsModule" },
+    { path: "addnewscafe", loadChildren: "~/app/addnewscafe/addnewscafe.module#AddnewscafeModule" },
+    { path: "addcredits", loadChildren: "~/app/addcredits/addcredits.module#AddcreditsModule" },
+    { path: "cafeteria", loadChildren: "~/app/cafeteria/cafeteria.module#CafeteriaModule" },
+    { path: "menu", loadChildren: "~/app/menu/menu.module#MenuModule" },
 ];
 
 @NgModule({

@@ -10,25 +10,28 @@
     because its function is to always navigate back in the application.
     -->
     <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
-    <Label class="action-bar-title" text="GPS"></Label>
+    <Label class="title" text="GPS"></Label>
 </ActionBar>
 
 <GridLayout class="page page-content">
-        <ContentView height="100%" width="100%">
-            <Mapbox
-                accessToken="pk.eyJ1IjoiYXZpLWJoYWdvd2FudGluIiwiYSI6ImNqcmZhNTQ5eDBsd3A0NW1qNXk1cWs0eHEifQ.1vXbXMEFcX-5dQkbmsTQUA"
-                mapStyle="streets"
-                latitude="-20.233983"
-                longitude="57.4972365"
-                zoomLevel="16"
-                delay="2000"
-                showUserLocation="true"
-                hideCompass="false"
-                disableZoom="false"
-                disableRotation="false"
-                disableScroll="false"
-                disableTilt="false"
-                (mapReady)="onMapReady($event)">
-            </Mapbox>
-        </ContentView>
+    <StackLayout>
+        <ContentView height="85%" width="100%">
+                <Mapbox
+                    accessToken="pk.eyJ1IjoiYXZpLWJoYWdvd2FudGluIiwiYSI6ImNqcmZhNTQ5eDBsd3A0NW1qNXk1cWs0eHEifQ.1vXbXMEFcX-5dQkbmsTQUA"
+                    mapStyle="streets"
+                    latitude="-20.233983"
+                    longitude="57.4972365"
+                    zoomLevel="16"
+                    delay="2000"
+                    showUserLocation="true"
+                    hideCompass="false"
+                    disableZoom="false"
+                    disableRotation="false"
+                    disableScroll="false"
+                    disableTilt="false"
+                    (mapReady)="onMapReady($event)">
+                </Mapbox>
+            </ContentView>
+            <Button class="btn btn-primary butn" text="Navigate" (tap)="onNavigateTap()"></Button>
+    </StackLayout>
 </GridLayout>

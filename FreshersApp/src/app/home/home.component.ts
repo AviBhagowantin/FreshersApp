@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { DatePipe } from '@angular/common';
+var dialogs = require("tns-core-modules/ui/dialogs");
 var firebase = require('nativescript-plugin-firebase');
 
 @Component({
@@ -19,13 +20,9 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // Init your component properties here.
 
-        firebase.getValue('/News')
-        .then(result=> (this.news=this.getData(result)))
-        .catch(error => console.error("Error: " + error));
-
-        //console.log(this.news);
+        this.news=this.getData();
+        console.log(this.news);
     }
 
     onDrawerButtonTap(): void {
@@ -33,6 +30,18 @@ export class HomeComponent implements OnInit {
         sideDrawer.showDrawer();
     }
 
+    onItemTap(i)
+    {
+        
+        dialogs.alert({
+            title: this.news[i].title,
+            message: this.news[i].description,
+            okButtonText: "ok"
+        }).then(function () {
+            console.log("Dialog closed!");
+        });
+
+    }
     // toggle(event) {
     //     if (event.object.textWrap) {
     //     event.object.textWrap = false;
@@ -41,30 +50,20 @@ export class HomeComponent implements OnInit {
     //     }
     // }
 
-    getData(data : any): any{
-        //console.log(data.value);
-
+    getData(): any{
         var nowDate = this.datePipe.transform(Date.now(), 'dd/MM/yyyy');
         var nowYear = +(nowDate[6]+nowDate[7]+nowDate[8]+nowDate[9]);
         var nowMonth = +(nowDate[3]+nowDate[4]);
 
-        this.keys=Object.keys(data.value); 
-
-        var counter : number;
         var newsArray = [];
 
-        //console.log(data.value[this.keys[0]]);
-        //console.log(data.value[this.keys[0]].title);
-
-        for (counter = 0; counter < this.keys.length; counter++) {
-
-            var key = this.keys[counter];
+        firebase.query(result => {
 
             var news_details = {
-                title: data.value[key].Title,
-                description: data.value[key].Description,
-                date: data.value[key].Date,
-                author: data.value[key].Author
+                title: result.value.Title,
+                description: result.value.Description,
+                date: result.value.Date,
+                author: result.value.Author
             };
 
             var year = +(news_details.date[6]+news_details.date[7]+news_details.date[8]+news_details.date[9]);
@@ -76,20 +75,28 @@ export class HomeComponent implements OnInit {
 
             if ((year<nowYear) && (nowMonth==1) && (month==12))
             {
-                newsArray.push(news_details);
+                newsArray.unshift(news_details);
             }
             else if ((year==nowYear) && ((nowMonth-month==1) || (nowMonth==month)))
             {
-                newsArray.push(news_details);
+                newsArray.unshift(news_details);
             }
 
-            //newsArray.push(news_details);
+            }, "/News", {
+            orderBy: {
+                type: firebase.QueryOrderByType.CHILD,
+                value: 'Timestamp'
+            }
+        });
 
-        } 
-
-        //console.log(newsArray);
         return newsArray;
     }
 
-    
+        // toggle(event) {
+    //     if (event.object.textWrap) {
+    //     event.object.textWrap = false;
+    //     } else {
+    //     event.object.textWrap = true;
+    //     }
+    // }
 }

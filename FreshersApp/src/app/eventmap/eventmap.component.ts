@@ -5,7 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 var firebase = require('nativescript-plugin-firebase');
 import { DatePipe } from '@angular/common';
-
+const httpModule = require("http");
 import { registerElement } from "nativescript-angular/element-registry";
 registerElement("Mapbox1", () => require("nativescript-mapbox").MapboxView);
 
@@ -27,6 +27,9 @@ export class EventmapComponent implements OnInit {
     public eventKey: any;
     public dateSelected: any;
 
+    public description;
+    public title;
+
     constructor(private router: RouterExtensions,private datePipe: DatePipe,private route: ActivatedRoute) {
         this.route.queryParams.subscribe(params => {
             this.pathEvent = params["pathEvent"];
@@ -41,6 +44,17 @@ export class EventmapComponent implements OnInit {
         firebase.getValue('/Events')
         .then(result=> (this.events=this.getData(result)))
         .catch(error => console.error("Error: " + error));
+
+        firebase.getValue(this.pathNews)
+        .then(result=> (this.title=result.value.Title))
+        .catch(error => console.error("Error: " + error));
+
+        firebase.getValue(this.pathNews)
+        .then(result=> (this.description=result.value.Description))
+        .catch(error => console.error("Error: " + error));
+
+        // console.log(this.title);
+        // console.log(this.description);
         
     }
 
@@ -53,9 +67,7 @@ export class EventmapComponent implements OnInit {
                 zoomLevel: 16
             }
         );
-
         args.map.addMarkers(this.events);
-
         args.map.setOnMapClickListener((point: any) => {
             console.log("Map clicked at latitude: " + point.lat + ", longitude: " + point.lng);
             this.eventLat=point.lat;
@@ -75,20 +87,12 @@ export class EventmapComponent implements OnInit {
     }
 
     getData(data : any): any{
-        //console.log(data.value);
-
         this.keys=Object.keys(data.value); 
-
         var counter : number;
         var eventsArray = [];
 
-        //console.log(data.value[this.keys[0]]);
-        //console.log(data.value[this.keys[0]].title);
-
         for (counter = 0; counter < this.keys.length; counter++) {
-
             var key = this.keys[counter];
-
             var events_details = {
                 id: key,
                 title: data.value[key].title,
@@ -99,7 +103,6 @@ export class EventmapComponent implements OnInit {
             };
 
             var eventDate=this.dateSelected;
-
             console.log(eventDate);
 
             if ((eventDate==events_details.date) && (this.eventKey!=events_details.id))
@@ -120,6 +123,33 @@ export class EventmapComponent implements OnInit {
                 'lng':this.eventLng
             }
         );
+
+        httpModule.request({
+            url: "https://fcm.googleapis.com/fcm/send",
+            method: "POST",
+            headers: {'Authorization': 'key=AAAACn6RBCk:APA91bF1vgYQbPk4P-AGNGewCBjIQc10wlYI5sz9y_kyYdBgbB2ScpxExjbaKvdeEHU6QkiXSZlYYkYBLRdkdueO6OCEM4C9nJS5pDA0PRn1REJPIGMKnvmLlYWRofkwzvSh2nNvNnz6', 'Content-Type': 'application/json' },
+            content: JSON.stringify({
+                "notification" : {
+                    "body": this.description,
+                    "title": this.title,
+                    "sound": "default",
+                    "priority": "High",
+                    "time_to_live": "0", 
+
+                },
+                'to': "/topics/news" // its is mandatory to have /topics/ before the topic name
+            })
+        }).then(function(response) {
+            //const result = response.content.toJSON();
+            console.log(JSON.stringify(response));
+        }, function (e) {
+              console.log("Error occurred " + JSON.stringify(e));
+        }).then(
+            function (result) {
+                //console.log("created key: " + result.key);
+            }
+        );
+
         this.router.navigate(["/admin"], { clearHistory: true });
     }
 

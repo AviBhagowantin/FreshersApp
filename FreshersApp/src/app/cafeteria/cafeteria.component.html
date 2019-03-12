@@ -1,3 +1,4 @@
+
 <ActionBar class="action-bar">
     <!-- 
     Use the NavigationButton as a side-drawer button in Android
@@ -12,11 +13,19 @@
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label class="title" text="Feedback"></Label>
+    <Label class="title" text="Cafeteria"></Label>
 </ActionBar>
 
-<StackLayout>
-    <Label class="title" text="Please tell us any issue you encountered or improvements you find important below:" textWrap="true" ></Label>
-    <TextView class="butn input input-border" hint="Enter your comments" editable="true"  [(ngModel)]="feedtext"></TextView>
-    <Button class="btn btn-primary butn" text="SUBMIT" (tap)="onSubmitButtonTap()"></Button>
-</StackLayout>
+<GridLayout class="page page-content">
+
+    <ListView [items]="cafe" (itemTap)="onItemTap($event)" class="list-group">
+    <ng-template let-cafe="item" let-i="index" let-odd="odd" let-even="even">
+        <!-- Display all the cafetarias in UoM-->
+        <StackLayout class="coverImage" orientation="horizontal" class="list-group-item">
+            <Label class="title" [text]="cafe.name"></Label>
+        </StackLayout>
+    </ng-template>
+</ListView>
+
+</GridLayout>
+

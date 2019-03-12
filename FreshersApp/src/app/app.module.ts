@@ -6,6 +6,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import {DatePipe} from '@angular/common';
 
+
 @NgModule({
     bootstrap: [
         AppComponent

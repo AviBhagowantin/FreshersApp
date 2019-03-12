@@ -5,11 +5,11 @@ import { DatePipe } from '@angular/common';
 const httpModule = require("http");
 
 @Component({
-    selector: "Addnews",
+    selector: "Addnewscafe",
     moduleId: module.id,
-    templateUrl: "./addnews.component.html"
+    templateUrl: "./addnewscafe.component.html"
 })
-export class AddnewsComponent implements OnInit {
+export class AddnewscafeComponent implements OnInit {
     
     public title;
     public description;
@@ -22,6 +22,21 @@ export class AddnewsComponent implements OnInit {
 
     ngOnInit(): void {
         // Init your component properties here.
+
+        firebase.getCurrentUser()
+        .then(
+            function(user) {
+                console.log(user);
+                if (user.email=="cafesecret@uom.com")
+                {
+                    this.author="Secret Cafetaria";
+                }
+                else if (user.email=="cafemain@uom.com")
+                {
+                    this.author="Main Cafetaria";
+                }
+            }.bind(this)
+        )
     }
 
     onAddButtonTap(): void {
@@ -67,10 +82,10 @@ export class AddnewsComponent implements OnInit {
             }
         );
 
-        this.router.navigate(["/admin"], { clearHistory: true });
+        this.router.navigate(["/cafeadmin"], { clearHistory: true });
     }
 
     onBackTap(): void {
-        this.router.navigate(["/admin"], { clearHistory: true });
+        this.router.navigate(["/cafeadmin"], { clearHistory: true });
     }
 }

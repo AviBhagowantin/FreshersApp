@@ -1,19 +1,19 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
-import { CpaRoutingModule } from "./cpa-routing.module";
-import { CpaComponent } from "./cpa.component";
+
+import { CafeteriaRoutingModule } from "./cafeteria-routing.module";
+import { CafeteriaComponent } from "./cafeteria.component";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
-        CpaRoutingModule
-        
+        CafeteriaRoutingModule
     ],
     declarations: [
-        CpaComponent
+        CafeteriaComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class CpaModule { }
+export class CafeteriaModule { }

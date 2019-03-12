@@ -17,11 +17,12 @@ import { Model } from './model';
 export class CpaComponent implements OnInit {
 
     @ViewChild('stack') stack : ElementRef;
-    @ViewChild('label') label : ElementRef;
-     
+   public cpaScore:any;
+   public counter:number;
 
     constructor() {
-        // Use the component constructor to inject providers.
+        this.cpaScore=0;
+        this.counter=0;
     }
 
     ngOnInit(): void {
@@ -42,35 +43,71 @@ export class CpaComponent implements OnInit {
             var source2= new observable.Observable();
 
             let stack_module_year1=new StackLayout();
+            let stack_module_words1=new StackLayout();
+            let stack_module_words2=new StackLayout();
+            let stack_module_words3=new StackLayout();
             
-            model[counter]=new Model();
-            model[counter].module_weight = new TextField();
-            model[counter].module_perc_marks=new TextField();
-            model[counter].module_credits=new TextField();
-            
-            model[counter].module_weight.hint="Module Weight";
-            model[counter].module_perc_marks.hint="Enter % Marks";
-            model[counter].module_credits.hint="Enter Credits";
-            
-            model[counter].module_weight.bind(textFieldBindingOptions, source);
-            model[counter].module_perc_marks.bind(textFieldBindingOptions1, source1);
-            model[counter].module_credits.bind(textFieldBindingOptions2, source2);
+            stack_module_words1.orientation="horizontal";
+            stack_module_words2.orientation="horizontal";
+            stack_module_words3.orientation="horizontal";
 
-            stack_module_year1.addChild(model[counter].module_weight);
-            stack_module_year1.addChild(model[counter].module_credits);
-            stack_module_year1.addChild(model[counter].module_perc_marks);          
+            var moduleWeight=new Label();
+            var moduleCredits=new Label();
+            var moduleperc=new Label();
+            var moduletitle=new Label();
             
+            var counter_dis=this.counter+1;
+            moduletitle.text="Module"+counter_dis;
+            moduleWeight.text="Module Weight";
+            moduleCredits.text="Module Credits"
+            moduleperc.text="Module Marks(in %)"
+
+            moduleWeight.horizontalAlignment="center";
+            moduleCredits.horizontalAlignment="center";
+            moduleperc.horizontalAlignment="center";
+            
+           
+
+            model[this.counter]=new Model();
+            model[this.counter].module_weight = new TextField();
+            model[this.counter].module_perc_marks=new TextField();
+            model[this.counter].module_credits=new TextField();
+
+            model[this.counter].module_weight.hint="Enter Module Weight";
+            model[this.counter].module_perc_marks.hint="Enter % Marks";
+            model[this.counter].module_credits.hint="Enter Credits";
+
+            model[this.counter].module_weight.keyboardType="number";
+            model[this.counter].module_perc_marks.keyboardType="number";
+            model[this.counter].module_credits.keyboardType="number";
+            
+            model[this.counter].module_weight.bind(textFieldBindingOptions, source);
+            model[this.counter].module_perc_marks.bind(textFieldBindingOptions1, source1);
+            model[this.counter].module_credits.bind(textFieldBindingOptions2, source2);
+
+             stack_module_words1.addChild(moduleWeight);
+             stack_module_words1.addChild(model[this.counter].module_weight);
+             stack_module_words2.addChild(moduleCredits);
+             stack_module_words2.addChild(model[this.counter].module_credits);
+            stack_module_words3.addChild(moduleperc);
+             stack_module_words3.addChild(model[this.counter].module_perc_marks);
+
+            stack_module_year1.addChild(stack_module_words1);
+            stack_module_year1.addChild(stack_module_words2);
+            stack_module_year1.addChild(stack_module_words3); 
+
+            myStack.addChild(moduletitle);
             myStack.addChild(stack_module_year1);
-            counter++;
+            this.counter++;
     }
 
     calculatecpa(args:EventData):void{
            
-    
+    this.cpaScore=0;
         var count;
         var credits_weightage=0;
         var marks_credits_weightage=0;
-        for (count = 0; count < counter; count++) {
+        for (count = 0; count < this.counter; count++) {
 
                 var credits=parseInt(model[count].module_credits.text);
                 var weightage=parseInt(model[count].module_weight.text);
@@ -82,14 +119,14 @@ export class CpaComponent implements OnInit {
         }
          
         var cpa=marks_credits_weightage/credits_weightage;
-          const mylabel: Label= <Label>this.label.nativeElement;
-         mylabel.text=cpa.toString();     
+          
+         this.cpaScore=cpa.toString();     
     }
 
 }
 
 var model:Model[]=[];
-var counter=0;
+
 
  const textFieldBindingOptions: BindingOptions = {
         sourceProperty: "textSource",

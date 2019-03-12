@@ -6,12 +6,7 @@ import * as ApplicationSettings from "application-settings";
 var firebase = require("nativescript-plugin-firebase");
 import {User} from '../models/user.model';
 import * as dialogs from "tns-core-modules/ui/dialogs";
-/* ***********************************************************
-* Before you can navigate to this page from your app, you need to reference this page's module in the
-* global app router module. Add the following object to the global array of routes:
-* { path: "login", loadChildren: "./login/login.module#LoginModule" }
-* Note that this simply points the path to the page module file. If you move the page, you need to update the route too.
-*************************************************************/
+import { Page } from "tns-core-modules/ui/page";
 
 @Component({
     selector: "Login",
@@ -22,7 +17,7 @@ export class LoginComponent implements OnInit {
     public user: User;
 
    
-    constructor(private router: RouterExtensions) {
+    constructor(private router: RouterExtensions,private page:Page) {
         this.user = {
             "email":"",
             "password":"",
@@ -35,7 +30,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
+        this.page.backgroundImage = "~/app/images/logo.jpg";
     }
 
     onSigninButtonTap(): void {
@@ -73,6 +68,7 @@ export class LoginComponent implements OnInit {
                                         else
                                         {
                                             console.log("Go CafeAdmin");
+                                            this.router.navigate(["/cafeadmin"], { clearHistory: true });
                                         }
                                         },"/cafeadmin",
                                         {
