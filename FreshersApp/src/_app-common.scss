@@ -8,6 +8,11 @@
 .butn 	{
 	font-family: "Montserrat-Medium";
 }
+
+.butnn 	{
+	font-family: "Montserrat-Medium";
+	color:white;
+}
 .butn_login 	{
 	font-family: "Montserrat-Medium";
 	text-decoration: underline; 
@@ -31,11 +36,32 @@
 	font-size:12px;
 }
 
+
 .title	{
 	font-family: "Montserrat-Medium";
 	font-weight: bold;
 	font-size:17px;
 	padding-left: 15px;
+	    
+}
+
+.titlecafe	{
+	font-family: "Montserrat-Medium";
+	font-weight: bold;
+	font-size:25%;
+	color:white;
+	    
+}
+.titlefood	{
+	font-family: "Montserrat-Medium";
+	color:white;
+	background-color:blue;
+	margin:15px;
+	padding-bottom: 15px;
+	text-align: center;
+	font-weight: bold;
+	font-size:25px;
+	
 	    
 }
 .title_rules	{
@@ -121,6 +147,87 @@
     }
 }
 
+.my-bar {
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/back.jpg");
+}
+
+.food-back{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/foodadmin.jpg");
+}
+
+.cafemenu{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/cafemenu.jpg");
+}
+
+.food-back2{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/foodadmin2.jpg");
+}
+
+.adminpanel{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/adminpanel.jpg");
+}
+
+.adminevent{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/adminevent.jpg");
+}
+
+.adminnews{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/newsadmin.jpg");
+}
+
+.food-back3{
+    padding-top:50px;
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/foodadmin3.jpg");
+}
+
+.lo-gin{
+    filter: blur(8px);
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("~/app/images/login.jpg");
+}
 //Action bar
 ActionBar .action-bar-title {
     horizontal-align: center;

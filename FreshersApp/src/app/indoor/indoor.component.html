@@ -1,4 +1,3 @@
-
 <ActionBar class="action-bar">
     <!-- 
     Use the NavigationButton as a side-drawer button in Android
@@ -13,22 +12,19 @@
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label class="title" text="Cafeteria"></Label>
+    <Label class="title" text="Indoor Map"></Label>
 </ActionBar>
 
 <GridLayout class="page page-content">
-    
-    <ListView [items]="cafe" (itemTap)="onItemTap($event)" class="list-group">
-    <ng-template let-cafe="item" let-i="index" let-odd="odd" let-even="even">
-        <!-- Display all the cafetarias in UoM-->
-        <GridLayout rows="220, auto" columns="*, *, *" >
-            <Image src="~/app/images/foodmain.jpg" colSpan="3" stretch="aspectFill" row="0" ></Image>
-            <Label horizontalAlignment="center" row="0" colSpan="2" textWrap="true" verticalAlignment="center" class="titlecafe" [text]="cafe.name"></Label>
-
-   </GridLayout>
-        
-    </ng-template>
-</ListView>
-
+    <ScrollView>
+       
+     <StackLayout class="p-20">
+         <WebView  [src]="webViewSrc"></WebView>
+        <Label text="nativescript-ibeacon demo"></Label>
+        <Button text="Start" (tap)="start()"></Button>
+        <Button text="Stop" (tap)="stop()"></Button>
+        <Label [text]="message" class="t-20 text-center c-black" textWrap="true"></Label>
+      </StackLayout>
+   
+</ScrollView>
 </GridLayout>
-

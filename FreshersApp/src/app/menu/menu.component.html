@@ -18,28 +18,45 @@
 <GridLayout class="page page-content">
   <TabView>
     <StackLayout *tabItem="{title: 'Courses'}">
-      <Accordion [items]="items" allowMultiple="false">
-        <ng-template let-i="index" let-item="item" acTemplateKey="title">
-          <StackLayout>
-            <Label [text]="item.title"></Label>
-            <StackLayout orientation="horizontal">
-              <label text="Price: Rs "></label>
-              <Label [text]="item.price"></Label>
-            </StackLayout>
-          </StackLayout>
-        </ng-template>
-        <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="content">
-          <StackLayout>
-            <Checkbox [id]="item.id" [text]="item.text"></Checkbox>
-          </StackLayout>
-        </ng-template>
-        <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="footer">
-          <StackLayout>
-            <Button text="Add to cart" (tap)="addmenutocart($event,myIndex)"></Button>
-          </StackLayout>
-        </ng-template>
-      </Accordion>
-    </StackLayout>
+
+ 
+  <Accordion [items]="items" allowMultiple="false" (itemHeaderTap)="onChange($event)">
+
+
+    <ng-template let-i="index" let-item="item" acTemplateKey="title" >
+      <GridLayout columns="80,*,20" rows="60,*">
+        <Image row="0" col="0" [src]=item.image stretch="aspectFill"></Image>
+        <StackLayout col="1" row="0"> 
+        <Label class="title" [text]="item.title"></Label>
+       
+        <StackLayout orientation="horizontal">
+            <label class="butn" text="Price:"></label>
+            <label class="cafe_description" text=" Rs"></label>
+            <Label class="cafe_description" [text]="item.price"></Label>
+        </StackLayout>
+      </StackLayout>
+      <Label col="3" [id]='"chrvon" + i' horizontalAlignment="center" verticalAlignment="center" row="0" text="&#xf078;" class="fa"></Label>
+      
+      </GridLayout>
+    </ng-template>
+
+    <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="content">
+      <StackLayout>
+        <Checkbox class="title" [id]="item.id" [text]="item.text" ></Checkbox>
+      </StackLayout>
+    </ng-template>
+
+
+    <ng-template let-i="index" let-item="item" let-myIndex="index" acTemplateKey="footer">
+      <StackLayout>
+        <Button  class="btn btn-primary butn" width="250" text="Add to cart" (tap)="addmenutocart($event,myIndex)"></Button>
+      </StackLayout>
+
+
+    </ng-template>
+
+  </Accordion>
+</StackLayout>
 
 
     <Accordion [items]="items" allowMultiple="false" (itemHeaderTap)="onChange($event)">
@@ -88,7 +105,7 @@
       <StackLayout>
         <Label class="title" [text]="Current"></Label>
         <Label class="title" [text]="Cost"></Label>
-        <Button class="btn btn-primary butn" text="Confirm order" (tap)="checkout()"></Button>
+        <Button class="btn btn-primary butn" text="Confirm order" (tap)="checkCheckout()"></Button>
       </StackLayout>
       <StackLayout class="hr-dark"></StackLayout>
       <ListView [items]="order" class="list-group" (loadMoreItems)="loadMore()">

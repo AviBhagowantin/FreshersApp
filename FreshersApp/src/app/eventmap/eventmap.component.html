@@ -1,7 +1,7 @@
 <ActionBar class="action-bar">
     <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
     <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
-    <Label class="action-bar-title" text="Event Location"></Label>
+    <Label class="title" text="Event Location"></Label>
 </ActionBar>
 
 <GridLayout class="page page-content">
@@ -23,7 +23,7 @@
                     (mapReady)="onMapReady($event)">
                 </Mapbox1>
         </ContentView>
-        <Button class="btn btn-primary" text="Add" (tap)="onAddTap()"></Button>
-        <Button class="btn" text="Cancel" (tap)="onBackTap()"></Button>
+        <Button class="btn btn-primary butn" text="Add Event" (tap)="onAddTap()"></Button>
+        <Button class="btn btn-primary butn" text="Cancel" (tap)="onBackTap()"></Button>
     </StackLayout>
 </GridLayout>

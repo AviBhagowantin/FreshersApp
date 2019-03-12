@@ -49,6 +49,11 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
                     <Label col="1" text="Map" class="sidedrawer_item"></Label>
                 </GridLayout>
 
+                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/indoor')" (tap)="onNavItemTap('/indoor')">
+                    <Label col="0" text="&#xf277;" class="fa"></Label>
+                    <Label col="1" text="Indoor Map" class="sidedrawer_item"></Label>
+                </GridLayout>
+
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/feedback')" (tap)="checkAuthFeedback()">
                     <Label col="0" text="&#xf003;" class="fa"></Label>
                     <Label col="1" text="Feedback" class="sidedrawer_item"></Label>
@@ -70,6 +75,7 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
             </StackLayout>
         </ScrollView>
     </GridLayout>
-
-    <page-router-outlet tkMainContent class="page page-content "></page-router-outlet>
+    
+    <page-router-outlet tkMainContent class="page page-content"></page-router-outlet>
+   
 </RadSideDrawer>

@@ -51,22 +51,11 @@ export class CpaComponent implements OnInit {
             stack_module_words2.orientation="horizontal";
             stack_module_words3.orientation="horizontal";
 
-            var moduleWeight=new Label();
-            var moduleCredits=new Label();
-            var moduleperc=new Label();
-            var moduletitle=new Label();
+                 var moduletitle=new Label();
             
             var counter_dis=this.counter+1;
             moduletitle.text="Module"+counter_dis;
-            moduleWeight.text="Module Weight";
-            moduleCredits.text="Module Credits"
-            moduleperc.text="Module Marks(in %)"
-
-            moduleWeight.horizontalAlignment="center";
-            moduleCredits.horizontalAlignment="center";
-            moduleperc.horizontalAlignment="center";
             
-           
 
             model[this.counter]=new Model();
             model[this.counter].module_weight = new TextField();
@@ -85,11 +74,9 @@ export class CpaComponent implements OnInit {
             model[this.counter].module_perc_marks.bind(textFieldBindingOptions1, source1);
             model[this.counter].module_credits.bind(textFieldBindingOptions2, source2);
 
-             stack_module_words1.addChild(moduleWeight);
-             stack_module_words1.addChild(model[this.counter].module_weight);
-             stack_module_words2.addChild(moduleCredits);
+
+             stack_module_words1.addChild(model[this.counter].module_weight);;
              stack_module_words2.addChild(model[this.counter].module_credits);
-            stack_module_words3.addChild(moduleperc);
              stack_module_words3.addChild(model[this.counter].module_perc_marks);
 
             stack_module_year1.addChild(stack_module_words1);

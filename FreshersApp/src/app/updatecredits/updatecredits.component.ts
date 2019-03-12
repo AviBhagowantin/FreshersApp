@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 var firebase = require("nativescript-plugin-firebase");
 import {ActivatedRoute} from "@angular/router";
+var regexpcredits = new RegExp('^[0-9]+$');
+import * as dialogs from "tns-core-modules/ui/dialogs";
+
 
 @Component({
     selector: "Updatecredits",
@@ -11,7 +14,7 @@ import {ActivatedRoute} from "@angular/router";
 export class UpdatecreditsComponent implements OnInit {
     
     public email;
-    public amount:number;
+    public amount:any;
     public path;
     public credits;
     public current;
@@ -31,57 +34,68 @@ export class UpdatecreditsComponent implements OnInit {
 
     onAddTap(): void {
 
-        this.amount=(+this.credits)+(+this.amount);
+        var testcredits = regexpcredits.test(this.amount);
 
-        firebase.query(result => {
-            console.log("query result:", JSON.stringify(result));
-            this.path='/User/'+result.key;
-            firebase.getCurrentUser()
-            .then(
-                function(user) {
-                    console.log(user);
-                    if (user.email=="cafesecret@uom.com")
-                    {
-                        firebase.update(
-                            this.path,
-                            {
-                                'CafeSecretCredits':this.amount
-                            }
-                        );
-                    }
-                    else if (user.email=="cafemain@uom.com")
-                    {
-                        firebase.update(
-                            this.path,
-                            {
-                                'CafeMainCredits':this.amount
-                            }
-                        );
-                    }
-                    this.router.navigate(['/cafeadmin'], { clearHistory: true });
-                }.bind(this)
-            )
-            .catch(error => console.log("Trouble in paradise: " + error));
-            }, "/User", {
-            orderBy: {
-                type: firebase.QueryOrderByType.CHILD,
-                value: 'Email'
-            },
-            ranges: [
-                {
-                type: firebase.QueryRangeType.START_AT,
-                value: this.email
+        if (testcredits==false) {
+            dialogs.alert({
+                title: "Error!",
+                message: "Invalid credits.",
+                okButtonText: "OK, got it"
+              });
+        }
+        else {
+            this.amount=(+this.credits)+(+this.amount);
+
+            firebase.query(result => {
+                console.log("query result:", JSON.stringify(result));
+                this.path='/User/'+result.key;
+                firebase.getCurrentUser()
+                .then(
+                    function(user) {
+                        console.log(user);
+                        if (user.email=="cafesecret@uom.com")
+                        {
+                            firebase.update(
+                                this.path,
+                                {
+                                    'CafeSecretCredits':this.amount
+                                }
+                            );
+                        }
+                        else if (user.email=="cafemain@uom.com")
+                        {
+                            firebase.update(
+                                this.path,
+                                {
+                                    'CafeMainCredits':this.amount
+                                }
+                            );
+                        }
+                        this.router.navigate(['/cafeadmin'], { clearHistory: true });
+                    }.bind(this)
+                )
+                .catch(error => console.log("Trouble in paradise: " + error));
+                }, "/User", {
+                orderBy: {
+                    type: firebase.QueryOrderByType.CHILD,
+                    value: 'Email'
                 },
-                {
-                type: firebase.QueryRangeType.END_AT,
-                value: this.email
+                ranges: [
+                    {
+                    type: firebase.QueryRangeType.START_AT,
+                    value: this.email
+                    },
+                    {
+                    type: firebase.QueryRangeType.END_AT,
+                    value: this.email
+                    }
+                ],
+                limit: {
+                    type: firebase.QueryLimitType.LAST,
+                    value: 1
                 }
-            ],
-            limit: {
-                type: firebase.QueryLimitType.LAST,
-                value: 1
-            }
-        })
+            })
+        }
     }
 
     onBackTap(): void {

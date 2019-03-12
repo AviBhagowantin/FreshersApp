@@ -1,16 +1,16 @@
 <ActionBar class="action-bar">
     <NavigationButton ios:visibility="collapsed" icon="res://home" (tap)="onBackTap()"></NavigationButton>
     <ActionItem icon="res://navigation/home" android:visibility="collapsed" (tap)="onBackTap()" ios.position="left"></ActionItem>
-    <Label class="action-bar-title" text="Event Date"></Label>
+    <Label class="title" text="Event Date"></Label>
 </ActionBar>
 
 <GridLayout class="page page-content">
-    <StackLayout orientation="vertical">
-        <label textWrap="true" text="Please select the date of the event:"></label>
-        <DatePicker (loaded)="onPickerLoaded($event)" (dateChange)="onDateChanged($event)" verticalAlignment="center"></DatePicker>
+    <StackLayout orientation="vertical" verticalAlignment="center">
+        <label class="butn" textWrap="true" text="Please select the date of the event:"></label>
+        <DatePicker (loaded)="onPickerLoaded($event)" (dateChange)="onDateChanged($event)" verticalAlignment="center" class="butn"></DatePicker>
             
 
-        <Button class="btn btn-primary" text="Next" (tap)="onNextTap()"></Button>
-        <Button class="btn" text="Cancel" (tap)="onBackTap()"></Button>
+        <Button class="btn btn-primary butn" text="Next" (tap)="onNextTap()"></Button>
+        <Button class="btn btn-primary butn" text="Cancel" (tap)="onBackTap()"></Button>
     </StackLayout>   
 </GridLayout>

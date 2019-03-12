@@ -7,6 +7,7 @@ import * as app from "tns-core-modules/application";
 var appSettings = require('application-settings');
 var firebase = require('nativescript-plugin-firebase');
 import * as dialogs from "tns-core-modules/ui/dialogs";
+import { UpdatecreditsModule } from "./updatecredits/updatecredits.module";
 
 
 @Component({
@@ -76,6 +77,20 @@ export class AppComponent implements OnInit {
                 this.email="Not logged in.";
                 appSettings.setBoolean("authenticated", false);
                 console.log(appSettings.getBoolean("authenticated"));
+              }
+              if (data.user.email=="cafemain@uom.com" || data.user.email=="cafesecret@uom.com") {
+                this.routerExtensions.navigate(["/cafeadmin"], {
+                    transition: {
+                        name: "fade"
+                    }
+                });
+              }
+              else if (data.user.email=="admin@uom.com") {
+                this.routerExtensions.navigate(["/admin"], {
+                    transition: {
+                        name: "fade"
+                    }
+                });
               }
               console.log(this.username);
               console.log(this.email);

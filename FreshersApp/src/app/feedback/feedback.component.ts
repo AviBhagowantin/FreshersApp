@@ -16,7 +16,6 @@ export class FeedbackComponent implements OnInit {
     public email: string;
 
     constructor(private datePipe: DatePipe,private router: RouterExtensions) {
-        this.feedtext="";
     }
 
     ngOnInit(): void {
@@ -26,10 +25,10 @@ export class FeedbackComponent implements OnInit {
     }
 
     onSubmitButtonTap(): void {
-        if (this.feedtext=="") {
+        if (!this.feedtext) {
             dialogs.alert({
-                title: "Empty Field",
-                message: "No data has been entered.",
+                title: "Error!",
+                message: "Please enter your comments in the field.",
                 okButtonText: "OK, got it"
               })
         } else {

@@ -14,12 +14,12 @@
         </ActionItem>
       <Label class="title" text="Login page"></Label>
     </ActionBar> 
-<ScrollView >
-    <StackLayout class="page p-t-15">
+<ScrollView class="lo-gin">
+    <StackLayout class=" p-t-15" verticalAlignment="center">
        
-        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15 butn " hint="Email Address" keyboardType="email" autocorrect="false" autocapitalization="none" type="email"
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15 butnn " hint="Email Address" keyboardType="email" autocorrect="false" autocapitalization="none" type="email"
             [(ngModel)]="user.email"></TextField>
-        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15 butn " hint="Password" secure="true" autocorrect="false" autocapitalization="none"
+        <TextField class="m-t-10 m-b-10 m-l-15 m-r-15 butnn " hint="Password" secure="true" autocorrect="false" autocapitalization="none"
             [(ngModel)]="user.password"></TextField>
 
         <Button class="btn btn-primary butn" text="Sign In" (tap)="onSigninButtonTap()"></Button>

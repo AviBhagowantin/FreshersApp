@@ -32,6 +32,7 @@ const routes: Routes = [
     { path: "addcredits", loadChildren: "~/app/addcredits/addcredits.module#AddcreditsModule" },
     { path: "cafeteria", loadChildren: "~/app/cafeteria/cafeteria.module#CafeteriaModule" },
     { path: "menu", loadChildren: "~/app/menu/menu.module#MenuModule" },
+    { path: "indoor", loadChildren: "~/app/indoor/indoor.module#IndoorModule" }
 ];
 
 @NgModule({
