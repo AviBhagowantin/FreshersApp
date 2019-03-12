@@ -24,26 +24,66 @@ export class PassresetComponent implements OnInit {
 
         console.log(this.email);
 
-        firebase.resetPassword({
-            email: this.email
-          }).then(
-              function () {
-                // dialogs.alert({
-                //     title: "Password Reset",
-                //     message: "Please check your email(spam as well): " + this.email,
-                //     okButtonText: "Nice!"
-                //   });
-                  this.router.navigate(['/login'], { clearHistory: true });
-              }.bind(this),
-              function (errorMessage) {
-                dialogs.alert({
-                  title: "Error!",
-                  message: errorMessage,
-                  okButtonText: "OK, got it"
-                })
+        if (!this.email) {
+          dialogs.alert({
+              title: "Error!",
+              message: "Please provide an email.",
+              okButtonText: "OK, got it"
+            });
+      }
+      else {
+
+        firebase.query(result => {
+          if (result.value==null)
+          {
+            dialogs.alert({
+              title: "Error!",
+              message: "No account found related to this email.",
+              okButtonText: "OK, got it"
+            });
+          }
+          else {
+            firebase.resetPassword({
+              email: this.email
+            }).then(
+                function () {
+                    this.router.navigate(['/login'], { clearHistory: true });
+                }.bind(this),
+                function (errorMessage) {
+                  dialogs.alert({
+                    title: "Error!",
+                    message: errorMessage,
+                    okButtonText: "OK, got it"
+                  })
+                }
+            );
+          }
+        },"/User",
+          {
+              singleEvent: true,
+              orderBy: {
+                  type: firebase.QueryOrderByType.CHILD,
+                  value: 'Email' 
+              },
+              ranges: [
+              {
+                  type: firebase.QueryRangeType.START_AT,
+                  value: this.email
+              },
+              {
+                  type: firebase.QueryRangeType.END_AT,
+                  value: this.email
               }
-          );
+              ],
+              limit: {
+                  type: firebase.QueryLimitType.LAST,
+                  value: 1
+              }
+          }
+      );
+
     }
+}
 
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();

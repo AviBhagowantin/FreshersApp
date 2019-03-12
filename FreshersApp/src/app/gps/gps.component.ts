@@ -154,8 +154,8 @@ export class GpsComponent implements OnInit {
         if (this.navLat==0 || this.navLng==0)
         {
             dialogs.alert({
-                title: "Unknown Location",
-                message: "Please press and hold on the location where you want to navigate to until a marker appears.",
+                title: "No Location Selected",
+                message: "Please tap and hold on the location where you want to navigate to until a marker appears.",
                 okButtonText: "Okay"
             }).then(() => {
                 console.log("Dialog closed!");

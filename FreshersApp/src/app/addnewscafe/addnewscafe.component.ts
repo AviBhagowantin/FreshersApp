@@ -3,6 +3,8 @@ import { RouterExtensions } from "nativescript-angular/router";
 var firebase = require("nativescript-plugin-firebase");
 import { DatePipe } from '@angular/common';
 const httpModule = require("http");
+import * as dialogs from "tns-core-modules/ui/dialogs";
+
 
 @Component({
     selector: "Addnewscafe",
@@ -40,7 +42,17 @@ export class AddnewscafeComponent implements OnInit {
     }
 
     onAddButtonTap(): void {
-        this.date = this.datePipe.transform(Date.now(), 'dd/MM/yyyy');
+
+
+        if (!this.title || !this.description) {
+            dialogs.alert({
+                title: "Error!",
+                message: "Please fill in all the fields.",
+                okButtonText: "OK, got it"
+              });
+        }
+        else {
+            this.date = this.datePipe.transform(Date.now(), 'dd/MM/yyyy');
         firebase.push(
             '/News',
             {
@@ -84,6 +96,8 @@ export class AddnewscafeComponent implements OnInit {
         );
 
         this.router.navigate(["/cafeadmin"], { clearHistory: true });
+        }
+
     }
 
     onBackTap(): void {

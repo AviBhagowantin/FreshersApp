@@ -3,6 +3,8 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { DatePipe } from '@angular/common';
 var firebase = require('nativescript-plugin-firebase');
 import { NavigationExtras} from "@angular/router";
+import * as dialogs from "tns-core-modules/ui/dialogs";
+
 
 @Component({
     selector: "Addevents",
@@ -27,47 +29,56 @@ export class AddeventsComponent implements OnInit {
     }
 
     onNextTap(): void {
-        this.date = this.datePipe.transform(Date.now(), 'dd/MM/yyyy');
+        if (!this.title || !this.author || !this.description) {
+            dialogs.alert({
+                title: "Error!",
+                message: "Please fill in all the fields.",
+                okButtonText: "OK, got it"
+              });
+        }
+        else {
+            this.date = this.datePipe.transform(Date.now(), 'dd/MM/yyyy');
 
-        firebase.push(
-            '/News',
-            {
-              'Title': this.title,
-              'Description': this.description,
-              'Author': this.author,
-              'Date': this.date,
-              'Timestamp' : Date.now(),
-              'Image':"~/app/images/event.png"
-            }
-        ).then(
-            function (result) {
-              console.log("created key: " + result.key);
-              this.newsKey = result.key;
-            }.bind(this)
-        );
-
-        firebase.push(
-            '/Events',
-            {
-              'title': this.title,
-              'lat': "",
-              'lng': "",
-              'time': "",
-              'date': "",
-            }
-        ).then(
-            function (result) {
-              console.log("created key: " + result.key);
-              this.eventKey = result.key;
-              let navigationExtras: NavigationExtras = {
-                queryParams: {
-                    "eventKey": this.eventKey,
-                    "newsKey": this.newsKey
+            firebase.push(
+                '/News',
+                {
+                  'Title': this.title,
+                  'Description': this.description,
+                  'Author': this.author,
+                  'Date': this.date,
+                  'Timestamp' : Date.now(),
+                  'Image':"~/app/images/event.png"
                 }
-              };
-              this.router.navigate(["/eventdate"], navigationExtras, { clearHistory: true });
-            }.bind(this)
-        );
+            ).then(
+                function (result) {
+                  console.log("created key: " + result.key);
+                  this.newsKey = result.key;
+                }.bind(this)
+            );
+    
+            firebase.push(
+                '/Events',
+                {
+                  'title': this.title,
+                  'lat': "",
+                  'lng': "",
+                  'time': "",
+                  'date': "",
+                }
+            ).then(
+                function (result) {
+                  console.log("created key: " + result.key);
+                  this.eventKey = result.key;
+                  let navigationExtras: NavigationExtras = {
+                    queryParams: {
+                        "eventKey": this.eventKey,
+                        "newsKey": this.newsKey
+                    }
+                  };
+                  this.router.navigate(["/eventdate"], navigationExtras, { clearHistory: true });
+                }.bind(this)
+            );
+        }
     }
 
     onBackTap(): void {
