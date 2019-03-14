@@ -103,8 +103,8 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
     didRangeBeaconsInRegion(region: BeaconRegion, beacons: Beacon[]): void {
         console.log("didRangeBeaconsInRegion: " + region.identifier + " - " + beacons.length);
         this.message = "didRangeBeaconsInRegion: " + (new Date().toDateString());
-        var lat;
-        var lon;
+        var lat=0;
+        var lon=0;
         var distance=0;
         for (let beacon of beacons) {
             console.log("B: " + beacon.proximityUUID + " - " + beacon.major + " - " + beacon.minor + " - " + beacon.distance_proximity + " - " + beacon.rssi + " - " + beacon.txPower_accuracy );
@@ -119,7 +119,7 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
                     sum=sum+this.values[i];
                 }
 
-                if(beacon.proximityUUID=="B9407F30-F5F8-466E-AFF9-25556B57FE6D")
+                if(beacon.proximityUUID=="b9407f30-f5f8-466e-aff9-25556b57fe6d")
                 {
                     distance=sum/this.values.length;
                     lat=-20.235341621405528;
@@ -135,7 +135,7 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
                
 
                 fs.knownFolders.documents().getFile("app/app/indoor/distance.js").readText()
-                .then((res) => {console.log("Result :" +res)});
+                .then((res) => {alert(res)});
 
                   fs.knownFolders.documents().getFile("app/app/indoor/distance.js").remove()
                  .then((res) => {

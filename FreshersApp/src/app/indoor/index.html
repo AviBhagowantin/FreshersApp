@@ -103,18 +103,21 @@
                 var e1=document.getElementById("test1");
                 function readTextFile()
                 {
+
                     theScript.parentNode.removeChild( theScript );
                     head = document.getElementsByTagName('head')[0];
                     theScript= document.createElement('script');
                     theScript.src = "./distance.js";
                     head.appendChild( theScript );
+
+
                     var splittedText=myData.split(",");
-                  
+                  	e1.value=dn;
                     dn=splittedText[0];
                     de=splittedText[1];
                     initialx=parseFloat(splittedText[2]);
                     initialy=parseFloat(splittedText[3]);
-                    e1.value=dn;
+                    
 
                     
                    
@@ -122,6 +125,8 @@
                
                 function meterstolat(x,y)
                 {
+                  	
+
                     readTextFile();
                     var dLat = dn/(R*Math.cos((Math.PI*x/33)));
                     var dLon = de/(R*Math.cos((Math.PI*x/140)));
