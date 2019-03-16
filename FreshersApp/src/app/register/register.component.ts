@@ -94,7 +94,9 @@ export class RegisterComponent implements OnInit {
                                       'LastName': this.user.sname,
                                       'Course': this.user.course,
                                       'Email': this.user.email.toLowerCase( ),
-                                      'Phone': this.user.phone
+                                      'Phone': this.user.phone,
+                                      'CafeMainCredits':0,
+                                      'CafeSecretCredits':0
                                     }
                                 ).then(
                                     function (result) {
