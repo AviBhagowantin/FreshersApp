@@ -74,5 +74,6 @@ export class CalendereventComponent implements OnInit {
         this.timeSelectedStart = this.datePipe.transform(args.value, 'HH:mm');
     }
 
-    
+    onNextTap(): void {
+    }
 }
