@@ -58,6 +58,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
                         if (this.cafe=="Main Cafetaria")
                         {
                             // Retrive the credits of the user.
+                            
                             this.credits=result.value.CafeMainCredits;
                             firebase.query(result => {
                                 // Fetch code of order from database.

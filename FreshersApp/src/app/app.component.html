@@ -39,6 +39,11 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
                     <Label col="1" text="Timetable" class="sidedrawer_item"></Label>
                 </GridLayout>
 
+                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/calender')" (tap)="onNavItemTap('/calender')">
+                    <Label col="0" text="&#xff0ce;" class="fa"></Label>
+                    <Label col="1" text="Personalized Calender" class="sidedrawer_item"></Label>
+                </GridLayout>
+
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/ruletitle')" (tap)="onNavItemTap('/ruletitle')">
                     <Label col="0" text="&#xf0e3;" class="fa"></Label>
                     <Label col="1" text="Rules & Regulation" class="sidedrawer_item"></Label>

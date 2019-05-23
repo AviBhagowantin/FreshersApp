@@ -1,0 +1,39 @@
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="title" text="Create Calender Event"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+    <ScrollView>
+        <StackLayout>
+            <StackLayout orientation="vertical" verticalAlignment="center">
+                <label class="butn" textWrap="true" text="Please select the date of the event:"></label>
+                <DatePicker (loaded)="onPickerLoadedDate($event)" (dateChange)="onDateChanged($event)" verticalAlignment="center" class="butn"></DatePicker>
+            </StackLayout>
+            <StackLayout orientation="vertical" verticalAlignment="center">
+                <label class="butn" textWrap="true" text="Please select the starting time of the event:"></label>
+                <TimePicker (loaded)="onPickerLoaded($event)" (timeChange)="onTimeChanged($event)" verticalAlignment="center" class="m-15 butn"></TimePicker>
+            </StackLayout>
+           
+            <StackLayout orientation="vertical" verticalAlignment="center">
+                <label class="butn" textWrap="true" text="Give a description of the event"></label> 
+                <TextView  class="butn" borderColor="#DEDEDE" borderWidth="1" height="100px" hint="Enter Note"  returnKeyType="send" class="input input-border"></TextView>
+
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</GridLayout>

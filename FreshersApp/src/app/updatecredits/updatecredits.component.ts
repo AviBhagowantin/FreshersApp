@@ -52,6 +52,8 @@ export class UpdatecreditsComponent implements OnInit {
                   });
             }
             else {
+            	console.log("Credits"+this.credits);
+            	console.log("Amount"+this.amount);
                 this.amount=(+this.credits)+(+this.amount);
     
                 firebase.query(result => {

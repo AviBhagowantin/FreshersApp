@@ -32,7 +32,9 @@ const routes: Routes = [
     { path: "addcredits", loadChildren: "~/app/addcredits/addcredits.module#AddcreditsModule" },
     { path: "cafeteria", loadChildren: "~/app/cafeteria/cafeteria.module#CafeteriaModule" },
     { path: "menu", loadChildren: "~/app/menu/menu.module#MenuModule" },
-    { path: "indoor", loadChildren: "~/app/indoor/indoor.module#IndoorModule" }
+    { path: "indoor", loadChildren: "~/app/indoor/indoor.module#IndoorModule" },
+    { path: "calenderevent", loadChildren: "~/app/calenderevent/calenderevent.module#CalendereventModule" },
+    { path: "calender", loadChildren: "~/app/calender/calender.module#CalenderModule" }
 ];
 
 @NgModule({

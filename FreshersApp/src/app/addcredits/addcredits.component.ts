@@ -37,6 +37,7 @@ export class AddcreditsComponent implements OnInit {
         else {
             firebase.query(result => {
                 console.log("query result:", JSON.stringify(result));
+                console.log(result.value);
                 if (result.value==null) {
                     dialogs.alert({
                         title: "Error!",
@@ -48,17 +49,21 @@ export class AddcreditsComponent implements OnInit {
                     firebase.getCurrentUser()
                     .then(
                         function(user) {
-                            console.log(user);
+                            //console.log(result.value);
+                            //console.log("query result:", JSON.stringify(result.key));
+
                             if (user.email=="cafesecret@uom.com")
                             {
+                            
                                 this.credits=result.value.CafeSecretCredits;
                                 console.log(result.value.CafeSecretCredits);
                             }
                             else if (user.email=="cafemain@uom.com")
                             {
                                 this.credits=result.value.CafeMainCredits;
+                                console.log("TEST"+result.value.CafeMainCredits);
                             }
-                            console.log(this.credits);
+                            console.log("Credits at cafe"+this.credits);
         
                             let navigationExtras: NavigationExtras = {
                                 queryParams: {
@@ -73,26 +78,21 @@ export class AddcreditsComponent implements OnInit {
                     .catch(error => console.log("Trouble in paradise: " + error));
                 }
                 }, "/User", {
-                singleEvent: true,
-                orderBy: {
-                    type: firebase.QueryOrderByType.CHILD,
-                    value: 'Email'
-                },
-                ranges: [
-                    {
-                    type: firebase.QueryRangeType.START_AT,
-                    value: this.email.toLowerCase()
-                    },
-                    {
-                    type: firebase.QueryRangeType.END_AT,
-                    value: this.email.toLowerCase()
-                    }
-                ],
-                limit: {
-                    type: firebase.QueryLimitType.LAST,
-                    value: 1
-                }
-            })
+                        orderBy: {
+                            type: firebase.QueryOrderByType.CHILD,
+                            value: 'Email'
+                        },
+                        ranges: [
+                            {
+                            type: firebase.QueryRangeType.START_AT,
+                            value: this.email
+                            },
+                            {
+                            type: firebase.QueryRangeType.END_AT,
+                            value: this.email
+                            }
+                        ]
+                    })
         }
     }
 
