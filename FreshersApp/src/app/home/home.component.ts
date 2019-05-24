@@ -31,8 +31,7 @@ export class HomeComponent implements OnInit {
     }
 
     onItemTap(i)
-    {
-        
+    { 
         dialogs.alert({
             title: this.news[i].title,
             message: this.news[i].description,
@@ -42,19 +41,11 @@ export class HomeComponent implements OnInit {
         });
 
     }
-    // toggle(event) {
-    //     if (event.object.textWrap) {
-    //     event.object.textWrap = false;
-    //     } else {
-    //     event.object.textWrap = true;
-    //     }
-    // }
 
     getData(): any{
         var nowDate = this.datePipe.transform(Date.now(), 'dd/MM/yyyy');
         var nowYear = +(nowDate[6]+nowDate[7]+nowDate[8]+nowDate[9]);
         var nowMonth = +(nowDate[3]+nowDate[4]);
-
         var newsArray = [];
 
         firebase.query(result => {
@@ -66,14 +57,11 @@ export class HomeComponent implements OnInit {
                 author: result.value.Author,
                 image:result.value.Image
             };
-
             var year = +(news_details.date[6]+news_details.date[7]+news_details.date[8]+news_details.date[9]);
             var month = +(news_details.date[3]+news_details.date[4]);
-
             news_details.date="Date: "+news_details.date;
             news_details.author="Author: "+news_details.author;
             
-
             if ((year<nowYear) && (nowMonth==1) && (month==12))
             {
                 newsArray.unshift(news_details);
@@ -89,7 +77,6 @@ export class HomeComponent implements OnInit {
                 value: 'Timestamp'
             }
         });
-
         return newsArray;
     }
 

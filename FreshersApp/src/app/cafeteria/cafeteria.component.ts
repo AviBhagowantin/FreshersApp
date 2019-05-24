@@ -13,15 +13,12 @@ var firebase = require('nativescript-plugin-firebase');
 export class CafeteriaComponent implements OnInit {
 
     public cafe: Array<Cafe>;
-    
     public uom_cafe=[];
 
     constructor(private router: RouterExtensions) {
     }
 
     ngOnInit(): void {
-        // Init your component properties here.
-
         firebase.getValue('/Cafetaria')
         .then(result => this.getData(result))
         .catch(error => console.log("Error: " + error));
@@ -29,9 +26,7 @@ export class CafeteriaComponent implements OnInit {
 
     getData(data:any):any {
         this.uom_cafe=Object.keys(data.value); 
-
         this.cafe= [];
-
         for (let i = 0; i < this.uom_cafe.length; i++) {
             this.cafe.push(new Cafe(this.uom_cafe[i]));
         }
@@ -42,7 +37,6 @@ export class CafeteriaComponent implements OnInit {
         sideDrawer.showDrawer();
     }
 
-
     public onItemTap(args) {
         let navigationExtras: NavigationExtras = {
             queryParams: {
@@ -52,9 +46,6 @@ export class CafeteriaComponent implements OnInit {
         this.router.navigate(['/menu'], navigationExtras);
         
       }
-
-
-  
 }
 
 class Cafe {

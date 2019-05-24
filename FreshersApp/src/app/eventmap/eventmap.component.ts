@@ -92,7 +92,6 @@ export class EventmapComponent implements OnInit {
         this.keys=Object.keys(data.value); 
         var counter : number;
         var eventsArray = [];
-
         for (counter = 0; counter < this.keys.length; counter++) {
             var key = this.keys[counter];
             var events_details = {
@@ -103,22 +102,16 @@ export class EventmapComponent implements OnInit {
                 lat: data.value[key].lat,
                 lng: data.value[key].lng
             };
-
             var eventDate=this.dateSelected;
-            console.log(eventDate);
-
             if ((eventDate==events_details.date) && (this.eventKey!=events_details.id))
             {
                 eventsArray.push(events_details);
             }
         } 
-
-        //console.log(newsArray);
         return eventsArray;
     }
 
     onAddTap(): void {
-
         if (this.eventLat==0 || this.eventLng==0)
         {
             dialogs.alert({
@@ -135,7 +128,6 @@ export class EventmapComponent implements OnInit {
                     'lng':this.eventLng
                 }
             );
-    
             httpModule.request({
                 url: "https://fcm.googleapis.com/fcm/send",
                 method: "POST",

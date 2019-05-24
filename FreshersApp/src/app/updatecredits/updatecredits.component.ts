@@ -33,7 +33,6 @@ export class UpdatecreditsComponent implements OnInit {
     }
 
     onAddTap(): void {
-
         if (!this.amount) {
             dialogs.alert({
                 title: "Error!",
@@ -55,7 +54,6 @@ export class UpdatecreditsComponent implements OnInit {
             	console.log("Credits"+this.credits);
             	console.log("Amount"+this.amount);
                 this.amount=(+this.credits)+(+this.amount);
-    
                 firebase.query(result => {
                     console.log("query result:", JSON.stringify(result));
                     this.path='/User/'+result.key;

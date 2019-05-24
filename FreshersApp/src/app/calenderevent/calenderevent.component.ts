@@ -4,6 +4,7 @@ import * as app from "tns-core-modules/application";
 import { RouterExtensions } from "nativescript-angular/router";
 import { TimePicker } from "tns-core-modules/ui/time-picker";
 import { DatePicker } from "tns-core-modules/ui/date-picker";
+var firebase = require('nativescript-plugin-firebase');
 
 import { DatePipe } from '@angular/common';
 
@@ -15,7 +16,9 @@ import { DatePipe } from '@angular/common';
 })
 export class CalendereventComponent implements OnInit {
     public path: any;
+    public note: any;
     public timeSelectedStart;
+    public timeSelectedEnd;
    
     public dateSelected;
 
@@ -24,7 +27,33 @@ export class CalendereventComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
+        // Init your component properties here.
+        firebase.getCurrentUser()
+            .then(
+                function(user) {
+                    firebase.query(result => {
+                        console.log("query result:", JSON.stringify(result));
+                        console.log(result.key);
+                        this.path='/User/'+result.key;
+                        }, "/User", {
+                        orderBy: {
+                            type: firebase.QueryOrderByType.CHILD,
+                            value: 'Email'
+                        },
+                        ranges: [
+                            {
+                            type: firebase.QueryRangeType.START_AT,
+                            value: user.email
+                            },
+                            {
+                            type: firebase.QueryRangeType.END_AT,
+                            value: user.email
+                            }
+                        ]
+                    })
+                }.bind(this)
+            )
+            .catch(error => console.log("Trouble in paradise: " + error));
     }
 
     onDrawerButtonTap(): void {
@@ -65,6 +94,7 @@ export class CalendereventComponent implements OnInit {
         timePicker.minute = 30;
 
         this.timeSelectedStart = "08:30";
+        this.timeSelectedEnd = "08:30";
     }
 
    
@@ -74,6 +104,30 @@ export class CalendereventComponent implements OnInit {
         this.timeSelectedStart = this.datePipe.transform(args.value, 'HH:mm');
     }
 
+    onEndTimeChanged(args) {
+        console.log(args.value);
+        this.timeSelectedEnd = this.datePipe.transform(args.value, 'HH:mm');
+    }
+
     onNextTap(): void {
+        if (!this.note)
+        {
+            this.note="";
+        }
+        this.path=this.path + '/events';
+        firebase.push(
+            this.path,
+            {
+                'startdate':this.dateSelected,
+                'starttime':this.timeSelectedStart,
+                'endtime':this.timeSelectedEnd,
+                'note':this.note
+            }
+        ).then(
+            function (result) {
+                console.log("created key: " + result.key);
+                this.router.navigate(['/calender'], { clearHistory: true });
+            }.bind(this)
+        );
     }
 }

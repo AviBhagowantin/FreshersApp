@@ -47,7 +47,6 @@ export class VieworderComponent implements OnInit {
     getData(data : any): any{
     console.log(data);
         this.keys=Object.keys(data.value); 
-
         var counter : number;
         var orderArray = [];
 
@@ -56,7 +55,6 @@ export class VieworderComponent implements OnInit {
             var key = this.keys[counter];
             var description=data.value[key].Description;
             var code=data.value[key].Code;
-            
             var order = {
                key:key,
                description:description,
@@ -66,7 +64,6 @@ export class VieworderComponent implements OnInit {
             console.log(order.description)
             orderArray.push(order);
         } 
-
         return orderArray;
     }
 

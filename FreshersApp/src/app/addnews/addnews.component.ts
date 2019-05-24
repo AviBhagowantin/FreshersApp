@@ -79,7 +79,7 @@ export class AddnewsComponent implements OnInit {
                 }
             );
     
-            this.router.navigate(["/admin"], { clearHistory: true });
+             this.router.navigate(["/admin"], { clearHistory: true });
         }
     }
 

@@ -5,25 +5,18 @@
 </ActionBar>
 
 <GridLayout class="page page-content">
-  
     <ScrollView> 
         <ListView [items]="orders" (itemTap)="onItemTap($event)" class="list-group">
             <ng-template let-order="item" let-i="index" let-odd="odd" let-even="even" >
-                <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
                 <StackLayout orientation="horizontal" class="list-group-item">
-
                      <GridLayout columns="*,50" rows="*,*,*">
                         <StackLayout orientation="horizontal" col="0" row="0" >
                         <Label class="title" text="Order No : "></Label>
                         <Label  class="title" [text]="order.code"></Label>
                         </StackLayout>
                         <Label col="0" row="1" textWrap="true" class="cafe_description" [text]="order.description"></Label>
-
                         <Button class="fa" col="2" row="0" text="&#xf00d;" (tap)="removeOrder(i)"></Button>
-
                       </GridLayout>
-
-             
                 </StackLayout>
             </ng-template>
         </ListView>
