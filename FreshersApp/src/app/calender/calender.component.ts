@@ -99,10 +99,13 @@ export class CalenderComponent implements OnInit {
             var endtimemin= endtime[3]+endtime[4];
             starttime=starttime[0]+starttime[1];
             endtime=endtime[0]+endtime[1];
-            startDate = new Date(now.getFullYear(), month-1, startd, starttime,starttimemin);
-            endDate = new Date(now.getFullYear(), month-1, startd, endtime,endtimemin);
-            let event = new calendarModule.CalendarEvent(note, startDate, endDate, false, colors);
-            eventsArray.push(event);
+            if(endtime>starttime)
+            {
+	            startDate = new Date(now.getFullYear(), month-1, startd, starttime,starttimemin);
+	            endDate = new Date(now.getFullYear(), month-1, startd, endtime,endtimemin);
+	            let event = new calendarModule.CalendarEvent(note, startDate, endDate, false, colors);
+	            eventsArray.push(event);
+            }
         } 
 
         return eventsArray;

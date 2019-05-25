@@ -34,6 +34,7 @@
     "nativescript-geolocation": "^4.4.2",
     "nativescript-ibeacon": "0.8.1",
     "nativescript-imagepicker": "6.1.1",
+    "nativescript-local-notifications": "3.1.2",
     "nativescript-mapbox": "^4.4.1",
     "nativescript-pdf-view": "^2.0.1",
     "nativescript-platform": "1.2.4",

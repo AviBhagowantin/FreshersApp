@@ -5,8 +5,9 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { TimePicker } from "tns-core-modules/ui/time-picker";
 import { DatePicker } from "tns-core-modules/ui/date-picker";
 var firebase = require('nativescript-plugin-firebase');
-
+import { LocalNotifications } from "nativescript-local-notifications";
 import { DatePipe } from '@angular/common';
+import { Color } from "color";
 
 
 @Component({
@@ -32,8 +33,8 @@ export class CalendereventComponent implements OnInit {
             .then(
                 function(user) {
                     firebase.query(result => {
-                        console.log("query result:", JSON.stringify(result));
-                        console.log(result.key);
+                        //console.log("query result:", JSON.stringify(result));
+                        //console.log(result.key);
                         this.path='/User/'+result.key;
                         }, "/User", {
                         orderBy: {
@@ -84,6 +85,8 @@ export class CalendereventComponent implements OnInit {
         // console.log("Date value: " + args.oldValue);
 
         this.dateSelected = this.datePipe.transform(args.value, 'dd-MM-yyyy');
+
+        
     }
 
 
@@ -100,16 +103,55 @@ export class CalendereventComponent implements OnInit {
    
 
     onTimeChanged(args) {
-        console.log(args.value);
+        //console.log(args.value);
         this.timeSelectedStart = this.datePipe.transform(args.value, 'HH:mm');
     }
 
     onEndTimeChanged(args) {
-        console.log(args.value);
+        //console.log(args.value);
         this.timeSelectedEnd = this.datePipe.transform(args.value, 'HH:mm');
     }
 
     onNextTap(): void {
+        var dates = new Date(this.dateSelected[6]+this.dateSelected[7]+this.dateSelected[8]+this.dateSelected[9],(this.dateSelected[3]+this.dateSelected[4])-1,this.dateSelected[0]+this.dateSelected[1]);
+        dates.setDate(dates.getDate()-3)
+        dates.setHours(dates.getHours()+(this.timeSelectedStart[0]+this.timeSelectedStart[1]));
+        dates.setMinutes(dates.getMinutes()+(this.timeSelectedStart[3]+this.timeSelectedStart[4]));
+        console.log(dates);
+        
+         LocalNotifications.schedule(
+                [{
+                  id: Math.floor(Math.random() * (100000000 - 1 + 1)) + 1,
+                  thumbnail: true,
+                  title: 'Calender Notification',
+                  body: this.note,
+                  icon: 'res://logo',
+                  forceShowWhenInForeground: true,
+                  at: dates,
+                  actions: [
+                    {
+                      id: "input-richard",
+                      type: "input",
+                      title: "Tap here to reply",
+                      placeholder: "Type to reply..",
+                      submitLabel: "Reply",
+                      launch: true,
+                      editable: true,
+                      // choices: ["Red", "Yellow", "Green"] // TODO Android only, but yet to see it in action
+                    }
+                  ]
+                }])
+                .then(() => {
+                  alert({
+                    title: "Notification scheduled",
+                    message: "You will get a notification 3 days prior to the event",
+                    okButtonText: "OK, thanks"
+                  });
+                })
+        .catch(error => console.log("doScheduleId5WithInput error: " + error));
+
+
+
         if (!this.note)
         {
             this.note="";
@@ -125,7 +167,7 @@ export class CalendereventComponent implements OnInit {
             }
         ).then(
             function (result) {
-                console.log("created key: " + result.key);
+                //console.log("created key: " + result.key);
                 this.router.navigate(['/calender'], { clearHistory: true });
             }.bind(this)
         );

@@ -8,6 +8,7 @@ var appSettings = require('application-settings');
 var firebase = require('nativescript-plugin-firebase');
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import { UpdatecreditsModule } from "./updatecredits/updatecredits.module";
+import { LocalNotifications } from "nativescript-local-notifications";
 
 
 @Component({
@@ -22,7 +23,9 @@ export class AppComponent implements OnInit {
     public username;
 
     constructor(private router: Router, private routerExtensions: RouterExtensions) {
-        // Use the component constructor to inject services.
+          LocalNotifications.addOnMessageReceivedCallback(notificationData => {
+            console.log("Notification received: " + JSON.stringify(notificationData));
+        });
     }
 
     ngOnInit(): void {
