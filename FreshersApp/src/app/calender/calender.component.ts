@@ -80,7 +80,7 @@ export class CalenderComponent implements OnInit {
     getData(data : any): any{
         let startDate;
         let endDate;
-        let colors = new Color(200,188,26,214);
+        let colors = new Color(250,25,25,112);
         let now = new Date();
 
         this.keys=Object.keys(data); 
@@ -93,11 +93,14 @@ export class CalenderComponent implements OnInit {
             var starttime=data[key].starttime;
             var endtime=data[key].endtime;
             var note=data[key].note;
+            var month=startd[3]+startd[4];
             startd=startd[0]+startd[1];
+            var starttimemin= starttime[3]+starttime[4];
+            var endtimemin= endtime[3]+endtime[4];
             starttime=starttime[0]+starttime[1];
             endtime=endtime[0]+endtime[1];
-            startDate = new Date(now.getFullYear(), now.getMonth(), startd, starttime);
-            endDate = new Date(now.getFullYear(), now.getMonth(), startd, endtime);
+            startDate = new Date(now.getFullYear(), month-1, startd, starttime,starttimemin);
+            endDate = new Date(now.getFullYear(), month-1, startd, endtime,endtimemin);
             let event = new calendarModule.CalendarEvent(note, startDate, endDate, false, colors);
             eventsArray.push(event);
         } 
