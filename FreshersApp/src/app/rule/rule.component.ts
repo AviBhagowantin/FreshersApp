@@ -21,11 +21,12 @@ export class RuleComponent implements OnInit {
         this.route.queryParams.subscribe(params => {
             this.chapter = params["Chapters"];
         });
+        
     }
 
     ngOnInit(): void {
         // Init your component properties here.
-
+        
         firebase.storage.getDownloadUrl({
             // optional, can also be passed during init() as 'storageBucket' param so we can cache it
             bucket: 'gs://freshersapp-7d28e.appspot.com',
@@ -41,6 +42,7 @@ export class RuleComponent implements OnInit {
                 console.log("Error: " + error);
               }
           );
+
     }
 
     onDrawerButtonTap(): void {

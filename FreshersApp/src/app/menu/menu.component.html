@@ -16,6 +16,7 @@
 
 
 <GridLayout class="page page-content">
+    <ActivityIndicator color="green" [busy]="processing"></ActivityIndicator>
   <TabView>
     <StackLayout *tabItem="{title: 'Courses'}">
       <Accordion [items]="items" allowMultiple="false" (itemHeaderTap)="onChange($event)">

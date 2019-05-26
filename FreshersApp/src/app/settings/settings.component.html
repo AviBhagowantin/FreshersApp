@@ -12,35 +12,35 @@
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label class="action-bar-title" text="Settings"></Label>
+    <Label class="title" text="Settings"></Label>
 </ActionBar>
 
 <GridLayout class="page page-content">
     <ScrollView>
         <StackLayout margin="10" verticalAlignment="center">
             <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
-                <StackLayout class="input-field">
+                <StackLayout class="butn">
                     <Label text="First Name" class="label font-weight-bold m-b-5"></Label>
                     <TextField class="input" [(ngModel)]="this.curUser.fname"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
-                <StackLayout class="input-field">
+                <StackLayout class="butn">
                     <Label text="Last Name" class="label font-weight-bold m-b-5"></Label>
                     <TextField class="input" [(ngModel)]="this.curUser.sname"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
-                <StackLayout class="input-field">
+                <StackLayout class="butn">
                     <Label text="Course" class="label font-weight-bold m-b-5"></Label>
                     <TextField class="input" [(ngModel)]="this.curUser.course"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
-                <StackLayout class="input-field">
+                <StackLayout class="butn">
                     <Label text="Phone Number" class="label font-weight-bold m-b-5"></Label>
                     <TextField class="input" [(ngModel)]="this.curUser.phone"></TextField>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
-                <Button class="btn btn-primary w-full" text="Save" (tap)="save()"></Button>
-                <Label (tap)="goBack()" text="cancel" class="text-center footnote"></Label>
+                <Button class="butn btn-primary w-full" text="Save" (tap)="save()"></Button>
+                <Button (tap)="goBack()" text="cancel" class="butn btn-primary w-full"></Button>
             </StackLayout>
         </StackLayout>
     </ScrollView>

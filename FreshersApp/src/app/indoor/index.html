@@ -11,7 +11,6 @@
     <body>
         <div id="mapwize"></div>
       
-        <input type="text" value="1" id="test1"/>
         <div>
                 <select id="places">
                   <option value="1">MCID</option>
@@ -100,7 +99,6 @@
                 var initialy;
                 
              
-                var e1=document.getElementById("test1");
                 function readTextFile()
                 {
 
@@ -112,7 +110,6 @@
 
 
                     var splittedText=myData.split(",");
-                  	e1.value=dn;
                     dn=splittedText[0];
                     de=splittedText[1];
                     initialx=parseFloat(splittedText[2]);
@@ -181,7 +178,7 @@
                 {
                 navigate();
                 }
-                setTimeout(function(){ myFunc(map,x,y); }, 3000);
+                setTimeout(function(){ myFunc(map,x,y); }, 4000);
             }
 
            

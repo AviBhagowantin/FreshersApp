@@ -12,9 +12,14 @@
     <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
-    <Label class="action-bar-title" text="Rule Details"></Label>
+    <Label class="title" text="Rule Details"></Label>
 </ActionBar>
 
 <GridLayout class="page page-content">
+      
+    
+    
     <PDFView [src]="path"></PDFView>
+
+
 </GridLayout>

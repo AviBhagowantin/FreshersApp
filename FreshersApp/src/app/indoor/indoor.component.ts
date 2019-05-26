@@ -134,9 +134,6 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
                 }
                
 
-                fs.knownFolders.documents().getFile("app/app/indoor/distance.js").readText()
-                .then((res) => {alert(res)});
-
                   fs.knownFolders.documents().getFile("app/app/indoor/distance.js").remove()
                  .then((res) => {
                    }).catch((err) => {

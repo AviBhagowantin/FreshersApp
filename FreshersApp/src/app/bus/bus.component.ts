@@ -149,7 +149,7 @@ export class BusComponent implements OnInit {
     onSubmit(args) {
         let searchBar = <SearchBar>args.object;
        
-        this.buses = this.buses.filter(item => item.destination.toLowerCase() == searchBar.text.toLowerCase());      
+        this.buses = this.buses.filter(item => item.destination.toLowerCase().includes(searchBar.text.toLowerCase()));      
     }
 
     onClear(args)

@@ -19,7 +19,7 @@ import {ImageSource, fromNativeSource} from "tns-core-modules/image-source";
 
 
 export class MenuComponent implements OnInit,AfterViewInit{
-
+    processing = false;
 	public cafe:string;
     public tabSelectedIndex: number;
     public count:number;
@@ -47,6 +47,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
     }
 
     ngAfterViewInit() {
+        this.processing = true;
         let imgbar: Image = <Image>this.page.getViewById<Image>('barcode');
 
         firebase.getCurrentUser()
@@ -144,10 +145,11 @@ export class MenuComponent implements OnInit,AfterViewInit{
                 }.bind(this)
             )
             .catch(error => console.log("Trouble in paradise: " + error));
-
+             this.processing = false;
      }
 
     ngOnInit(): any {
+         this.processing = true;
         const myTitle: Label = <Label>this.actionbartitle.nativeElement;
     
         // Retrieve name of the cafeteria selected by the user in the previous page.
@@ -162,6 +164,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
         firebase.getValue(path)
         .then(result => (this.items=this.getData(result)))
         .catch(error => console.log("Error: " + error));
+         this.processing = false;
     }
 
     // Get menu of the cafeteria and push it in an array.
@@ -207,16 +210,22 @@ export class MenuComponent implements OnInit,AfterViewInit{
             cancelButtonText: "No",
            
         }).then(result => {
+         
             if(result==true){
+                this.processing=true;
                 this.checkout();
             }
+
         });
+
     }
     checkout()
     {
+       
         let imgbar: Image = <Image>this.page.getViewById<Image>('barcode');
         if (this.credits<this.sum)
         {
+            this.processing=false;
             dialogs.alert({
                 title: "Not enough credits",
                 message: "Please go to the cafetaria to put more credits.",
@@ -225,6 +234,7 @@ export class MenuComponent implements OnInit,AfterViewInit{
         }
         else 
         {
+            
             var description="";
             var path='/User/'+this.userKey;
             var orderPath='/Orders/'+this.cafe;
@@ -266,9 +276,11 @@ export class MenuComponent implements OnInit,AfterViewInit{
                         message: "Please go to the QR code tab and show the code at the cafetaria.",
                         okButtonText: "OK, got it"
                     })
+                    this.processing = false;
                 }.bind(this)
             );
         }
+
     }
 
     loadMore()
