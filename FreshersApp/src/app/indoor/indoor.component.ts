@@ -61,7 +61,7 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
         };
         this.nativescriptIbeacon = new NativescriptIbeacon(this, options);
         this.region1 = new BeaconRegion("Blanc", "B9407F30-F5F8-466E-AFF9-25556B57FE6D");
-        this.region2 = new BeaconRegion("Vert","63208BDB-82E2-46E4-A066-839A1E5DC12D");
+        this.region2 = new BeaconRegion("Bleu","07A31494-0B6E-45F5-AB1B-25D684C67EB4");
     }
 
     start() {
