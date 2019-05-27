@@ -108,7 +108,7 @@ export class IndoorComponent  extends Observable implements BeaconCallback,OnIni
         var distance=0;
         for (let beacon of beacons) {
             console.log("B: " + beacon.proximityUUID + " - " + beacon.major + " - " + beacon.minor + " - " + beacon.distance_proximity + " - " + beacon.rssi + " - " + beacon.txPower_accuracy );
-            var d=Math.pow(10,((beacon.txPower_accuracy- beacon.rssi)/25));
+            var d=Math.pow(10,((beacon.txPower_accuracy- beacon.rssi)/30));
             this.values.push(d);
             this.count++;
             if (this.count==5)
